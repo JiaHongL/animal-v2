@@ -1,10 +1,14 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Module
+import { StorageModule } from './storage/storage.module';
+
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    StorageModule
   ]
 })
 export class CoreModule {
