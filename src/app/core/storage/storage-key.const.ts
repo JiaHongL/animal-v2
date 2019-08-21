@@ -8,4 +8,9 @@ export const storageKeys = {
    */
   favoriteList: 'favoriteList',
 
+  /**
+   * 使用者資料
+   */
+  user: 'user'
+
 };
