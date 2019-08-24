@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 // Module
 import { StorageModule } from './storage/storage.module';
+import { NetworkingModule } from './networking/networking.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StorageModule
+    StorageModule,
+    NetworkingModule
   ]
 })
 export class CoreModule {
