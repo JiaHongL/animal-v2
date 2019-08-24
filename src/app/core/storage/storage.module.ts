@@ -10,7 +10,11 @@ import { StorageService } from './storage.service';
 @NgModule({
   imports: [
     CommonModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot({
+      prefix: 'webStorage',
+      separator: '.',
+      caseSensitive: true
+    })
   ],
   declarations: [],
   providers: [StorageService]
