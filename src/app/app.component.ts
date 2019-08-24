@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+// service
+import { SelectsService } from './core/selects/selects.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,7 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(
+    public selectsService: SelectsService
+  ) {
+
+    this.selectsService.getAllSelects();
 
   }
 
