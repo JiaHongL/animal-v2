@@ -1,0 +1,64 @@
+<ng-container *ngIf="show">
+
+  <div [ngSwitch]="selfLoadingType">
+
+      <div *ngSwitchCase="loadingType.ROLLER">
+
+        <!-- 滾筒樣式 開始 -->
+        <div class="wrapper">
+          <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <!-- 滾筒樣式 開始 -->
+
+      </div>
+
+      <div *ngSwitchCase="loadingType.SPINNER">
+
+        <!-- spinner樣式 開始 -->
+        <div class="wrapper-sp">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <!-- spinner樣式 開始 -->
+
+      </div>
+
+      <div *ngSwitchDefault>
+
+        <!-- 矩形樣式 開始 -->
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
+        <!-- 矩形樣式 結束 -->
+
+      </div>
+
+  </div>
+
+</ng-container>
+

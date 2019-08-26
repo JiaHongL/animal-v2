@@ -8,9 +8,15 @@ import { SelectsModule } from './selects/selects.module';
 
 // service
 import { ApiService } from './api/api.service';
+import { LoadingService } from './loading/loading.service';
+
+// component
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoadingComponent
+  ],
   imports: [
     CommonModule,
     StorageModule,
@@ -18,8 +24,10 @@ import { ApiService } from './api/api.service';
     SelectsModule
   ],
   providers: [
-    ApiService
-  ]
+    ApiService,
+    LoadingService
+  ],
+  exports: [LoadingComponent]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

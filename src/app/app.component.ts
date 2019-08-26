@@ -11,7 +11,7 @@ import { SelectsService } from './core/selects/selects.service';
 export class AppComponent {
 
   constructor(
-    public selectsService: SelectsService
+    private selectsService: SelectsService
   ) {
 
     this.selectsService.getAllSelects();
