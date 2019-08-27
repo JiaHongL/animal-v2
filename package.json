@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build",
+    "build": "ng build --aot=true",
     "test": "ng test",
+    "ci:test": "ng test --watch=false --browsers=ChromeHeadless --progress=false",
+    "ci:build": "ng build --aot=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
