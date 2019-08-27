@@ -19,7 +19,7 @@ export class UtilityService {
    *
    * @memberof UtilityService
    */
-  top = 0
+  top = 0;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -49,7 +49,7 @@ export class UtilityService {
 
     if (isLock) {
 
-      this.top = window.scrollY
+      this.top = window.scrollY;
       this.renderer.setStyle(this.document.body, 'position', 'fixed');
       this.renderer.setStyle(this.document.body, 'top', - this.top + 'px');
 
@@ -59,7 +59,7 @@ export class UtilityService {
       this.renderer.setStyle(this.document.body, 'top', '');
       window.scrollTo(0, this.top);
 
-    };
+    }
 
   }
 
@@ -71,7 +71,7 @@ export class UtilityService {
    */
   preloadPicture(images: string[]): void {
     images.forEach((src) => {
-      let img = new Image();
+      const img = new Image();
       img.src = src;
     });
   }
@@ -98,6 +98,8 @@ export class UtilityService {
    */
   hasRequired(formControl: FormControl): boolean {
 
+    const ctrlKey = 'controls';
+
     if (formControl.validator) {
       const validator = formControl.validator({} as FormControl);
       if (validator && validator.required) {
@@ -105,10 +107,10 @@ export class UtilityService {
       }
     }
 
-    if (formControl['controls']) {
-      for (const controlName in formControl['controls']) {
-        if (formControl['controls'][controlName]) {
-          if (this.hasRequired(formControl['controls'][controlName])) {
+    if (formControl[ctrlKey]) {
+      for (const controlName in formControl[ctrlKey]) {
+        if (formControl[ctrlKey][controlName]) {
+          if (this.hasRequired(formControl[ctrlKey][controlName])) {
             return true;
           }
         }
