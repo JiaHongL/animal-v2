@@ -9,6 +9,7 @@ import { SelectsModule } from './selects/selects.module';
 // service
 import { ApiService } from './api/api.service';
 import { LoadingService } from './loading/loading.service';
+import { UtilityService } from './utility/utility.service';
 
 // component
 import { LoadingComponent } from './loading/loading.component';
@@ -25,7 +26,8 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   providers: [
     ApiService,
-    LoadingService
+    LoadingService,
+    UtilityService
   ],
   exports: [LoadingComponent]
 })
