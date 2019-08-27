@@ -49,7 +49,7 @@ describe('LoadingService', () => {
     };
 
     const spyFunc = spyOn(service, 'show').and.callThrough();
-    const spySubject = spyOn(service[], 'next');
+    const spySubject = spyOn(service[loadingObsKey], 'next');
 
     service.show();
 
