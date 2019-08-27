@@ -76,4 +76,4 @@ export const appRoutePaths = {
     title: '無管理權限'
   }
 
-}
+};

@@ -15,6 +15,8 @@ import { of } from 'rxjs';
 
 describe('LoadingService', () => {
 
+  const loadingObsKey = 'loadingObservable';
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [LoadingService]
@@ -47,7 +49,7 @@ describe('LoadingService', () => {
     };
 
     const spyFunc = spyOn(service, 'show').and.callThrough();
-    const spySubject = spyOn(service['loadingObservable'], 'next');
+    const spySubject = spyOn(service[], 'next');
 
     service.show();
 
@@ -67,7 +69,7 @@ describe('LoadingService', () => {
     };
 
     const spyFunc = spyOn(service, 'show').and.callThrough();
-    const spySubject = spyOn(service['loadingObservable'], 'next');
+    const spySubject = spyOn(service[loadingObsKey], 'next');
 
     service.show({ loadingType: mock.loadingType });
 
@@ -86,7 +88,7 @@ describe('LoadingService', () => {
     };
 
     const spyFunc = spyOn(service, 'hide').and.callThrough();
-    const spySubject = spyOn(service['loadingObservable'], 'next');
+    const spySubject = spyOn(service[loadingObsKey], 'next');
 
     service.hide();
 
@@ -105,7 +107,7 @@ describe('LoadingService', () => {
     };
 
     const spyFunc = spyOn(service, 'hide').and.callThrough();
-    const spySubject = spyOn(service['loadingObservable'], 'next');
+    const spySubject = spyOn(service[loadingObsKey], 'next');
 
     service.hide(mock.name);
 
