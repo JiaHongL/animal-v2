@@ -4,7 +4,6 @@ import { TestBed, inject } from '@angular/core/testing';
 import { LoadingService } from './loading.service';
 
 // const
-import { defaultName } from './const/default-name.const';
 import { defaultLoadingType } from './const/default-loading-type.const';
 
 // enum
@@ -27,23 +26,13 @@ describe('LoadingService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('getLoading function 應該被呼叫', inject([LoadingService], (service: LoadingService) => {
-
-    const spyFunc = spyOn(service, 'getLoading').and.returnValue(of());
-
-    service.getLoading('mock');
-
-    const args = spyFunc.calls.first().args;
-
-    expect(args[0]).toEqual('mock');
-    expect(spyFunc).toHaveBeenCalled();
-
+  it('valueChanges 應該得到 loading subject obs', inject([LoadingService], (service: LoadingService) => {
+    expect(service.valueChanges).toEqual(service[loadingObsKey].asObservable());
   }));
 
   it('show function 應該被呼叫 且 使用預設值', inject([LoadingService], (service: LoadingService) => {
 
     const mock = {
-      name: defaultName,
       loadingType: defaultLoadingType,
       show: true
     };
@@ -63,7 +52,6 @@ describe('LoadingService', () => {
   it('show function 應該被呼叫 且 使用帶入的參數', inject([LoadingService], (service: LoadingService) => {
 
     const mock = {
-      name: defaultName,
       loadingType: LoadingType.ROLLER,
       show: true
     };
@@ -71,7 +59,7 @@ describe('LoadingService', () => {
     const spyFunc = spyOn(service, 'show').and.callThrough();
     const spySubject = spyOn(service[loadingObsKey], 'next');
 
-    service.show({ loadingType: mock.loadingType });
+    service.show(mock.loadingType);
 
     const args = spySubject.calls.first().args;
 
@@ -83,7 +71,6 @@ describe('LoadingService', () => {
   it('hide function 應該被呼叫 且 使用預設值', inject([LoadingService], (service: LoadingService) => {
 
     const mock = {
-      name: defaultName,
       show: false
     };
 
@@ -91,25 +78,6 @@ describe('LoadingService', () => {
     const spySubject = spyOn(service[loadingObsKey], 'next');
 
     service.hide();
-
-    const args = spySubject.calls.first().args;
-
-    expect(spyFunc).toHaveBeenCalled();
-    expect(args[0]).toEqual(mock);
-
-  }));
-
-  it('hide function 應該被呼叫 且 使用帶入的參數', inject([LoadingService], (service: LoadingService) => {
-
-    const mock = {
-      name: 'mockName',
-      show: false
-    };
-
-    const spyFunc = spyOn(service, 'hide').and.callThrough();
-    const spySubject = spyOn(service[loadingObsKey], 'next');
-
-    service.hide(mock.name);
 
     const args = spySubject.calls.first().args;
 

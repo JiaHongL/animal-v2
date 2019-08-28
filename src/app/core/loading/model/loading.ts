@@ -9,13 +9,6 @@ import { LoadingType } from '../enum/loading-type.enum';
 export class Loading {
 
   /**
-   * 名稱
-   *
-   * @memberof Loading
-   */
-  name = '';
-
-  /**
    * 是否顯示
    *
    * @memberof Loading

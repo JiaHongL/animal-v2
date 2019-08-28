@@ -4,11 +4,7 @@ import { Component, OnInit, SimpleChange, OnChanges, OnDestroy } from '@angular/
 import { LoadingService } from './loading.service';
 
 // const
-import { defaultName } from './const/default-name.const';
 import { defaultLoadingType } from './const/default-loading-type.const';
-
-// model
-import { Loading } from './model/loading';
 
 // enum
 import { LoadingType } from './enum/loading-type.enum';
@@ -30,13 +26,6 @@ export class LoadingComponent implements OnInit, OnDestroy {
    * @memberof LoadingComponent
    */
   loadingType = LoadingType;
-
-  /**
-   * 名稱
-   *
-   * @memberof LoadingComponent
-   */
-  name = defaultName;
 
   /**
    *  是否顯示
@@ -69,7 +58,7 @@ export class LoadingComponent implements OnInit, OnDestroy {
 
     this
       .loadingService
-      .getLoading(this.name)
+      .valueChanges
       .pipe(
         takeUntil(this.componentUnsubscribe)
       )

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 // const
-import { defaultName } from './const/default-name.const';
 import { defaultLoadingType } from './const/default-loading-type.const';
 
 // model
@@ -12,8 +11,6 @@ import { LoadingType } from './enum/loading-type.enum';
 
 // rxjs
 import { Observable, ReplaySubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
-
 
 @Injectable()
 export class LoadingService {
@@ -29,44 +26,32 @@ export class LoadingService {
   constructor() { }
 
   /**
-   * 獲取 loading設定通知 的 Observable
+   * 獲取 loading 改變通知 的 Observable
    *
-   * @param {string} name
-   * @returns {Observable<Loading>}
+   * @readonly
+   * @type {Observable<Partial<Loading>>}
    * @memberof LoadingService
    */
-  getLoading(name: string): Observable<Loading> {
-
-    return this
-      .loadingObservable
-      .asObservable()
-      .pipe(
-        filter((v: Loading) => v && v.name === name)
-      );
-
+  get valueChanges(): Observable<Partial<Loading>> {
+    return this.loadingObservable.asObservable();
   }
 
   /**
    * 顯示
    *
-   * @param {Partial<{ name: string; loadingType: LoadingType }>} config - 選項設定
+   * @param {LoadingType} [loadingType] - loading樣式
    * @returns {Promise<{}>}
    * @memberof LoadingService
    */
-  show(config?: Partial<{ name: string; loadingType: LoadingType }>): Promise<{}> {
-
-    const loading = Object.assign(
-      {
-        name: defaultName,
-        loadingType: defaultLoadingType,
-        show: true
-      },
-      config
-    );
+  show(loadingType?: LoadingType): Promise<{}> {
 
     const showPromise = new Promise((resolve) => {
 
-      this.loadingObservable.next(loading);
+      this.loadingObservable.next({
+        loadingType: loadingType ? loadingType : defaultLoadingType,
+        show: true
+      });
+
       resolve(true);
 
     });
@@ -78,15 +63,15 @@ export class LoadingService {
   /**
    * 隱藏
    *
-   * @param {string} [name=defaultName] - 哪個Loading的名稱
    * @returns {Promise<{}>}
    * @memberof LoadingService
    */
-  hide(name: string = defaultName): Promise<{}> {
+  hide(): Promise<{}> {
 
     const hidePromise = new Promise((resolve) => {
 
-      this.loadingObservable.next({ name, show: false });
+      this.loadingObservable.next({ show: false });
+
       resolve(true);
 
     });

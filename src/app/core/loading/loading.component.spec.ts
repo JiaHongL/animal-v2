@@ -4,9 +4,6 @@ import { SimpleChange } from '@angular/core';
 // component
 import { LoadingComponent } from './loading.component';
 
-// const
-import { defaultName } from './const/default-name.const';
-
 // service
 import { LoadingService } from './loading.service';
 
