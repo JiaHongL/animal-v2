@@ -33,7 +33,7 @@ describe('ModalService', () => {
   }));
 
   it('open function 參數未傳入內容元件，會丟一個錯誤', inject([ModalService], (service: ModalService) => {
-    expect(() => service.open(null)).toThrow(new Error("not found component"));
+    expect(() => service.open(null)).toThrow(new Error('not found component'));
   }));
 
   it('open function 會產生一個 Modal Reference', inject([ModalService], (service: ModalService) => {

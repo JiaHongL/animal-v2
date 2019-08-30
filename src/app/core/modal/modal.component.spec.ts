@@ -15,8 +15,8 @@ describe('ModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent ],
-      providers:[
+      declarations: [ModalComponent],
+      providers: [
         {
           provide: ModalRef,
           useValue: null
@@ -27,7 +27,7 @@ describe('ModalComponent', () => {
         }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
