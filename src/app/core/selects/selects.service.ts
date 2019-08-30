@@ -144,20 +144,20 @@ export class SelectsService {
       this.getList(SelectType.ISSUES_STATUS)
     ]);
 
-    combined.subscribe((Lists) => {
+    combined.subscribe((list) => {
 
-      this.statusList = Lists[0];
-      this.sexList = Lists[1];
-      this.bodyTypeList = Lists[2];
-      this.ageList = Lists[3];
-      this.areaList = Lists[4];
-      this.sterilizationList = Lists[5];
-      this.bacterinList = Lists[6];
-      this.kindList = Lists[7];
-      this.colourList = Lists[8];
-      this.shelterList = Lists[9];
-      this.feedbackTypeList = Lists[10];
-      this.issuesStatusList = Lists[11];
+      this.statusList = list[0];
+      this.sexList = list[1];
+      this.bodyTypeList = list[2];
+      this.ageList = list[3];
+      this.areaList = list[4];
+      this.sterilizationList = list[5];
+      this.bacterinList = list[6];
+      this.kindList = list[7];
+      this.colourList = list[8];
+      this.shelterList = list[9];
+      this.feedbackTypeList = list[10];
+      this.issuesStatusList = list[11];
 
     });
 

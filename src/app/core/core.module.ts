@@ -10,14 +10,19 @@ import { SelectsModule } from './selects/selects.module';
 import { ApiService } from './api/api.service';
 import { LoadingService } from './loading/loading.service';
 import { UtilityService } from './utility/utility.service';
+import { ModalService } from './modal/modal.service';
 
 // component
 import { LoadingComponent } from './loading/loading.component';
+import { ModalComponent } from './modal/modal.component';
+
+const components = [
+  LoadingComponent,
+  ModalComponent
+];
 
 @NgModule({
-  declarations: [
-    LoadingComponent
-  ],
+  declarations: components,
   imports: [
     CommonModule,
     StorageModule,
@@ -27,9 +32,11 @@ import { LoadingComponent } from './loading/loading.component';
   providers: [
     ApiService,
     LoadingService,
-    UtilityService
+    UtilityService,
+    ModalService
   ],
-  exports: [LoadingComponent]
+  exports: components,
+  entryComponents: [ModalComponent]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

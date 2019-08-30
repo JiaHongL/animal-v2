@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
-
 // module
+import { AppRoutingModule } from './app-routing.module';
 import { FirebaseModule } from './firebase.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
+
+// component
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
