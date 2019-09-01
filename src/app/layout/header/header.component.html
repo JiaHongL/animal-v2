@@ -1,0 +1,170 @@
+<div class="no-touch">
+
+  <div class="header-inner">
+
+    <!-- header 開始-->
+    <header>
+      <a>
+        <img class="logo" src="assets/logo/dog.png">
+      </a>
+    </header>
+    <!-- header 結束 -->
+
+    <!-- 導航選單 開始 -->
+    <div class="nav">
+
+      <!-- 選單表頭 開始 -->
+      <span
+        class="nav-menu"
+        (click)="isMenuOpen=!isMenuOpen"
+      >
+        <a href="javascript:void(0)">
+          <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
+        </a>
+      </span>
+      <!-- 選單表頭 結束 -->
+
+      <!-- 選單清單 開始 -->
+      <div
+        class="nav-menu-list"
+        [style.marginRight.px]="marginRightPx"
+      >
+
+        <!-- 選單表頭 開始 -->
+        <div class="close-btn">
+          <a href="javascript:void(0)">
+            <i
+              class="fa fa-lg fa-times"
+              (click)="isMenuOpen=!isMenuOpen"
+            ></i>
+          </a>
+        </div>
+        <!-- 選單表頭 結束 -->
+
+        <!-- 前台選項 開始 -->
+        <div *ngIf="!isAdminLogin">
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fas fa-home fa-lg item-icon"></i>
+              <span class="item-title">首頁</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="far fa-kiss-wink-heart fa-lg item-icon"></i>
+              <span class="item-title">我的最愛</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-clipboard-list fa-lg item-icon"></i>
+              <span class="item-title">條件收尋</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-file-alt fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
+              <span class="item-title">編號收尋</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-map-signs fa-lg item-icon"></i>
+              <span class="item-title">地區收尋</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-hands-helping fa-lg item-icon p-r-15"></i>
+              <span class="item-title">收容中心收尋</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-hand-holding-heart  fa-lg item-icon"></i>
+              <span class="item-title">回饋與建議</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-users fa-lg item-icon p-r-15"></i>
+              <span class="item-title">管理員登入</span>
+            </a>
+          </div>
+        </div>
+        <!-- 前台選項 結束 -->
+
+        <!-- 後台選項 開始 -->
+        <div *ngIf="isAdminLogin">
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="far fa-user-circle  fa-lg item-icon"></i>
+              <span class="item-title">{{ userName }}</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="far fa-list-alt fa-lg item-icon"></i>
+              <span class="item-title">待處理</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-clipboard-check fa-lg item-icon p-r-20"></i>
+              <span class="item-title">已歸檔</span>
+            </a>
+          </div>
+          <div
+            class="list-item"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i class="fas fa-sign-out-alt fa-lg item-icon"></i>
+              <span class="item-title">登出帳號</span>
+            </a>
+          </div>
+        </div>
+        <!-- 後台選項 結束 -->
+
+      </div>
+      <!-- 選單清單 結束 -->
+
+    </div>
+    <!-- 導航選單 結束-->
+
+  </div>
+
+</div>

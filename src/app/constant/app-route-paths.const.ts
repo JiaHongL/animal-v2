@@ -5,6 +5,11 @@
 export const appRoutePaths = {
 
   /**
+   * 版型
+   */
+  layout: '',
+
+  /**
    * 管理員登入
    */
   adLogin: {

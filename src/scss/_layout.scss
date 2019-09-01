@@ -1,23 +1,27 @@
 html,
 body {
   height: 100%;
-  background:url('./assets/images/brushed_@2X.png');
+  background: url('./assets/images/brushed_@2X.png');
 }
 
 @include media-breakpoint-only(xs) {
+
   html,
   body {
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
+
 }
 
 @include media-breakpoint-only(sm) {
+
   html,
   body {
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
+
 }
 
 .container {
@@ -51,5 +55,5 @@ body {
     width: 100%;
     z-index: 100;
   }
-}
 
+}

@@ -40,6 +40,23 @@ export class UtilityService {
   }
 
   /**
+   * ios 移除 no-touch class
+   *
+   * @memberof UtilityService
+   */
+  iosRemoveNoTouch(): void {
+
+    const ua = navigator.userAgent.toLowerCase();
+
+    if (/iphone|ipad|ipod/.test(ua)) {
+      Array.from(this.document.querySelectorAll('.no-touch')).forEach((element) => {
+        element.classList.remove('no-touch');
+      });
+    }
+
+  }
+
+  /**
    * 停止 Body 滾動 ( mobile modal open & hide 使用)
    *
    * @param {boolean} isLock
