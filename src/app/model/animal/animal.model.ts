@@ -1,3 +1,13 @@
+
+// service
+import { StorageService } from '../../core/storage/storage.service';
+
+// const
+import { storageKeys } from 'src/app/core/storage/storage-key.const';
+
+// enum
+import { StorageType } from 'src/app/core/storage/storage-type.enum';
+
 /**
  *  動物資訊的資料模型
  *
@@ -230,6 +240,17 @@ export class Animal {
    */
   isLike = false;
 
+  /**
+   * 獲取 storageService 實體
+   * ps: only work with singleton services (injected at app root)
+   *
+   * @readonly
+   * @memberof Animal
+   */
+  private get storageService(): StorageService {
+    return StorageService.instance;
+  }
+
   constructor(data: any) {
 
     if (!data) {
@@ -264,7 +285,34 @@ export class Animal {
     this.shelter_name = data.shelter_name || '';
     this.shelter_tel = data.shelter_tel || '';
 
+    const favoriteList = this.storageService.getData(storageKeys.favoriteList, StorageType.LOCAL) || [];
+    const subIdList = favoriteList.map((item: Animal) => item.animal_subid);
+
+    if (subIdList.includes(this.animal_subid)) {
+      this.isLike = true;
+    }
+
   }
 
+  /**
+   * 設定我的最愛
+   *
+   * @memberof Animal
+   */
+  setFavorite(): void {
+
+    let favoriteList = this.storageService.getData(storageKeys.favoriteList, StorageType.LOCAL) || [];
+
+    this.isLike = !this.isLike;
+
+    if (this.isLike) {
+      favoriteList.push(this);
+    } else {
+      favoriteList = favoriteList.filter((item: Animal) => item.animal_subid !== this.animal_subid);
+    }
+
+    this.storageService.store(storageKeys.favoriteList, favoriteList, StorageType.LOCAL);
+
+  }
 
 }

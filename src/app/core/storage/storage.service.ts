@@ -15,10 +15,22 @@ import { StorageType } from './storage-type.enum';
 @Injectable()
 export class StorageService {
 
+  /**
+   * 儲存 instance (單一實例)
+   * ps : only work with singleton services (injected at app root)
+   *
+   * @static
+   * @type {StorageService}
+   * @memberof StorageService
+   */
+  static instance: StorageService;
+
   constructor(
     private sessionStorage: SessionStorageService,
     private localStorage: LocalStorageService
-  ) { }
+  ) {
+    StorageService.instance = this;
+  }
 
   /**
    * 儲存資料

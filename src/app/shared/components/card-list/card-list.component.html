@@ -15,14 +15,14 @@
         <div class="card-header">
           <a href="javascript:void(0)" class="round-btn">
             <i
-              class="far fa-heart fa-2x font-red-thunderbird p-l-5"
-              *ngIf="item.isLike==false"
-              (click)="setFavorite(item)"
+              class="fas fa-heart fa-2x font-red-thunderbird p-l-5"
+              *ngIf="item.isLike"
+              (click)="item.setFavorite()"
             ></i>
             <i
-              class="fas fa-heart fa-2x font-red-thunderbird p-l-5"
-              *ngIf="item.isLike==true"
-              (click)="setFavorite(item)"
+              class="far fa-heart fa-2x font-red-thunderbird p-l-5"
+              *ngIf="!item.isLike"
+              (click)="item.setFavorite()"
             ></i>
           </a>
         </div>

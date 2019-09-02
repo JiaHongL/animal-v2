@@ -82,12 +82,12 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   *  打開 相片 modal
+   * 打開 相片 modal
    *
-   * @param {*} url - 路徑
+   * @param {string} url - 路徑
    * @memberof HomeComponent
    */
-  openImageModal(url): void {
+  openImageModal(url: string): void {
     console.log(url);
   }
 

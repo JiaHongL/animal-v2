@@ -1,7 +1,28 @@
+import { TestBed } from '@angular/core/testing';
+
+import { StorageService } from '../../core/storage/storage.service';
+
+import { CoreModule } from '../../core/core.module';
+
 import { Animal } from './animal.model';
+import { storageKeys } from 'src/app/core/storage/storage-key.const';
+import { StorageType } from 'src/app/core/storage/storage-type.enum';
 
 describe('Animal', () => {
 
+  let storage: StorageService = null;
+
+  beforeEach(() => {
+
+    TestBed.configureTestingModule({
+      providers: [StorageService],
+      imports: [CoreModule]
+    });
+
+    storage = TestBed.get(StorageService);
+    storage.clean(StorageType.LOCAL, storageKeys.favoriteList);
+
+  });
 
   it('伺服器回傳 null，物件本身要有預設值', () => {
 
@@ -35,6 +56,7 @@ describe('Animal', () => {
     expect(animal.shelter_address).toEqual('');
     expect(animal.shelter_name).toEqual('');
     expect(animal.shelter_tel).toEqual('');
+    expect(animal.isLike).toBe(false);
 
   });
 
@@ -99,6 +121,7 @@ describe('Animal', () => {
     expect(animal.shelter_address).toEqual('');
     expect(animal.shelter_name).toEqual('');
     expect(animal.shelter_tel).toEqual('');
+    expect(animal.isLike).toBe(false);
 
   });
 
@@ -163,7 +186,56 @@ describe('Animal', () => {
     expect(animal.shelter_address).toEqual(data.shelter_address);
     expect(animal.shelter_name).toEqual(data.shelter_name);
     expect(animal.shelter_tel).toEqual(data.shelter_tel);
+    expect(animal.isLike).toBe(false);
 
   });
+
+  it('若伺服器回傳的資料，有被紀錄在我的最愛，則 isLike 為 true', () => {
+
+    const data = {
+      animal_subid: 'mock01'
+    };
+
+    spyOn(storage, 'getData').and.returnValue([{ animal_subid: data.animal_subid }]);
+
+    const animal = new Animal(data);
+
+    expect(animal.isLike).toBe(true);
+
+  });
+
+  it('若伺服器回傳的資料，沒有被紀錄在我的最愛，則 isLike 為 false', () => {
+
+    const data = {
+      animal_subid: 'mock02'
+    };
+
+    const animal = new Animal(data);
+
+    expect(animal.isLike).toBe(false);
+
+  });
+
+  it('setFavorite function，會切換 isLike 狀態，且將資料儲存在 storage', () => {
+
+    const data = {
+      animal_subid: 'mock03'
+    };
+
+    const animal = new Animal(data);
+
+    expect(animal.isLike).toBe(false);
+
+    animal.setFavorite();
+
+    const favoriteList = storage.getData(storageKeys.favoriteList, StorageType.LOCAL);
+    const subIdList = favoriteList.map((item: Animal) => item.animal_subid);
+
+    expect(animal.isLike).toBe(true);
+    expect(subIdList.includes(animal.animal_subid)).toBe(true);
+
+  });
+
+
 
 });
