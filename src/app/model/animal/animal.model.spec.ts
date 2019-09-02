@@ -110,7 +110,7 @@ describe('Animal', () => {
       animal_age: '3',
       animal_area_pkid: '4',
       animal_bacterin: '5',
-      oldAddress: '6',
+      animal_caption: '6',
       animal_bodytype: '7',
       animal_closeddate: '8',
       animal_colour: '9',
