@@ -37,9 +37,9 @@ describe('HomeComponent', () => {
     spyOn(apiService, 'getAnimals')
       .and
       .returnValue(of({
-        "success": true,
-        "result": [],
-        "errorMessage": null
+        success: true,
+        result: [],
+        errorMessage: null
       }));
 
     fixture = TestBed.createComponent(HomeComponent);

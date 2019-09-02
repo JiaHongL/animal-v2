@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
           .keys
           .forEach(key => {
             allParams[key] = queryParam.get(key);
-          })
+          });
 
         this.searchAnimals(1, allParams);
 
