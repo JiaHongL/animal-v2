@@ -5,24 +5,14 @@ import { CommonModule } from '@angular/common';
 import { StorageModule } from './storage/storage.module';
 import { NetworkingModule } from './networking/networking.module';
 import { SelectsModule } from './selects/selects.module';
+import { LoadingModule } from './loading/loading.module';
+import { ModalModule } from './modal/modal.module';
 
 // service
 import { ApiService } from './api/api.service';
-import { LoadingService } from './loading/loading.service';
 import { UtilityService } from './utility/utility.service';
-import { ModalService } from './modal/modal.service';
-
-// component
-import { LoadingComponent } from './loading/loading.component';
-import { ModalComponent } from './modal/modal.component';
-
-const components = [
-  LoadingComponent,
-  ModalComponent
-];
 
 @NgModule({
-  declarations: components,
   imports: [
     CommonModule,
     StorageModule,
@@ -31,12 +21,12 @@ const components = [
   ],
   providers: [
     ApiService,
-    LoadingService,
-    UtilityService,
-    ModalService
+    UtilityService
   ],
-  exports: components,
-  entryComponents: [ModalComponent]
+  exports: [
+    ModalModule,
+    LoadingModule
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
