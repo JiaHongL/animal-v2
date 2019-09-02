@@ -32,7 +32,7 @@ export class ApiService {
   /**
    * 取得各式選項清單
    *
-   * @param {string} type 選項類型
+   * @param {string} type - 選項類型
    * @memberof ApiService
    */
   getSelects(type: string): Observable<ServerResponse> {
@@ -49,8 +49,8 @@ export class ApiService {
   /**
    * 取得寵物列表資料
    *
-   * @param {number} page
-   * @param {QueryParams} params
+   * @param {number} page - 頁碼
+   * @param {QueryParams} params - 查詢參數
    * @returns {Observable<ServerResponse>}
    * @memberof ApiService
    */
