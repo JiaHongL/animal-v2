@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 
 // model
 import { ServerResponse } from '../networking/model/server-response.model';
+import { QueryParams } from './model/query-params.model';
 
 // rxjs
 import { Observable } from 'rxjs';
@@ -25,7 +26,7 @@ export class ApiService {
   private readonly baseUrl = environment.api.path;
 
   constructor(
-    private networking: NetworkingService,
+    private networking: NetworkingService
   ) { }
 
   /**
@@ -42,6 +43,26 @@ export class ApiService {
         HttpMethodType.GET,
         `${this.baseUrl}/${type}`
       );
+
+  }
+
+  /**
+   * 取得寵物列表資料
+   *
+   * @param {number} page
+   * @param {QueryParams} params
+   * @returns {Observable<ServerResponse>}
+   * @memberof ApiService
+   */
+  getAnimals(page: number, params?: Partial<QueryParams>): Observable<ServerResponse> {
+
+    const queryParams = new QueryParams(page, params);
+
+    return this.networking.sendRequest(
+      HttpMethodType.GET,
+      `${this.baseUrl}/animals`,
+      queryParams
+    );
 
   }
 

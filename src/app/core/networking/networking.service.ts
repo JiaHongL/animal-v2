@@ -91,16 +91,21 @@ export class NetworkingService {
    *
    * @private
    * @param {string} url - API的路徑
-   * @param {*} params - 所需的參數
-   * @param {*} [option] - 其他設定
+   * @param {*} [params] - 所需的參數
+   * @param {*} [options] - 其他設定
    * @returns {Observable<any>}
    * @memberof NetworkingService
    */
-  private get(url: string, params?: any, option?: any): Observable<any> {
+  private get(url: string, params?: any, options?: any): Observable<any> {
 
-    const requestUrl = url + this.getQueryParamsString(params);
+    const margeOptions = {};
+    const httpParams: any = {};
 
-    return this.http.get(requestUrl, option);
+    httpParams.params = params || {};
+
+    Object.assign(margeOptions, httpParams, options);
+
+    return this.http.get(url, margeOptions);
 
   }
 
@@ -123,16 +128,21 @@ export class NetworkingService {
    *
    * @private
    * @param {string} url - API的路徑
-   * @param {*} params - 所需的參數
-   * @param {*} [option] - 其他設定
+   * @param {*} [params] - 所需的參數
+   * @param {*} [options] - 其他設定
    * @returns {Observable<any>}
    * @memberof NetworkingService
    */
-  private delete(url: string, params?: any, option?: any): Observable<any> {
+  private delete(url: string, params?: any, options?: any): Observable<any> {
 
-    const requestUrl = url + this.getQueryParamsString(params);
+    const margeOptions = {};
+    const httpParams: any = {};
 
-    return this.http.delete(requestUrl, option);
+    httpParams.params = params || {};
+
+    Object.assign(margeOptions, httpParams, options);
+
+    return this.http.delete(url, options);
 
   }
 
@@ -148,34 +158,6 @@ export class NetworkingService {
    */
   private put(url: string, params?: any, option?: any): Observable<any> {
     return this.http.put(url, params, option);
-  }
-
-  /**
-   * 取得 QueryParams 的字串
-   *
-   * @private
-   * @param {*} params - 欲轉換的參數資料物件
-   * @returns {string}
-   * @memberof NetworkingService
-   */
-  private getQueryParamsString(params: any): string {
-
-    let queryParamsString = '';
-
-    if (params) {
-
-      queryParamsString = '?';
-
-      for (const obj in params) {
-        if (params.hasOwnProperty(obj)) {
-          queryParamsString += `&${obj}=${params[obj]}`;
-        }
-      }
-
-    }
-
-    return queryParamsString;
-
   }
 
 }
