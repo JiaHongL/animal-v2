@@ -15,7 +15,7 @@ import { LoadingService } from './loading.service';
   providers: [
     LoadingService
   ],
-  exports:[
+  exports: [
     LoadingComponent
   ]
 })

@@ -1,0 +1,89 @@
+<div class="no-touch">
+
+  <div class="wrapper">
+
+    <!-- 列表 開始 -->
+    <div class="card-list">
+
+      <!-- 卡片 開始 -->
+      <div
+        class="card"
+        *ngFor="let item of animals"
+      >
+
+        <!-- 表頭 開始 -->
+        <div class="card-header">
+          <a href="javascript:void(0)" class="round-btn">
+            <i
+              class="far fa-heart fa-2x font-red-thunderbird p-l-5"
+              *ngIf="item.isLike==false"
+              (click)="setFavorite(item)"
+            ></i>
+            <i
+              class="fas fa-heart fa-2x font-red-thunderbird p-l-5"
+              *ngIf="item.isLike==true"
+              (click)="setFavorite(item)"
+            ></i>
+          </a>
+        </div>
+        <!-- 表頭 結束 -->
+
+        <!-- 照片 開始 -->
+        <div class="card-image">
+          <div
+            class="image-wrapper"
+            (click)="clickPicture.emit(item.album_file)"
+          >
+            <a href="javascript:void(0)">
+              <img src="{{ item.album_file || 'assets/images/non01.png' }}" alt="">
+            </a>
+          </div>
+        </div>
+        <!-- 照片 結束 -->
+
+        <!-- 內容 開始 -->
+        <div class="card-content">
+
+          <!-- 簡介 開始 -->
+          <div class="content-desc">
+            <span class="font-blue-steel p-r-5">{{ item.animal_id }}</span>
+            <i
+              *ngIf="item.animal_sex===sex.MALE"
+              class="fas fa-mars font-blue fa-lg"
+            ></i>
+            <i
+              *ngIf="item.animal_sex===sex.FEMALE"
+              class="fas fa-venus font-red fa-lg"
+            ></i>
+          </div>
+          <!-- 簡介 結束 -->
+
+          <!-- 另開視窗 開始 -->
+          <!-- <a
+            [routerLink]="['/detail',item.animal_id]"
+            target="_blank"
+            class="open-btn"
+          >
+            <i class="fas fa-book fa-lg"></i>
+          </a> -->
+          <!-- 另開視窗 結束 -->
+
+        </div>
+        <!-- 內容 結束 -->
+
+      </div>
+
+      <!-- 假卡片 (排版用) 開始 -->
+      <div
+        class="card card-dummy"
+        *ngFor="let item of '12345'.split('')"
+      ></div>
+      <!-- 假卡片 (排版用) 結束 -->
+
+      <!-- 卡片 結束 -->
+    </div>
+    <!-- 列表 結束 -->
+
+  </div>
+
+</div>

@@ -81,4 +81,14 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /**
+   *  打開 相片 modal
+   *
+   * @param {*} url - 路徑
+   * @memberof HomeComponent
+   */
+  openImageModal(url): void {
+    console.log(url);
+  }
+
 }

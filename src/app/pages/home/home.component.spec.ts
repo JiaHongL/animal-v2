@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 // module
 import { CoreModule } from './../../core/core.module';
+import { SharedModule } from '../../shared/shared.module';
 
 // component
 import { HomeComponent } from './home.component';
@@ -23,7 +24,8 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        CoreModule
+        CoreModule,
+        SharedModule
       ],
       declarations: [HomeComponent]
     })

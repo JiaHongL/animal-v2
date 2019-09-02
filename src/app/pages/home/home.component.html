@@ -1,1 +1,5 @@
-<pre>{{animals | json}}</pre>
+<app-card-list
+  [animals]="animals"
+  (clickPicture)="openPhotoModal($event)"
+></app-card-list>
+

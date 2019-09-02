@@ -1,0 +1,180 @@
+/****************/
+/*  CardList    */
+/****************/
+
+.wrapper{
+  margin: 0px 10px 0px 10px;
+  .card-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-template-rows: repeat(max(244px));
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 10px 10px;
+
+    .card {
+      width: 100%;
+
+      display: inline-grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 40px 190px 40px;
+      align-items: center;
+
+      background: white;
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .26), 0 2px 2px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .08);
+      border-radius: 5px;
+
+      .no-touch &:hover {
+        box-shadow: 0 3px 10px 3px rgba(0, 0, 0, .26), 0 2px 2px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .08);
+      }
+
+      .card-image {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        .image-wrapper {
+          position: relative;
+          width: 280px;
+          height: 165px;
+          overflow: hidden;
+          border-radius: 5px;
+
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: center;
+          align-items: center;
+
+          .no-touch &:hover::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-family: 'Font Awesome\ 5 Free';
+            color: rgb(0, 105, 92);
+            font-size: 1.2em;
+            content: "點擊可放大 \f59c";
+            text-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff, 0px 0px 10px #fff;
+            z-index: 6;
+          }
+
+          img {
+            border-radius: 5px;
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            z-index: 5;
+            transform: scale(1.2);
+            &:hover {
+              transform: scale(1.1);
+              transition: transform .5s ease-out;
+            }
+          }
+
+        }
+      }
+
+      .card-content {
+        position: relative;
+        height: 100%;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        .content-desc {
+          widows: 95%;
+        }
+
+        .open-btn {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+
+          display: inline-flex;
+          flex-flow: row nowrap;
+          justify-content: center;
+          align-items: center;
+
+          text-decoration: none;
+          color: black;
+
+          .fas {
+            transform: rotate(10deg);
+          }
+
+          .no-touch &:hover {
+            background: rgba(228, 28, 119, .05);
+            color: #e41c77;
+          }
+
+        }
+
+      }
+
+      .card-actions {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background: white;
+        display: inline-grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 44px;
+        justify-items: center;
+        // align-items: center;
+
+        .round-btn {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+
+          display: inline-flex;
+          flex-flow: row nowrap;
+          justify-content: center;
+          align-items: center;
+
+          .no-touch &:hover {
+            background: rgba(228, 28, 119, .05);
+            color: #e41c77;
+          }
+        }
+
+        .rectangle-btn {
+          width: 90px;
+          height: 40px;
+          font-weight: 600;
+
+          display: inline-flex;
+          flex-flow: row nowrap;
+          justify-content: center;
+          align-items: center;
+
+          .no-touch &:hover {
+            background: rgba(228, 28, 119, .05);
+            color: #e41c77;
+          }
+        }
+
+      }
+
+    }
+    .card-dummy {
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+  }
+}
