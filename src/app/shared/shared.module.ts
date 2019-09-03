@@ -6,6 +6,8 @@ import { CardListModule } from './components/card-list/card-list.module';
 import { ImageModalModule } from './components/image-modal/image-modal.module';
 import { ModalModule } from './components/modal/modal.module';
 
+import { AnimalModule } from './pipes/animal/animal.module';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +16,8 @@ import { ModalModule } from './components/modal/modal.module';
   exports: [
     CardListModule,
     ImageModalModule,
-    ModalModule
+    ModalModule,
+    AnimalModule
   ]
 })
 export class SharedModule {

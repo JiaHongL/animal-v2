@@ -9,61 +9,61 @@ export enum SelectType {
   /**
    * 動物狀態
    */
-  STATUS = 'status',
+  STATUS = 'statusList',
 
   /**
    * 動物性別
    */
-  SEX = 'sex',
+  SEX = 'sexList',
 
   /**
    * 動物體型
    */
-  BODY_TYPE = 'body-type',
+  BODY_TYPE = 'bodyTypeList',
 
   /**
    * 動物年紀
    */
-  AGE = 'age',
+  AGE = 'ageList',
 
   /**
    * 縣市
    */
-  AREA = 'area',
+  AREA = 'areaList',
 
   /**
    * 是否絕育
    */
-  STERILIZATION = 'sterilization',
+  STERILIZATION = 'sterilizationList',
 
   /**
    * 是否施打狂犬病
    */
-  BACTERIN = 'bacterin',
+  BACTERIN = 'bacterinList',
 
   /**
    * 動物種類
    */
-  KIND = 'kind',
+  KIND = 'kindList',
 
   /**
    * 動物毛色
    */
-  COLOUR = 'colour',
+  COLOUR = 'colourList',
 
   /**
    * 收容中心
    */
-  SHELTER = 'shelter',
+  SHELTER = 'shelterList',
 
   /**
    * 回饋類型
    */
-  FEEDBACK_TYPE = 'feedback-type',
+  FEEDBACK_TYPE = 'feedbackTypeList',
 
   /**
    * 議題狀態
    */
-  ISSUES_STATUS = 'issues-status'
+  ISSUES_STATUS = 'issuesStatusList'
 
 }
