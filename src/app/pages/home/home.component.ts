@@ -24,6 +24,27 @@ import { ModalService } from '../../shared/components/modal/modal.service';
 export class HomeComponent implements OnInit {
 
   /**
+   * 當前頁數
+   *
+   * @memberof HomeComponent
+   */
+  currentPage = 1;
+
+  /**
+   * 查詢參數
+   *
+   * @memberof HomeComponent
+   */
+  searchParams = {};
+
+  /**
+   * 是否有資料
+   *
+   * @memberof HomeComponent
+   */
+  hasData = true;
+
+  /**
    * 動物列表資料
    *
    * @type {Animal[]}
@@ -46,6 +67,9 @@ export class HomeComponent implements OnInit {
       .queryParamMap
       .subscribe(queryParam => {
 
+        this.currentPage = 1;
+        this.animals = [];
+
         const allParams = {};
 
         queryParam
@@ -54,9 +78,23 @@ export class HomeComponent implements OnInit {
             allParams[key] = queryParam.get(key);
           });
 
-        this.searchAnimals(1, allParams);
+        this.searchParams = allParams;
+
+        this.searchAnimals(this.currentPage, this.searchParams);
 
       });
+
+  }
+
+  /**
+   * 監聽被滾動
+   *
+   * @memberof HomeComponent
+   */
+  scrolled(): void {
+
+    this.currentPage += 1;
+    this.searchAnimals(this.currentPage, this.searchParams);
 
   }
 
@@ -80,7 +118,7 @@ export class HomeComponent implements OnInit {
       .subscribe((res) => {
 
         if (res.success) {
-          this.animals = res.result.map(animal => new Animal(animal));
+          this.animals.push(...res.result.map(animal => new Animal(animal)));
         } else {
           alert(res.errorMessage);
         }

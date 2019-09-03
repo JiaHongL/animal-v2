@@ -1,5 +1,22 @@
-<app-card-list
-  [animals]="animals"
-  (clickPicture)="openImageModal($event)"
-></app-card-list>
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="3"
+  (scrolled)="scrolled()"
+  *ngIf="hasData; else tmpl"
+>
+  <app-card-list
+    [animals]="animals"
+    (clickPicture)="openImageModal($event)"
+  ></app-card-list>
+</div>
+<ng-template #tmpl>
+  <div class="wrapper">
+    <div class="message-box">
+      <div class="img">
+        <img src="./assets/images/animal-koala-001.png" alt="" srcset="">
+      </div>
+      <div class="desc">尚無相關資訊</div>
+    </div>
+  </div>
+</ng-template>
 
