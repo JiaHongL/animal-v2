@@ -95,7 +95,7 @@ export class ModalRef<T> {
    * @param {*} result - 回傳結果
    * @memberof ModalRef
    */
-  close(result: any): void {
+  close(result: any = null): void {
 
     // 獲取 視窗元件的 domElem
     const domElem = (this.modalRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
