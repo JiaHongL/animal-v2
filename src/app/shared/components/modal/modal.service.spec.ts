@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Component, NgModule } from '@angular/core';
 
-import { CoreModule } from '../core.module';
+import { SharedModule } from './../../shared.module';
 
 import { ModalService } from './modal.service';
 
@@ -22,7 +22,7 @@ describe('ModalService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        CoreModule,
+        SharedModule,
         ContentTestModule
       ],
     });
@@ -42,6 +42,5 @@ describe('ModalService', () => {
     expect(modalRef instanceof ModalRef).toBe(true);
 
   }));
-
 
 });

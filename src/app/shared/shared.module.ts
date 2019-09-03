@@ -1,7 +1,10 @@
+
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CardListModule } from './components/card-list/card-list.module';
+import { ImageModalModule } from './components/image-modal/image-modal.module';
+import { ModalModule } from './components/modal/modal.module';
 
 @NgModule({
   declarations: [],
@@ -9,7 +12,9 @@ import { CardListModule } from './components/card-list/card-list.module';
     CommonModule
   ],
   exports: [
-    CardListModule
+    CardListModule,
+    ImageModalModule,
+    ModalModule
   ]
 })
 export class SharedModule {

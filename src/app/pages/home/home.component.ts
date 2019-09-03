@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+// component
+import { ImageModalComponent } from '../../shared/components/image-modal/image-modal.component';
+
 // class
 import { Animal } from 'src/app/model/animal/animal.model';
+import { ModalConfig } from '../../shared/components/modal/modal-config';
 
 // service
 import { ApiService } from './../../core/api/api.service';
 import { LoadingService } from './../../core/loading/loading.service';
+
+// rxjs
 import { finalize } from 'rxjs/operators';
+import { ModalService } from '../../shared/components/modal/modal.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +34,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -88,7 +96,15 @@ export class HomeComponent implements OnInit {
    * @memberof HomeComponent
    */
   openImageModal(url: string): void {
-    console.log(url);
+
+    const data: any = {};
+    data.url = url;
+
+    const config: ModalConfig = {};
+    config.data = data;
+
+    this.modalService.open(ImageModalComponent, config);
+
   }
 
 }

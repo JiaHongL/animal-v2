@@ -6,7 +6,6 @@ import { StorageModule } from './storage/storage.module';
 import { NetworkingModule } from './networking/networking.module';
 import { SelectsModule } from './selects/selects.module';
 import { LoadingModule } from './loading/loading.module';
-import { ModalModule } from './modal/modal.module';
 
 // service
 import { ApiService } from './api/api.service';
@@ -24,7 +23,6 @@ import { UtilityService } from './utility/utility.service';
     UtilityService
   ],
   exports: [
-    ModalModule,
     LoadingModule
   ]
 })

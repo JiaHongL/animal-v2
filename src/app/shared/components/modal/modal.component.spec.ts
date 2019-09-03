@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalComponent } from './modal.component';
 
 // const
-import { MODAL_DATA } from './modal';
+import { MODAL_CONFIG } from './modal';
 
 // class
 import { ModalRef } from './modal-ref.model';
@@ -22,8 +22,8 @@ describe('ModalComponent', () => {
           useValue: null
         },
         {
-          provide: MODAL_DATA,
-          useValue: null
+          provide: MODAL_CONFIG,
+          useValue: {}
         }
       ]
     })

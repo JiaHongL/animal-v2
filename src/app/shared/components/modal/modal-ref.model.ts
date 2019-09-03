@@ -4,7 +4,7 @@ import { ComponentRef, EmbeddedViewRef, ComponentFactory, Injector } from '@angu
 import { ModalComponent } from './modal.component';
 
 // const
-import { MODAL_DATA } from './modal';
+import { MODAL_DATA, MODAL_CONFIG } from './modal';
 
 // rxjs
 import { Subject, Observable } from 'rxjs';
@@ -53,8 +53,12 @@ export class ModalRef<T> {
           useValue: this
         },
         {
-          provide: MODAL_DATA,
+          provide: MODAL_CONFIG,
           useValue: this.data
+        },
+        {
+          provide: MODAL_DATA,
+          useValue: this.data ? this.data.data : ''
         }
       ]
     });

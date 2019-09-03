@@ -1,6 +1,10 @@
-import { Injectable, ComponentFactoryResolver, ApplicationRef, EmbeddedViewRef, Type, ComponentRef } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, ApplicationRef, EmbeddedViewRef, Type } from '@angular/core';
+
 import { ModalComponent } from './modal.component';
+
 import { ModalRef } from './modal-ref.model';
+
+import { ModalConfig } from './modal-config';
 
 @Injectable()
 export class ModalService {
@@ -16,11 +20,11 @@ export class ModalService {
    * 開起視窗
    *
    * @param {Type<{}>} contentComponent - 傳入的內容元件
-   * @param {*} [data] - 傳入的資料
+   * @param {ModalConfig} [data] - 傳入的設定檔
    * @returns {ModalRef<any>}
    * @memberof ModalService
    */
-  open(contentComponent: Type<{}>, data?: any): ModalRef<any> {
+  open(contentComponent: Type<{}>, data?: ModalConfig): ModalRef<any> {
 
     // 若沒放入內容元件，則丟出一個錯誤
     if (!contentComponent) {

@@ -1,0 +1,18 @@
+<div
+  class="modal-wrapper"
+  (click)="clickBackdrop($event)"
+>
+
+  <div
+    class="modal"
+    [style.min-width]="minWidth"
+    [style.min-height]="minHeight"
+  >
+
+    <!-- 顯示內容元件 開始 -->
+    <ng-container  *ngComponentOutlet="contentComponent"></ng-container>
+    <!-- 顯示內容元件 結束 -->
+
+  </div>
+
+</div>
