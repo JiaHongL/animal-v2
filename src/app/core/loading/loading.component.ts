@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // service
 import { LoadingService } from './loading.service';

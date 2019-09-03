@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
    * @memberof HeaderComponent
    */
   get marginRightPx(): 0 | -284 {
-    return this.isMenuOpen === true ? 0 : -284;
+    return this.isMenuOpen ? 0 : -284;
   }
 
 }

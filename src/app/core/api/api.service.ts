@@ -66,4 +66,25 @@ export class ApiService {
 
   }
 
+  /**
+   * 獲取動物詳細資料
+   *
+   * @param {string} animalId - 動物流水編號
+   * @returns {Observable<ServerResponse>}
+   * @memberof ApiService
+   */
+  getAnimalDetail(animalId: string): Observable<ServerResponse> {
+
+    const queryParams: any = {};
+
+    queryParams.animal_id = animalId;
+
+    return this.networking.sendRequest(
+      HttpMethodType.GET,
+      `${this.baseUrl}/animals`,
+      queryParams
+    );
+
+  }
+
 }
