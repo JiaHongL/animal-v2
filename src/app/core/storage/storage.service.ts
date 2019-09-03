@@ -6,6 +6,10 @@ import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 // enum
 import { StorageType } from './storage-type.enum';
 
+// rxjs
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 /**
  * Storage的底層
  *
@@ -73,6 +77,28 @@ export class StorageService {
 
       case StorageType.SESSION:
         return JSON.parse(this.sessionStorage.retrieve(key));
+
+    }
+
+  }
+
+  /**
+   * 取得儲存的資料 Observable
+   *
+   * @param {string} key
+   * @param {number} type
+   * @returns {*}
+   * @memberof StorageService
+   */
+  getDataObs(key: string, type: number): Observable<any> {
+
+    switch (type) {
+
+      case StorageType.LOCAL:
+        return this.localStorage.observe(key).pipe(map(v => JSON.parse(v)));
+
+      case StorageType.SESSION:
+        return this.sessionStorage.observe(key).pipe(map(v => JSON.parse(v)));
 
     }
 

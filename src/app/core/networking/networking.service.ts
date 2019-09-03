@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // enum
 import { HttpMethodType } from './enum/http-method-type.enum';
@@ -8,7 +8,8 @@ import { HttpMethodType } from './enum/http-method-type.enum';
 import { ServerResponse } from './model/server-response.model';
 
 // rxjs
-import { Observable, of } from 'rxjs';
+import { Observable, of} from 'rxjs';
+import { catchError, filter, map } from 'rxjs/operators';
 
 @Injectable()
 export class NetworkingService {
@@ -68,7 +69,24 @@ export class NetworkingService {
 
     }
 
-    return observable;
+    return observable.pipe(
+      catchError((err: HttpErrorResponse) => {
+
+        const serverResponse = err.error as ServerResponse;
+
+        alert(serverResponse);
+
+        return of(err);
+
+      }),
+      filter((res) => {
+        return !(res instanceof HttpErrorResponse);
+      }),
+      map((res) => {
+        return new ServerResponse(res);
+      })
+
+    );
 
   }
 

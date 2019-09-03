@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 
-// service
-import { NetworkingService } from '../networking/networking.service';
-
 // environment
 import { environment } from '../../../environments/environment';
+
+// service
+import { NetworkingService } from '../networking/networking.service';
+import { StorageService } from './../storage/storage.service';
+
+// enum
+import { HttpMethodType } from '../networking/enum/http-method-type.enum';
 
 // model
 import { ServerResponse } from '../networking/model/server-response.model';
@@ -12,7 +16,6 @@ import { QueryParams } from './model/query-params.model';
 
 // rxjs
 import { Observable } from 'rxjs';
-import { HttpMethodType } from '../networking/enum/http-method-type.enum';
 
 @Injectable()
 export class ApiService {

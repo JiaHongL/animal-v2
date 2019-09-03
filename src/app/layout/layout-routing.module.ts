@@ -20,6 +20,10 @@ const routes: Routes = [{
     {
       path: appRoutePaths.detail.path,
       loadChildren: '../pages/detail/detail.module#DetailModule',
+    },
+    {
+      path: appRoutePaths.favorite.path,
+      loadChildren: '../pages/favorite/favorite.module#FavoriteModule'
     }
   ]
 }];
