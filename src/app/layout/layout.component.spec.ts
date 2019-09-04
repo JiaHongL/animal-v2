@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
+import { SharedModule } from '../shared/shared.module';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -15,7 +16,8 @@ describe('LayoutComponent', () => {
       imports: [
         RouterTestingModule,
         FooterModule,
-        HeaderModule
+        HeaderModule,
+        SharedModule
       ],
       declarations: [
         LayoutComponent

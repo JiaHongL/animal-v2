@@ -8,6 +8,8 @@ import { ModalModule } from './components/modal/modal.module';
 
 import { AnimalModule } from './pipes/animal/animal.module';
 
+import { GoTopModule } from './directives/go-top/go-top.module';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -17,7 +19,8 @@ import { AnimalModule } from './pipes/animal/animal.module';
     CardListModule,
     ImageModalModule,
     ModalModule,
-    AnimalModule
+    AnimalModule,
+    GoTopModule
   ]
 })
 export class SharedModule {
