@@ -34,10 +34,10 @@ export class FavoriteComponent implements OnInit, OnDestroy {
    * @type {Animal[]}
    * @memberof FavoriteComponent
    */
-  animals: Animal[] = null;
+  animals: Animal[] = [];
 
   /**
-   *
+   * 訂閱 Local Storage obs 的 subscription
    *
    * @type {Subscription}
    * @memberof FavoriteComponent
@@ -51,7 +51,7 @@ export class FavoriteComponent implements OnInit, OnDestroy {
 
     // 從 LocalStorage 獲取 最愛清單資料
     const animalsData = this.storageService.getData(storageKeys.favoriteList, StorageType.LOCAL);
-    this.animals = animalsData ? animalsData.map(animal => new Animal(animal)) : null;
+    this.animals = animalsData ? animalsData.map(animal => new Animal(animal)) : [];
 
     // 訂閱 LocalStorage 最愛清單的 subject
     this.subscription = this

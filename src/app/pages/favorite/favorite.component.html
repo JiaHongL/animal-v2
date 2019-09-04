@@ -1,4 +1,4 @@
-<div *ngIf="!animals; else tmpl">
+<div *ngIf="animals.length; else tmpl">
   <app-card-list
     [animals]="animals"
     (clickPicture)="openImageModal($event)"

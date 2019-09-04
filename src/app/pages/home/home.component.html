@@ -2,7 +2,7 @@
   infiniteScroll
   [infiniteScrollDistance]="3"
   (scrolled)="scrolled()"
-  *ngIf="hasData; else tmpl"
+  *ngIf="isQuerying || animals.length ; else tmpl"
 >
   <app-card-list
     [animals]="animals"
@@ -19,4 +19,3 @@
     </div>
   </div>
 </ng-template>
-

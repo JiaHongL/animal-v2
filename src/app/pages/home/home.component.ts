@@ -24,6 +24,13 @@ import { ModalService } from '../../shared/components/modal/modal.service';
 export class HomeComponent implements OnInit {
 
   /**
+   * 是否正在查詢
+   *
+   * @memberof HomeComponent
+   */
+  isQuerying = true;
+
+  /**
    * 當前頁數
    *
    * @memberof HomeComponent
@@ -38,19 +45,12 @@ export class HomeComponent implements OnInit {
   searchParams = {};
 
   /**
-   * 是否有資料
-   *
-   * @memberof HomeComponent
-   */
-  hasData = true;
-
-  /**
    * 動物列表資料
    *
    * @type {Animal[]}
    * @memberof HomeComponent
    */
-  animals: Animal[] = null;
+  animals: Animal[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -107,13 +107,17 @@ export class HomeComponent implements OnInit {
    */
   searchAnimals(page: number, params: any): void {
 
+    this.isQuerying = true;
     this.loadingService.show();
 
     this
       .apiService
       .getAnimals(page, params)
       .pipe(
-        finalize(() => this.loadingService.hide())
+        finalize(() => {
+          this.loadingService.hide();
+          this.isQuerying = false;
+        })
       )
       .subscribe((res) => {
 
