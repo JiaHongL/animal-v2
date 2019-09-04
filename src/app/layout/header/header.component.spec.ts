@@ -1,6 +1,11 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+
+import { ConditionModalModule } from './condition-modal/condition-modal.module';
+import { CoreModule } from './../../core/core.module';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,9 +13,15 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      imports: [
+        RouterTestingModule,
+        ConditionModalModule,
+        CoreModule,
+        SharedModule
+      ],
+      declarations: [HeaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

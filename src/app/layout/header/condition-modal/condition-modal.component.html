@@ -1,0 +1,171 @@
+<div class="container-grid">
+
+  <div class="modal-header">
+    <div class="title">
+      <span>依條件收尋</span>
+    </div>
+    <div class="close">
+      <a
+        href="javascript:void(0)"
+        (click)="modalRef.close()"
+      >
+        <i class="fas fa-times fa-lg font-grey-mint"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- 內容 開始 -->
+  <div class="modal-content">
+
+    <!-- 表單 開始 -->
+    <form
+      class="pure-form pure-form-stacked"
+      [formGroup]="form"
+    >
+
+      <fieldset class="no-padding">
+
+        <!-- 類型 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">類型</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.kind"
+          >
+            <option
+              *ngFor="let item of selects.kindList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 類型 欄位 結束 -->
+
+        <!-- 性別 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">性別</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.sex"
+          >
+            <option
+              *ngFor="let item of selects.sexList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 性別 欄位 結束 -->
+
+        <!-- 體型 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">體型</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.bodyType"
+          >
+            <option
+              *ngFor="let item of selects.bodyTypeList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 體型 欄位 結束 -->
+
+        <!-- 年紀 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">年紀</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.age"
+          >
+            <option
+              *ngFor="let item of selects.ageList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 年紀 欄位 結束 -->
+
+        <!-- 毛色 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">毛色</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.colour"
+          >
+            <option
+              *ngFor="let item of selects.colourList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 毛色 欄位 結束 -->
+
+        <!-- 是否絕育 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">是否絕育</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.colour"
+          >
+            <option
+              *ngFor="let item of selects.sterilizationList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 是否絕育 欄位 結束 -->
+
+        <!-- 是否施打狂犬病 欄位 開始 -->
+        <div class="pure-control-group">
+          <label for="name">是否施打狂犬病</label>
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.bacterin"
+          >
+            <option
+              *ngFor="let item of selects.bacterinList"
+              [value]="item.key"
+            >{{item.value}}</option>
+          </select>
+        </div>
+        <!-- 是否施打狂犬病 欄位 結束 -->
+
+      </fieldset>
+
+      <!-- 重置按鈕 開始 -->
+      <div class="reset">
+        <a
+          href="javascript:void(0)"
+          class="title"
+          (click)="form.reset()"
+        >重新設定</a>
+      </div>
+      <!-- 重置按鈕 結束 -->
+
+    </form>
+    <!-- 表單 結束 -->
+
+  </div>
+  <!-- 內容 開始-->
+
+  <!-- 頁尾 開始 -->
+  <div class="modal-footer">
+
+    <button
+      class="pure-button button-small button-cancel m-r-t hidden-xs"
+      (click)="modalRef.close()"
+    >
+      取消
+    </button>
+
+    <button
+      class="pure-button button-small button-search m-r-t"
+      (click)="query()"
+    >
+      查詢
+    </button>
+
+  </div>
+  <!-- 頁尾 結束 -->
+
+</div>

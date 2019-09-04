@@ -1,4 +1,18 @@
 import { Component, OnInit, ElementRef, HostBinding, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+
+// component
+import { ConditionModalComponent } from './condition-modal/condition-modal.component';
+
+// service
+import { ModalService } from './../../shared/components/modal/modal.service';
+
+// const
+import { ModalConfig } from '../../shared/components/modal/modal-config';
+import { appRoutePaths } from './../../constant/app-route-paths.const';
+
+// enum
+import { QueryModalType } from './enum/query-modal-type.enum';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +20,26 @@ import { Component, OnInit, ElementRef, HostBinding, HostListener } from '@angul
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  private queryComponents = [{
+    type: QueryModalType.CONDITION,
+    component: ConditionModalComponent
+  }];
+
+  /**
+   * 查詢視窗類型
+   *
+   * @type {QueryModalType}
+   * @memberof HeaderComponent
+   */
+  queryModalType = QueryModalType;
+
+  /**
+   * 全站路由
+   *
+   * @memberof HeaderComponent
+   */
+  appRoutePaths = appRoutePaths;
 
   /**
    * 是否開啟選單
@@ -51,7 +85,9 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(
-    private elementRef: ElementRef
+    private router: Router,
+    private elementRef: ElementRef,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() { }
@@ -65,6 +101,35 @@ export class HeaderComponent implements OnInit {
    */
   get marginRightPx(): 0 | -284 {
     return this.isMenuOpen ? 0 : -284;
+  }
+
+  /**
+   * 開啟查詢視窗
+   *
+   * @param {QueryModalType} type - 哪種類型的視窗
+   * @memberof HeaderComponent
+   */
+  openQueryModal(type: QueryModalType): void {
+
+    const contentComponent = this.queryComponents.find(item => item.type === type).component;
+    const config: ModalConfig = {};
+
+    config.mobileFullScreen = true;
+
+    this
+      .modalService
+      .open(contentComponent, config)
+      .afterClosed()
+      .subscribe((result) => {
+
+        if (!result) {
+          return;
+        }
+
+        this.router.navigate([ '/' + appRoutePaths.home.path], { queryParams: result });
+
+      });
+
   }
 
 }

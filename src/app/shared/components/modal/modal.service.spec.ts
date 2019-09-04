@@ -2,11 +2,11 @@ import { TestBed, inject } from '@angular/core/testing';
 import { Component, NgModule } from '@angular/core';
 
 import { SharedModule } from './../../shared.module';
+import { CoreModule } from '../../../core/core.module';
 
 import { ModalService } from './modal.service';
 
 import { ModalRef } from './modal-ref.model';
-
 
 @Component({ template: '<p>hi</p>' })
 class ContentTestComponent { }
@@ -23,7 +23,8 @@ describe('ModalService', () => {
     TestBed.configureTestingModule({
       imports: [
         SharedModule,
-        ContentTestModule
+        ContentTestModule,
+        CoreModule
       ],
     });
   });

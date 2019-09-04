@@ -1,5 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+// module
+import { CoreModule } from '../../../core/core.module';
+
 // component
 import { ModalComponent } from './modal.component';
 
@@ -15,6 +18,7 @@ describe('ModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [CoreModule],
       declarations: [ModalComponent],
       providers: [
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, OnDestroy } from '@angular/core';
 
 // const
 import { MODAL_CONFIG } from './modal';
@@ -7,12 +7,15 @@ import { MODAL_CONFIG } from './modal';
 import { ModalRef } from './modal-ref.model';
 import { ModalConfig } from './modal-config';
 
+// service
+import { UtilityService } from '../../../core/utility/utility.service';
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
 
   /**
    * 內容元件
@@ -24,11 +27,14 @@ export class ModalComponent implements OnInit {
   constructor(
     @Inject(MODAL_CONFIG) public config: ModalConfig,
     public modalRef: ModalRef<ModalComponent>,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private utilityService: UtilityService
   ) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.utilityService.stopBodyScroll(true);
+  }
 
   /**
    * 點擊背景
@@ -52,7 +58,7 @@ export class ModalComponent implements OnInit {
    * @memberof ModalComponent
    */
   get minWidth(): string {
-    return this.config.minWidth ? this.config.minWidth : '300px';
+    return this.config && this.config.hasOwnProperty('minWidth') ? this.config.minWidth : '300px';
   }
 
   /**
@@ -63,7 +69,23 @@ export class ModalComponent implements OnInit {
    * @memberof ModalComponent
    */
   get minHeight(): string {
-    return this.config.minHeight ? this.config.minHeight : '400px';
+    return this.config && this.config.hasOwnProperty('minHeight') ? this.config.minHeight : '400px';
+  }
+
+  /**
+   * 是否有行動裝置滿屏顯示設定
+   *
+   * @readonly
+   * @type {boolean}
+   * @memberof ModalComponent
+   */
+  get hasMobileFullScreen(): boolean {
+    return this.config && this.config.hasOwnProperty('mobileFullScreen') ? this.config.mobileFullScreen : false;
+  }
+
+
+  ngOnDestroy(): void {
+    this.utilityService.stopBodyScroll(false);
   }
 
 }

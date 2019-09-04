@@ -5,6 +5,7 @@
 
   <div
     class="modal"
+    [ngClass]="{ 'mobile-full-screen' : hasMobileFullScreen }"
     [style.min-width]="minWidth"
     [style.min-height]="minHeight"
   >

@@ -24,6 +24,14 @@ export declare class ModalConfig<D = any> {
   minHeight?: string;
 
   /**
+   *  setting full screen
+   *
+   * @type {string}
+   * @memberof ModalConfig
+   */
+  mobileFullScreen?: boolean;
+
+  /**
    * Data being injected into the child component
    *
    * @type {(D | null)}
