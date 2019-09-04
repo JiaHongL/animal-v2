@@ -2,8 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { LayoutComponent } from './layout.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+
+import { FooterModule } from './footer/footer.module';
+import { HeaderModule } from './header/header.module';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -12,12 +13,12 @@ describe('LayoutComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        FooterModule,
+        HeaderModule
       ],
       declarations: [
-        LayoutComponent,
-        HeaderComponent,
-        FooterComponent
+        LayoutComponent
       ]
     })
       .compileComponents();

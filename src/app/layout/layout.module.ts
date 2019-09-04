@@ -4,19 +4,20 @@ import { CommonModule } from '@angular/common';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { LayoutComponent } from './layout.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+
+import { HeaderModule } from './header/header.module';
+import { FooterModule } from './footer/footer.module';
 
 
 @NgModule({
   declarations: [
-    LayoutComponent,
-    HeaderComponent,
-    FooterComponent
+    LayoutComponent
   ],
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    FooterModule,
+    HeaderModule
   ]
 })
 export class LayoutModule { }
