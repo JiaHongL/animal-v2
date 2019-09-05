@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 // component
 import { ConditionModalComponent } from './condition-modal/condition-modal.component';
 import { IdModalComponent } from './id-modal/id-modal.component';
+import { AreaModalComponent } from './area-modal/area-modal.component';
 
 // service
 import { ModalService } from './../../shared/components/modal/modal.service';
@@ -36,6 +37,10 @@ export class HeaderComponent implements OnInit {
     {
       type: QueryModalType.ID,
       component: IdModalComponent
+    },
+    {
+      type: QueryModalType.AREA,
+      component: AreaModalComponent
     }
   ];
 
@@ -134,6 +139,11 @@ export class HeaderComponent implements OnInit {
     if (type === QueryModalType.ID) {
       config.minWidth = '300px';
       config.minHeight = '300px';
+    }
+
+    if (type === QueryModalType.AREA) {
+      config.minWidth = '300px';
+      config.minHeight = '400px';
     }
 
     this

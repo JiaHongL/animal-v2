@@ -49,4 +49,9 @@ export const animalQueryFormKeys = {
    */
   bacterin: 'animal_bacterin',
 
+  /**
+   *  所屬縣市代碼
+   */
+  areaId: 'animal_area_pkid'
+
 };

@@ -7,6 +7,7 @@ import { HeaderComponent } from './header.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ConditionModalModule } from './condition-modal/condition-modal.module';
 import { IdModalModule } from './id-modal/id-modal.module';
+import { AreaModalModule } from './area-modal/area-modal.module';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -15,7 +16,8 @@ import { IdModalModule } from './id-modal/id-modal.module';
     RouterModule,
     SharedModule,
     ConditionModalModule,
-    IdModalModule
+    IdModalModule,
+    AreaModalModule
   ],
   exports: [HeaderComponent]
 })
