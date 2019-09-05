@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  width:100%;
   background: url('./assets/images/brushed_@2X.png');
 }
 
@@ -25,7 +26,6 @@ body {
 }
 
 .container {
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 44px 1fr;
