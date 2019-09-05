@@ -33,19 +33,31 @@ export class HeaderComponent implements OnInit {
   private queryComponents = [
     {
       type: QueryModalType.CONDITION,
-      component: ConditionModalComponent
+      component: ConditionModalComponent,
+      minWidth: '350px',
+      minHeight: '85%',
+      mobileFullScreen: true
     },
     {
       type: QueryModalType.ID,
-      component: IdModalComponent
+      component: IdModalComponent,
+      minWidth: '300px',
+      minHeight: '300px',
+      mobileFullScreen: true
     },
     {
       type: QueryModalType.AREA,
-      component: AreaModalComponent
+      component: AreaModalComponent,
+      minWidth: '300px',
+      minHeight: '400px',
+      mobileFullScreen: true
     },
     {
       type: QueryModalType.SHELTER,
-      component: ShelterModalComponent
+      component: ShelterModalComponent,
+      minWidth: '400px',
+      minHeight: '400px',
+      mobileFullScreen: true
     }
   ];
 
@@ -134,29 +146,17 @@ export class HeaderComponent implements OnInit {
    */
   openQueryModal(type: QueryModalType): void {
 
-    const contentComponent = this.queryComponents.find(item => item.type === type).component;
+    const findComponentInfo = this.queryComponents.find(item => item.type === type);
+
     const config: ModalConfig = {};
 
-    config.mobileFullScreen = true;
-    config.minHeight = '85%';
-    config.minWidth = '350px';
-
-    if (type === QueryModalType.ID) {
-      config.minWidth = '300px';
-      config.minHeight = '300px';
-    }
-
-    if (
-      type === QueryModalType.AREA ||
-      type === QueryModalType.SHELTER
-    ) {
-      config.minWidth = '300px';
-      config.minHeight = '400px';
-    }
+    config.minHeight = findComponentInfo.minHeight;
+    config.minWidth = findComponentInfo.minWidth;
+    config.mobileFullScreen = findComponentInfo.mobileFullScreen;
 
     this
       .modalService
-      .open(contentComponent, config)
+      .open(findComponentInfo.component, config)
       .afterClosed()
       .subscribe((result) => {
 
