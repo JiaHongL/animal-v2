@@ -69,7 +69,7 @@ export class ModalComponent implements OnInit, OnDestroy {
    * @memberof ModalComponent
    */
   get minHeight(): string {
-    return this.config && this.config.hasOwnProperty('minHeight') ? this.config.minHeight : '400px';
+    return this.config && this.config.hasOwnProperty('minHeight') ? this.config.minHeight : '450px';
   }
 
   /**

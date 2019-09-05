@@ -115,6 +115,8 @@ export class HeaderComponent implements OnInit {
     const config: ModalConfig = {};
 
     config.mobileFullScreen = true;
+    config.minHeight = '85%';
+    config.minWidth = '350px';
 
     this
       .modalService
@@ -126,7 +128,7 @@ export class HeaderComponent implements OnInit {
           return;
         }
 
-        this.router.navigate([ '/' + appRoutePaths.home.path], { queryParams: result });
+        this.router.navigate(['/' + appRoutePaths.home.path], { queryParams: result });
 
       });
 
