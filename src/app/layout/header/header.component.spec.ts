@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { ConditionModalModule } from './condition-modal/condition-modal.module';
 import { IdModalModule } from './id-modal/id-modal.module';
+import { ShelterModalModule } from './shelter-modal/shelter-modal.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -20,7 +21,8 @@ describe('HeaderComponent', () => {
         CoreModule,
         SharedModule,
         ConditionModalModule,
-        IdModalModule
+        IdModalModule,
+        ShelterModalModule
       ],
       declarations: [HeaderComponent]
     })

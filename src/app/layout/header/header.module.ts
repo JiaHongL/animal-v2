@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ConditionModalModule } from './condition-modal/condition-modal.module';
 import { IdModalModule } from './id-modal/id-modal.module';
 import { AreaModalModule } from './area-modal/area-modal.module';
+import { ShelterModalModule } from './shelter-modal/shelter-modal.module';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -17,7 +18,8 @@ import { AreaModalModule } from './area-modal/area-modal.module';
     SharedModule,
     ConditionModalModule,
     IdModalModule,
-    AreaModalModule
+    AreaModalModule,
+    ShelterModalModule
   ],
   exports: [HeaderComponent]
 })

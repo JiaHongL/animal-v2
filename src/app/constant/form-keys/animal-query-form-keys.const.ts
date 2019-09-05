@@ -45,13 +45,18 @@ export const animalQueryFormKeys = {
   sterilization: 'animal_sterilization',
 
   /**
-   *  是否施打狂犬病
+   * 是否施打狂犬病
    */
   bacterin: 'animal_bacterin',
 
   /**
-   *  所屬縣市代碼
+   * 所屬縣市代碼
    */
-  areaId: 'animal_area_pkid'
+  areaId: 'animal_area_pkid',
+
+  /**
+   * 收容所編號
+   */
+  shelterId: 'animal_shelter_pkid'
 
 };
