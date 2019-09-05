@@ -5,6 +5,16 @@
 export const animalQueryFormKeys = {
 
   /**
+   * 流水編號
+   */
+  id: 'animal_id',
+
+  /**
+   * 區域編號
+   */
+  subId: 'animal_subid',
+
+  /**
    * 種類
    */
   kind: 'animal_kind',

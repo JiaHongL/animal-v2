@@ -3,9 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 
-import { ConditionModalModule } from './condition-modal/condition-modal.module';
 import { CoreModule } from './../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
+
+import { ConditionModalModule } from './condition-modal/condition-modal.module';
+import { IdModalModule } from './id-modal/id-modal.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -15,9 +17,10 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        ConditionModalModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        ConditionModalModule,
+        IdModalModule
       ],
       declarations: [HeaderComponent]
     })

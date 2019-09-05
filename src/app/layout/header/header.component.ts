@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 // component
 import { ConditionModalComponent } from './condition-modal/condition-modal.component';
+import { IdModalComponent } from './id-modal/id-modal.component';
 
 // service
 import { ModalService } from './../../shared/components/modal/modal.service';
@@ -21,10 +22,22 @@ import { QueryModalType } from './enum/query-modal-type.enum';
 })
 export class HeaderComponent implements OnInit {
 
-  private queryComponents = [{
-    type: QueryModalType.CONDITION,
-    component: ConditionModalComponent
-  }];
+  /**
+   * 查詢使用 的 Modal元件
+   *
+   * @private
+   * @memberof HeaderComponent
+   */
+  private queryComponents = [
+    {
+      type: QueryModalType.CONDITION,
+      component: ConditionModalComponent
+    },
+    {
+      type: QueryModalType.ID,
+      component: IdModalComponent
+    }
+  ];
 
   /**
    * 查詢視窗類型
@@ -117,6 +130,11 @@ export class HeaderComponent implements OnInit {
     config.mobileFullScreen = true;
     config.minHeight = '85%';
     config.minWidth = '350px';
+
+    if (type === QueryModalType.ID) {
+      config.minWidth = '300px';
+      config.minHeight = '300px';
+    }
 
     this
       .modalService
