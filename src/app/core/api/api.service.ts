@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, LOCALE_ID } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { formatDate } from '@angular/common';
 
 // environment
 import { environment } from '../../../environments/environment';
 
 // service
 import { NetworkingService } from '../networking/networking.service';
-import { StorageService } from './../storage/storage.service';
 
 // enum
 import { HttpMethodType } from '../networking/enum/http-method-type.enum';
@@ -13,9 +14,11 @@ import { HttpMethodType } from '../networking/enum/http-method-type.enum';
 // model
 import { ServerResponse } from '../networking/model/server-response.model';
 import { QueryParams } from './model/query-params.model';
+import { Issue } from '../../model/issue/issue.model';
 
 // rxjs
 import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
@@ -29,7 +32,9 @@ export class ApiService {
   private readonly baseUrl = environment.api.path;
 
   constructor(
-    private networking: NetworkingService
+    private networking: NetworkingService,
+    private afs: AngularFirestore,
+    @Inject(LOCALE_ID) private locale: string
   ) { }
 
   /**
@@ -88,6 +93,26 @@ export class ApiService {
       queryParams
     );
 
+  }
+
+  postFeedback(issue: Issue): Observable<any> {
+
+    return this
+      .afs
+      .collection('issues')
+      .get()
+      .pipe(
+        mergeMap((collection) => {
+
+          let serialNumber = (collection.size + 1).toString();
+          serialNumber = serialNumber.padStart(4, '0');
+
+          issue.id = formatDate(issue.createTime, 'yyyyMMdd', this.locale) + serialNumber;
+
+          return this.afs.collection('issues').doc(issue.id).set(issue);
+
+        })
+      );
   }
 
 }

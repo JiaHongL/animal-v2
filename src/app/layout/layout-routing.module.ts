@@ -24,6 +24,10 @@ const routes: Routes = [{
     {
       path: appRoutePaths.favorite.path,
       loadChildren: '../pages/favorite/favorite.module#FavoriteModule'
+    },
+    {
+      path: appRoutePaths.feedback.path,
+      loadChildren: '../pages/feedback/feedback.module#FeedbackModule'
     }
   ]
 }];

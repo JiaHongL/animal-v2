@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 // environment
-import { environment } from '../environments/environment';
+import { environment } from '../../../environments/environment';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';

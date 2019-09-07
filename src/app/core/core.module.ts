@@ -11,6 +11,8 @@ import { LoadingModule } from './loading/loading.module';
 import { ApiService } from './api/api.service';
 import { UtilityService } from './utility/utility.service';
 
+import { FirebaseModule } from './firebase/firebase.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { UtilityService } from './utility/utility.service';
     UtilityService
   ],
   exports: [
-    LoadingModule
+    LoadingModule,
+    FirebaseModule
   ]
 })
 export class CoreModule {

@@ -9,7 +9,9 @@ import { ApiService } from './api.service';
 describe('ApiService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [CoreModule],
+    imports: [
+      CoreModule
+    ],
     providers: [ApiService]
   }));
 
