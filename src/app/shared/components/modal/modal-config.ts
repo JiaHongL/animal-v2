@@ -5,7 +5,7 @@
  * @class ModalConfig
  * @template D
  */
-export declare class ModalConfig<D = any> {
+export class ModalConfig<D = any> {
 
   /**
    *   min-width of the modal

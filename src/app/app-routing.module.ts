@@ -6,7 +6,7 @@ import { appRoutePaths } from './constant/app-route-paths.const';
 const routes: Routes = [
   {
     path: appRoutePaths.layout,
-    loadChildren: './layout/layout.module#LayoutModule'
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
   },
   {
     path: '**',

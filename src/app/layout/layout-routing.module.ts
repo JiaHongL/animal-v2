@@ -15,19 +15,19 @@ const routes: Routes = [{
     },
     {
       path: appRoutePaths.home.path,
-      loadChildren: '../pages/home/home.module#HomeModule',
+      loadChildren: () => import('../pages/home/home.module').then(m => m.HomeModule)
     },
     {
       path: appRoutePaths.detail.path,
-      loadChildren: '../pages/detail/detail.module#DetailModule',
+      loadChildren: () => import('../pages/detail/detail.module').then(m => m.DetailModule)
     },
     {
       path: appRoutePaths.favorite.path,
-      loadChildren: '../pages/favorite/favorite.module#FavoriteModule'
+      loadChildren: () => import('../pages/favorite/favorite.module').then(m => m.FavoriteModule)
     },
     {
       path: appRoutePaths.feedback.path,
-      loadChildren: '../pages/feedback/feedback.module#FeedbackModule'
+      loadChildren: () => import('../pages/feedback/feedback.module').then(m => m.FeedbackModule)
     }
   ]
 }];
