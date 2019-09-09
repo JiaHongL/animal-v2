@@ -6,6 +6,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { feedbackFormKeys } from '../../constant/form-keys/feedback-form-keys.const';
 import { historyFormKeys } from '../../constant/form-keys/history-form-keys.const';
 
+// enum
+import { LoadingType } from '../../core/loading/enum/loading-type.enum';
+
 // service
 import { SelectsService } from './../../core/selects/selects.service';
 import { ApiService } from '../../core/api/api.service';
@@ -204,7 +207,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
     const issue = this.form.getRawValue();
 
-    this.loading.show();
+    this.loading.show(LoadingType.SPINNER);
 
     this
       .api
