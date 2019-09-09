@@ -2,10 +2,13 @@
 
   <div class="header-inner">
 
-    <!-- header 開始-->
+    <!-- header 開始 -->
     <header>
       <a>
-        <img class="logo" src="assets/logo/dog.png">
+        <img
+          class="logo"
+          src="assets/logo/dog.png"
+        >
       </a>
     </header>
     <!-- header 結束 -->
@@ -19,7 +22,10 @@
         (click)="isMenuOpen=!isMenuOpen"
       >
         <a href="javascript:void(0)">
-          <i class="fa fa-bars menu-icon" aria-hidden="true"></i>
+          <i
+            class="fa fa-bars menu-icon"
+            aria-hidden="true"
+          ></i>
         </a>
       </span>
       <!-- 選單表頭 結束 -->
@@ -68,7 +74,10 @@
             (click)="isMenuOpen=false;openQueryModal(queryModalType.CONDITION)"
           >
             <a href="javascript:void(0)">
-              <i class="fas fa-clipboard-list fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
+              <i
+                class="fas fa-clipboard-list fa-lg item-icon"
+                style="padding-left:17px;padding-right:23px;"
+              ></i>
               <span class="item-title">條件收尋</span>
             </a>
           </div>
@@ -77,7 +86,10 @@
             (click)="isMenuOpen=false;openQueryModal(queryModalType.ID)"
           >
             <a href="javascript:void(0)">
-              <i class="fas fa-file-alt fa-lg item-icon" style="padding-left:17px;padding-right:23px;"></i>
+              <i
+                class="fas fa-file-alt fa-lg item-icon"
+                style="padding-left:17px;padding-right:23px;"
+              ></i>
               <span class="item-title">編號收尋</span>
             </a>
           </div>
@@ -98,7 +110,7 @@
               <i class="fas fa-hands-helping fa-lg item-icon p-r-15"></i>
               <span class="item-title">收容中心收尋</span>
             </a>
-          </div>
+          </span>
           <div
             class="list-item"
             [routerLink]="[ '/' + appRoutePaths.feedback.path]"
@@ -166,7 +178,7 @@
       <!-- 選單清單 結束 -->
 
     </div>
-    <!-- 導航選單 結束-->
+    <!-- 導航選單 結束 -->
 
   </div>
 

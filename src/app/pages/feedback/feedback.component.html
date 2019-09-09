@@ -18,7 +18,12 @@
         <!-- 標題 結束 -->
 
         <!-- 意見類型 開始 -->
-        <label class="font-grey-mint" for="type">意見類型：</label>
+        <label
+          class="font-grey-mint"
+          for="type"
+        >
+          意見類型：
+        </label>
         <select
           [formControlName]="formKeys.type"
           class="w-250 w-max"
@@ -27,7 +32,9 @@
           <option
             *ngFor="let item of selects.feedbackTypeList"
             value="{{item.key}}"
-          >{{item.value}}</option>
+          >
+            {{item.value}}
+          </option>
         </select>
         <!-- 意見類型 結束 -->
 
@@ -61,7 +68,9 @@
             <label
               class="font-grey-mint"
               for="createUser"
-            >您的名字：</label>
+            >
+              您的名字：
+            </label>
             <input
               [formControlName]="formKeys.createUser"
               [ngClass]="{'has-error': hasError(formKeys.createUser)}"
@@ -78,7 +87,9 @@
             <label
               class="font-grey-mint"
               for="email"
-            >Email：</label>
+            >
+              Email：
+            </label>
             <input
               [formControlName]="formKeys.email"
               [ngClass]="{'has-error': hasError(formKeys.email)}"
@@ -105,7 +116,9 @@
             style="width:100%;"
             class="pure-button button-warning no-margin"
             [disabled]="form.invalid"
-          >送出</button>
+          >
+            送出
+          </button>
         </div>
         <!-- 送出按鈕 結束 -->
 
@@ -117,7 +130,11 @@
   <ng-template #tmpl>
     <div class="message-box">
       <div class="img">
-        <img src="./assets/images/person-family-001.png" alt="" srcset="">
+        <img
+          src="./assets/images/person-family-001.png"
+          alt
+          srcset
+        >
       </div>
       <div class="desc">非常感謝您的填寫</div>
     </div>

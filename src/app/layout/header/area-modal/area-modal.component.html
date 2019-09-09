@@ -19,8 +19,12 @@
         *ngFor="let item of selects.areaList"
         (click)="query(item.key)"
       >
-        <a class="title font-grey-salsa" href="javascript:void(0)">
-          <i class="icon-tag"></i>{{item.value}}
+        <a
+          class="title font-grey-salsa"
+          href="javascript:void(0)"
+        >
+          <i class="icon-tag"></i>
+          {{item.value}}
         </a>
         <div class="icon">
           <i class="fa fa-angle-right fa-lg font-grey-salsa"></i>
@@ -29,4 +33,3 @@
     </ul>
   </div>
 </div>
-

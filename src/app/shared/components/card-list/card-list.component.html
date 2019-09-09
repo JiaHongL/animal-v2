@@ -13,7 +13,10 @@
 
         <!-- 表頭 開始 -->
         <div class="card-header">
-          <a href="javascript:void(0)" class="round-btn">
+          <a
+            href="javascript:void(0)"
+            class="round-btn"
+          >
             <i
               class="fas fa-heart fa-2x font-red-thunderbird p-l-5"
               *ngIf="item.isLike"
@@ -35,7 +38,10 @@
             (click)="clickPicture.emit(item.album_file)"
           >
             <a href="javascript:void(0)">
-              <img src="{{ item.album_file || 'assets/images/non01.png' }}" alt="">
+              <img
+                src="{{ item.album_file || 'assets/images/non01.png' }}"
+                alt
+              >
             </a>
           </div>
         </div>
