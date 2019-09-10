@@ -4,7 +4,12 @@
 >
 
   <!-- header 開始 -->
-  <app-header></app-header>
+  <app-header
+    [isLoggedIn]="userService.isLoggedIn"
+    [isAdmin]="userService.isAdmin"
+    [userName]="userService.user?.name"
+    (signOut)="signOut()"
+  ></app-header>
   <!-- header 結束 -->
 
   <!-- 內容頁 開始 -->

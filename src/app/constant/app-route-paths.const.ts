@@ -13,7 +13,7 @@ export const appRoutePaths = {
    * 管理員登入
    */
   adLogin: {
-    path: 'adLogin',
+    path: 'admin-login',
     title: '管理員登入'
   },
 

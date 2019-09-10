@@ -28,7 +28,11 @@ const routes: Routes = [{
     {
       path: appRoutePaths.feedback.path,
       loadChildren: () => import('../pages/feedback/feedback.module').then(m => m.FeedbackModule)
-    }
+    },
+    {
+      path: appRoutePaths.issues.path,
+      loadChildren: () => import('../pages/issues/issues.module').then(m => m.IssuesModule)
+    },
   ]
 }];
 

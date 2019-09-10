@@ -7,11 +7,12 @@ import { NetworkingModule } from './networking/networking.module';
 import { SelectsModule } from './selects/selects.module';
 import { LoadingModule } from './loading/loading.module';
 
+import { FirebaseModule } from './firebase/firebase.module';
+
 // service
 import { ApiService } from './api/api.service';
 import { UtilityService } from './utility/utility.service';
-
-import { FirebaseModule } from './firebase/firebase.module';
+import { UserService } from './user/user.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FirebaseModule } from './firebase/firebase.module';
   ],
   providers: [
     ApiService,
-    UtilityService
+    UtilityService,
+    UserService
   ],
   exports: [
     LoadingModule,

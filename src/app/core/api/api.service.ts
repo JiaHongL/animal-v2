@@ -1,6 +1,7 @@
 import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { formatDate } from '@angular/common';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 // environment
 import { environment } from '../../../environments/environment';
@@ -17,8 +18,8 @@ import { QueryParams } from './model/query-params.model';
 import { Issue } from '../../model/issue/issue.model';
 
 // rxjs
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
+import { mergeMap, take, map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
@@ -34,6 +35,7 @@ export class ApiService {
   constructor(
     private networking: NetworkingService,
     private afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
@@ -104,8 +106,7 @@ export class ApiService {
       .pipe(
         mergeMap((collection) => {
 
-          let serialNumber = (collection.size + 1).toString();
-          serialNumber = serialNumber.padStart(4, '0');
+          const serialNumber = (collection.size + 1).toString().padStart(4, '0');
 
           issue.id = formatDate(issue.createTime, 'yyyyMMdd', this.locale) + serialNumber;
 
@@ -113,6 +114,73 @@ export class ApiService {
 
         })
       );
+  }
+
+  /**
+   * 使用者登入
+   *
+   * @param {string} email - 電子信箱
+   * @param {string} password - 密碼
+   * @returns {Observable<any>}
+   * @memberof ApiService
+   */
+  login(email: string, password: string): Observable<any> {
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
+  }
+
+  /**
+   * 獲取使用者資訊
+   *
+   * @param {string} uid - uid
+   * @returns {Observable<any>}
+   * @memberof ApiService
+   */
+  getUserInfo(uid: string): Observable<any> {
+
+    return this
+      .afs
+      .collection('users', ref => {
+
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+
+        query = query.where('uid', '==', uid);
+
+        return query;
+
+      })
+      .valueChanges()
+      .pipe(
+        take(1)
+      );
+
+  }
+
+  /**
+   * 登出
+   *
+   * @returns {Observable<any>}
+   * @memberof ApiService
+   */
+  signOut(): Observable<any> {
+    return from(this.afAuth.auth.signOut());
+  }
+
+  /**
+   *  取得登入狀態
+   *
+   * @returns {Observable<any>}
+   * @memberof UserService
+   */
+  getLogInStatus(): Observable<boolean> {
+
+    return this
+      .afAuth
+      .authState
+      .pipe(
+        take(1),
+        map((authState) => !!authState)
+      );
+
   }
 
 }

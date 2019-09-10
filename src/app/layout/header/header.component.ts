@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, HostBinding, HostListener, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 // component
@@ -23,6 +23,34 @@ import { QueryModalType } from './enum/query-modal-type.enum';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  /**
+   * 是否已登入系統
+   *
+   * @memberof HeaderComponent
+   */
+  @Input() isLoggedIn = false;
+
+  /**
+   * 是否為管理員登入
+   *
+   * @memberof HeaderComponent
+   */
+  @Input() isAdmin = false;
+
+  /**
+   * 使用者名稱
+   *
+   * @memberof HeaderComponent
+   */
+  @Input() userName = '';
+
+  /**
+   * 登出
+   *
+   * @memberof HeaderComponent
+   */
+  @Output() signOut = new EventEmitter<any>();
 
   /**
    * 查詢使用 的 Modal元件
@@ -82,20 +110,6 @@ export class HeaderComponent implements OnInit {
    * @memberof HeaderComponent
    */
   isMenuOpen = false;
-
-  /**
-   * 是否為管理員登入
-   *
-   * @memberof HeaderComponent
-   */
-  isAdminLogin = false;
-
-  /**
-   * 使用者名稱
-   *
-   * @memberof HeaderComponent
-   */
-  userName = '';
 
   /**
    * class 綁定

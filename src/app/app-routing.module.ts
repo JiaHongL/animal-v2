@@ -5,6 +5,10 @@ import { appRoutePaths } from './constant/app-route-paths.const';
 
 const routes: Routes = [
   {
+    path: appRoutePaths.adLogin.path,
+    loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdLoginModule)
+  },
+  {
     path: appRoutePaths.layout,
     loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
   },

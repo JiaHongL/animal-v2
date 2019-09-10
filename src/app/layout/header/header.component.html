@@ -48,7 +48,7 @@
         <!-- 選單表頭 結束 -->
 
         <!-- 前台選項 開始 -->
-        <div *ngIf="!isAdminLogin">
+        <div *ngIf="!isLoggedIn">
           <div
             class="list-item"
             [routerLink]="[ '/' + appRoutePaths.home.path]"
@@ -123,6 +123,7 @@
           </div>
           <div
             class="list-item"
+            [routerLink]="['/' + appRoutePaths.adLogin.path]"
             (click)="isMenuOpen=false"
           >
             <a href="javascript:void(0)">
@@ -134,7 +135,7 @@
         <!-- 前台選項 結束 -->
 
         <!-- 後台選項 開始 -->
-        <div *ngIf="isAdminLogin">
+        <div *ngIf="isLoggedIn">
           <div
             class="list-item"
             (click)="isMenuOpen=false"
@@ -155,6 +156,7 @@
           </div>
           <div
             class="list-item"
+            *ngIf="isAdmin"
             (click)="isMenuOpen=false"
           >
             <a href="javascript:void(0)">
@@ -164,7 +166,7 @@
           </div>
           <div
             class="list-item"
-            (click)="isMenuOpen=false"
+            (click)="isMenuOpen=false;signOut.emit()"
           >
             <a href="javascript:void(0)">
               <i class="fas fa-sign-out-alt fa-lg item-icon"></i>
