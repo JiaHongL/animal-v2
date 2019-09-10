@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
 
+import { AuthGuard } from '../guard/auth/auth.guard';
+
 const routes: Routes = [{
   path: appRoutePaths.layout,
   component: LayoutComponent,
@@ -31,7 +33,8 @@ const routes: Routes = [{
     },
     {
       path: appRoutePaths.issues.path,
-      loadChildren: () => import('../pages/issues/issues.module').then(m => m.IssuesModule)
+      loadChildren: () => import('../pages/issues/issues.module').then(m => m.IssuesModule),
+      canActivate: [AuthGuard]
     },
   ]
 }];

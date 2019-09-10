@@ -1,3 +1,5 @@
+import { UserService } from './core/user/user.service';
+import { ApiService } from './core/api/api.service';
 import { Component } from '@angular/core';
 
 // service

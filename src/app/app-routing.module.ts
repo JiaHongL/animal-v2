@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdLoginModule)
   },
   {
+    path: appRoutePaths.authError.path,
+    loadChildren: () => import('./auth-error/auth-error.module').then(m => m.AuthErrorModule)
+  },
+  {
     path: appRoutePaths.layout,
     loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
   },

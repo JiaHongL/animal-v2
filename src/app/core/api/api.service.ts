@@ -171,16 +171,8 @@ export class ApiService {
    * @returns {Observable<any>}
    * @memberof UserService
    */
-  getLogInStatus(): Observable<boolean> {
-
-    return this
-      .afAuth
-      .authState
-      .pipe(
-        take(1),
-        map((authState) => !!authState)
-      );
-
+  getLogInStatus(): Observable<firebase.User> {
+    return this.afAuth.authState;
   }
 
 }

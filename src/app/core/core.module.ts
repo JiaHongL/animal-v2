@@ -1,12 +1,12 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 // Module
 import { StorageModule } from './storage/storage.module';
 import { NetworkingModule } from './networking/networking.module';
 import { SelectsModule } from './selects/selects.module';
 import { LoadingModule } from './loading/loading.module';
-
 import { FirebaseModule } from './firebase/firebase.module';
 
 // service
@@ -24,7 +24,8 @@ import { UserService } from './user/user.service';
   providers: [
     ApiService,
     UtilityService,
-    UserService
+    UserService,
+    AngularFireAuthGuard
   ],
   exports: [
     LoadingModule,
