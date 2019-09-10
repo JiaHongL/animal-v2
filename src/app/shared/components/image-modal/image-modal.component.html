@@ -1,16 +1,21 @@
-<!-- 內容 開始 -->
-<div class="modal-content">
-  <div class="image-block">
-    <img src="{{ pictureUrl || 'assets/images/non01.png' }}">
-  </div>
-</div>
-<!-- 內容 結束 -->
+<div class="container-grid ">
 
-<!-- 關閉按鈕 開始 -->
-<a href="javascript:void(0)">
-  <i
-    class="fa fa-times fa-1x close-btn"
-    (click)="modalRef.close()"
-  ></i>
-</a>
-<!-- 關閉按鈕 結束 -->
+  <!-- 內容 開始 -->
+  <div class="modal-content">
+    <div class="image-block">
+      <img src="{{ pictureUrl || 'assets/images/non01.png' }}">
+    </div>
+  </div>
+  <!-- 內容 結束 -->
+
+  <!-- 關閉按鈕 開始 -->
+  <a href="javascript:void(0)">
+    <i
+      class="fa fa-times fa-1x close-btn"
+      (click)="modalRef.close()"
+    ></i>
+  </a>
+  <!-- 關閉按鈕 結束 -->
+
+</div>
+
