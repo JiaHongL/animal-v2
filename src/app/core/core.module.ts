@@ -8,18 +8,21 @@ import { NetworkingModule } from './networking/networking.module';
 import { SelectsModule } from './selects/selects.module';
 import { LoadingModule } from './loading/loading.module';
 import { FirebaseModule } from './firebase/firebase.module';
+import { MessageModule } from './message/message.module';
 
 // service
 import { ApiService } from './api/api.service';
 import { UtilityService } from './utility/utility.service';
 import { UserService } from './user/user.service';
+import { ModalModule } from '../shared/components/modal/modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     StorageModule,
     NetworkingModule,
-    SelectsModule
+    SelectsModule,
+    MessageModule
   ],
   providers: [
     ApiService,

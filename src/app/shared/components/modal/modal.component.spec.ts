@@ -1,8 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// module
-import { CoreModule } from '../../../core/core.module';
-
 // component
 import { ModalComponent } from './modal.component';
 
@@ -11,6 +8,7 @@ import { MODAL_CONFIG } from './modal';
 
 // class
 import { ModalRef } from './modal-ref.model';
+import { UtilityService } from '../../../core/utility/utility.service';
 
 describe('ModalComponent', () => {
   let component: ModalComponent;
@@ -18,12 +16,14 @@ describe('ModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule],
       declarations: [ModalComponent],
       providers: [
+        UtilityService,
         {
           provide: ModalRef,
-          useValue: null
+          useValue: {
+            opened: () => { }
+          }
         },
         {
           provide: MODAL_CONFIG,

@@ -9,6 +9,8 @@ import { MODAL_DATA, MODAL_CONFIG } from './modal';
 // rxjs
 import { Subject, Observable } from 'rxjs';
 
+export const MODAL_REF_OPENED = 'opened';
+
 export class ModalRef<T> {
 
   /**
@@ -87,6 +89,16 @@ export class ModalRef<T> {
    */
   afterClosed(): Observable<any> {
     return this._afterClosed.asObservable();
+  }
+
+  /**
+   * 已打開 通知
+   *
+   * @memberof ModalRef
+   */
+  private [MODAL_REF_OPENED](): void {
+    this._afterOpened.next(null);
+    this._afterOpened.complete();
   }
 
   /**

@@ -8,7 +8,7 @@
 export class ModalConfig<D = any> {
 
   /**
-   *   min-width of the modal
+   *  min-width of the modal
    *
    * @type {string}
    * @memberof ModalConfig
@@ -38,5 +38,13 @@ export class ModalConfig<D = any> {
    * @memberof ModalConfig
    */
   data?: D | null;
+
+  /**
+   * show animate
+   *
+   * @type {boolean}
+   * @memberof ModalConfig
+   */
+  animate?: boolean;
 
 }

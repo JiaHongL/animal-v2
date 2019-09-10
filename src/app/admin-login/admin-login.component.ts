@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 // service
 import { UserService } from './../core/user/user.service';
 import { LoadingService } from './../core/loading/loading.service';
+import { MessageService } from '../core/message/message.service';
 
 // const
 import { adminLoginFormKeys } from '../constant/form-keys/admin-login-form-keys.const';
@@ -44,7 +45,8 @@ export class AdminLoginComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private message: MessageService
   ) {
 
     this.form = this.fb.group({
@@ -120,7 +122,7 @@ export class AdminLoginComponent implements OnInit {
             break;
         }
 
-        alert(errorMessage);
+        this.message.alert(errorMessage);
 
       });
 

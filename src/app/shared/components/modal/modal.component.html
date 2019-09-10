@@ -5,7 +5,10 @@
 
   <div
     class="modal"
-    [ngClass]="{ 'mobile-full-screen' : hasMobileFullScreen }"
+    [ngClass]="{
+      'mobile-full-screen' : hasMobileFullScreen ,
+      'zoom-in' : animate
+    }"
     [style.min-width]="minWidth"
     [style.min-height]="minHeight"
   >

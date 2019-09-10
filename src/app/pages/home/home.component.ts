@@ -11,6 +11,7 @@ import { ModalConfig } from '../../shared/components/modal/modal-config';
 // service
 import { ApiService } from './../../core/api/api.service';
 import { LoadingService } from './../../core/loading/loading.service';
+import { MessageService } from './../../core/message/message.service';
 
 // rxjs
 import { finalize } from 'rxjs/operators';
@@ -56,7 +57,8 @@ export class HomeComponent implements OnInit {
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
     private loadingService: LoadingService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private message: MessageService
   ) { }
 
   ngOnInit() {
@@ -124,7 +126,7 @@ export class HomeComponent implements OnInit {
         if (res.success) {
           this.animals.push(...res.result.map(animal => new Animal(animal)));
         } else {
-          alert(res.errorMessage);
+          this.message.alert(res.errorMessage);
         }
 
       });

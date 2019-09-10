@@ -25,10 +25,13 @@
     border-radius: 4px;
     display: grid;
 
-    animation-name: zoom;
-    animation-duration: 0.6s;
+    &.zoom-in {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
 
   }
+
 
 }
 
@@ -72,16 +75,3 @@
     transform: scale(1);
   }
 }
-
-@keyframes up {
-  from {
-    margin-bottom: -150%;
-  }
-
-  to {
-    margin-bottom: 0%;
-  }
-}
-
-
-

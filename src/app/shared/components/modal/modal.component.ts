@@ -4,7 +4,7 @@ import { Component, OnInit, Inject, ElementRef, OnDestroy } from '@angular/core'
 import { MODAL_CONFIG } from './modal';
 
 // class
-import { ModalRef } from './modal-ref.model';
+import { ModalRef, MODAL_REF_OPENED } from './modal-ref.model';
 import { ModalConfig } from './modal-config';
 
 // service
@@ -33,7 +33,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     this.utilityService.stopBodyScroll(true);
+    this.modalRef[MODAL_REF_OPENED]();
+
   }
 
   /**
@@ -83,6 +86,16 @@ export class ModalComponent implements OnInit, OnDestroy {
     return this.config && this.config.hasOwnProperty('mobileFullScreen') ? this.config.mobileFullScreen : false;
   }
 
+  /**
+   * 是否顯示開啟的動畫
+   *
+   * @readonly
+   * @type {boolean}
+   * @memberof ModalComponent
+   */
+  get animate(): boolean {
+    return this.config && this.config.hasOwnProperty('animate') ? this.config.animate : true;
+  }
 
   ngOnDestroy(): void {
     this.utilityService.stopBodyScroll(false);

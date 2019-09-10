@@ -10,6 +10,7 @@ import { StorageType } from '../storage/storage-type.enum';
 // service
 import { ApiService } from './../api/api.service';
 import { StorageService } from '../storage/storage.service';
+import { MessageService } from './../message/message.service';
 
 // rxjs
 import { Observable, of, combineLatest } from 'rxjs';
@@ -117,7 +118,8 @@ export class SelectsService {
 
   constructor(
     private api: ApiService,
-    private storage: StorageService
+    private storage: StorageService,
+    private message: MessageService
   ) {
 
   }
@@ -207,7 +209,7 @@ export class SelectsService {
           if (res.success) {
             options = res.result;
           } else {
-            alert(res.errorMessage);
+            this.message.alert(res.errorMessage);
           }
 
           return options.map(option => new Option(option));

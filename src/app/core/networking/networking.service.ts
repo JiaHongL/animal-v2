@@ -7,15 +7,19 @@ import { HttpMethodType } from './enum/http-method-type.enum';
 // model
 import { ServerResponse } from './model/server-response.model';
 
+// service
+import { MessageService } from './../message/message.service';
+
 // rxjs
-import { Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, filter, map } from 'rxjs/operators';
 
 @Injectable()
 export class NetworkingService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private message: MessageService
   ) { }
 
   /**
@@ -72,9 +76,9 @@ export class NetworkingService {
     return observable.pipe(
       catchError((err: HttpErrorResponse) => {
 
-        const serverResponse = err.error as ServerResponse;
+        const serverResponse = err.error;
 
-        alert(serverResponse);
+        this.message.alert(serverResponse);
 
         return of(err);
 
