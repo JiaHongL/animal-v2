@@ -8,6 +8,7 @@ import { ModalModule } from './components/modal/modal.module';
 import { GoTopModule } from './directives/go-top/go-top.module';
 import { DataTransformModule } from './pipes/data-transform/data-transform.module';
 import { IssueTableModule } from './components/issue-table/issue-table.module';
+import { PaginationModule } from './components/pagination/pagination.module';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import { IssueTableModule } from './components/issue-table/issue-table.module';
     ModalModule,
     DataTransformModule,
     GoTopModule,
-    IssueTableModule
+    IssueTableModule,
+    PaginationModule
   ]
 })
 export class SharedModule {

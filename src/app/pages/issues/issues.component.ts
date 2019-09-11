@@ -46,6 +46,20 @@ export class IssuesComponent implements OnInit {
    */
   currentPage = 1;
 
+  /**
+   * 資料總筆數
+   *
+   * @memberof IssuesComponent
+   */
+  total = 0;
+
+  /**
+   * 每頁幾筆
+   *
+   * @memberof IssuesComponent
+   */
+  itemsPerPage = 10;
+
   constructor(
     private api: ApiService
   ) { }
@@ -65,16 +79,27 @@ export class IssuesComponent implements OnInit {
     this.currentIssuesStatus = issueStatus;
     this.currentPage = 1;
     this.pageList = [];
+    this.total = 0;
 
     this
       .api
       .getIssues(issueStatus)
       .subscribe((data) => {
         if (data.pages.length) {
+          this.total = data.total;
           this.pageList = data.pages.map(issues => issues.map(issue => new Issue(issue)));
         }
       });
 
+  }
+
+  /**
+   * 設定頁碼
+   *
+   * @memberof IssuesComponent
+   */
+  setCurrentPage(page: number): void {
+    this.currentPage = page;
   }
 
   /**

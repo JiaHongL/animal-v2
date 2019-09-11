@@ -28,10 +28,15 @@
     </div>
     <!-- 表格 開始 -->
 
-    <!-- 標題 開始 -->
+    <!-- 頁碼 開始 -->
     <div class="pagination">
+      <app-pagination
+        [totalItems]="130"
+        [itemsPerPage]="itemsPerPage"
+        (clickEvent)="setCurrentPage($event)"
+      ></app-pagination>
     </div>
-    <!-- 標題 開始 -->
+    <!-- 頁碼 開始 -->
 
   </div>
 </div>
