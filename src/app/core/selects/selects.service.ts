@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // model
-import { Option } from './model/option.model';
+import { Option } from '../../model/option/option.model';
 
 // enum
 import { SelectType } from './enum/select-type.enum';

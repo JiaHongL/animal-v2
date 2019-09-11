@@ -17,14 +17,14 @@
       <li
         class="list-item"
         *ngFor="let item of selects.areaList"
-        (click)="query(item.key)"
+        (click)="query(item.code)"
       >
         <a
           class="title font-grey-salsa"
           href="javascript:void(0)"
         >
           <i class="icon-tag"></i>
-          {{item.value}}
+          {{item.name}}
         </a>
         <div class="icon">
           <i class="fa fa-angle-right fa-lg font-grey-salsa"></i>

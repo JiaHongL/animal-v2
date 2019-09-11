@@ -7,18 +7,18 @@
 export class Option {
 
   /**
-   * Key
+   * 代碼
    *
    * @memberof Option
    */
-  key = '';
+  code = '';
 
   /**
-   * Value
+   * 名稱
    *
    * @memberof Option
    */
-  value = '';
+  name = '';
 
 
   constructor(data) {
@@ -27,8 +27,8 @@ export class Option {
       return;
     }
 
-    this.key = data.key || '';
-    this.value = data.value || '';
+    this.code = data.code || '';
+    this.name = data.name || '';
 
   }
 
