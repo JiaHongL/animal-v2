@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AnimalPipe } from './animal.pipe';
+import { DataTransformPipe } from './data-transform.pipe';
 
 import { CoreModule } from '../../../core/core.module';
 
 import { SelectsService } from '../../../core/selects/selects.service';
 
-describe('AnimalPipe', () => {
+describe('DataTransformPipe', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [CoreModule]
@@ -15,7 +15,7 @@ describe('AnimalPipe', () => {
   it('create an instance', () => {
 
     const selectsService: SelectsService = TestBed.get(SelectsService);
-    const pipe = new AnimalPipe(selectsService);
+    const pipe = new DataTransformPipe(selectsService);
 
     expect(pipe).toBeTruthy();
 

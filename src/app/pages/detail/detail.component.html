@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">狀態</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_status | animal:selectType.STATUS }}
+      {{ animal?.animal_status | dataTransform:selectType.STATUS }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">流水編號</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">{{ animal?.animal_id }}</div>
@@ -26,7 +26,7 @@
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">{{ animal?.animal_opendate }}</div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">所屬縣市</div>
     <div class="col-md-1-4 col-xs-3-4 col-xs-2-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_area_pkid | animal: selectType.AREA }}
+      {{ animal?.animal_area_pkid | dataTransform: selectType.AREA }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">實際所在地</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">{{ animal?.animal_place }}</div>
@@ -41,26 +41,26 @@
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">{{ animal?.animal_kind }}</div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">性別</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_sex | animal:selectType.SEX }}
+      {{ animal?.animal_sex | dataTransform:selectType.SEX }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">年紀</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_age | animal:selectType.AGE }}
+      {{ animal?.animal_age | dataTransform:selectType.AGE }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">體型</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_bodytype | animal:selectType.BODY_TYPE }}
+      {{ animal?.animal_bodytype | dataTransform:selectType.BODY_TYPE }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">毛色</div>
     <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">{{ animal?.animal_colour }}</div>
     <div class="col-md-2-4 xs-hide padding-l-5 border-t-r line-height-28"></div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">是否絕育</div>
     <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_sterilization | animal:selectType.STERILIZATION }}
+      {{ animal?.animal_sterilization | dataTransform:selectType.STERILIZATION }}
     </div>
     <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">是否施打狂犬病</div>
     <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
-      {{ animal?.animal_bacterin | animal:selectType.BACTERIN }}
+      {{ animal?.animal_bacterin | dataTransform:selectType.BACTERIN }}
     </div>
     <div class="col-md-4-4 col-xs-4-4 padding-l-5 border-t-r line-height-28 bold">三、其它備註</div>
     <div
