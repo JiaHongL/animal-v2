@@ -9,8 +9,8 @@ describe('Issue', () => {
     const issue = new Issue(data);
 
     expect(issue.id).toEqual('');
-    expect(issue.status).toEqual('');
-    expect(issue.type).toEqual('');
+    expect(issue.status).toEqual(null);
+    expect(issue.type).toEqual(null);
     expect(issue.title).toEqual('');
     expect(issue.createUser).toEqual('');
     expect(issue.createTime).toEqual('');
@@ -37,8 +37,8 @@ describe('Issue', () => {
     const issue = new Issue(data);
 
     expect(issue.id).toEqual('');
-    expect(issue.status).toEqual('');
-    expect(issue.type).toEqual('');
+    expect(issue.status).toEqual(null);
+    expect(issue.type).toEqual(null);
     expect(issue.title).toEqual('');
     expect(issue.createUser).toEqual('');
     expect(issue.createTime).toEqual('');
@@ -52,8 +52,8 @@ describe('Issue', () => {
 
     const data = {
       id: '1',
-      status: '2',
-      type: '3',
+      status: 2,
+      type: 3,
       title: '4',
       createUser: '5',
       createTime: '6',

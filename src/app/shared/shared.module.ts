@@ -7,6 +7,7 @@ import { ImageModalModule } from './components/image-modal/image-modal.module';
 import { ModalModule } from './components/modal/modal.module';
 import { GoTopModule } from './directives/go-top/go-top.module';
 import { DataTransformModule } from './pipes/data-transform/data-transform.module';
+import { IssueTableModule } from './components/issue-table/issue-table.module';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { DataTransformModule } from './pipes/data-transform/data-transform.modul
     ImageModalModule,
     ModalModule,
     DataTransformModule,
-    GoTopModule
+    GoTopModule,
+    IssueTableModule
   ]
 })
 export class SharedModule {

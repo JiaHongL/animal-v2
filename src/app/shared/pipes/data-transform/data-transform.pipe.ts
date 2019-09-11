@@ -20,7 +20,11 @@ export class DataTransformPipe implements PipeTransform {
    */
   transform(code: any, selectType: SelectType): string {
 
-    if (!code) {
+    if (
+      code === '' ||
+      code === null ||
+      code === undefined
+    ) {
       return '';
     }
 

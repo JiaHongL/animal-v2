@@ -20,7 +20,7 @@ export class History {
    * @type {number}
    * @memberof History
    */
-  status = '';
+  status: number = null;
 
   /**
    * 建立時間
@@ -53,7 +53,7 @@ export class History {
     }
 
     this.id = data.id || '';
-    this.status = data.status || '';
+    this.status = data.status;
     this.createUser = data.createUser || '';
     this.createTime = data.createTime || '';
     this.remark = data.remark || '';

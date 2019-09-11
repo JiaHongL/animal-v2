@@ -34,6 +34,6 @@ export class ButtonGroupComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

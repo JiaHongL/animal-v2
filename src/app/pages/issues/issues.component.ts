@@ -3,8 +3,12 @@ import { Component, OnInit } from '@angular/core';
 // const
 import { issueStatusOptions } from './../../constant/options/issue-status-options.const';
 
+// service
+import { ApiService } from './../../core/api/api.service';
+
 // enum
 import { IssueStatus } from '../../enum/issue-status.enum';
+import { Issue } from '../../model/issue/issue.model';
 
 @Component({
   selector: 'app-issues',
@@ -25,21 +29,63 @@ export class IssuesComponent implements OnInit {
    *
    * @memberof IssuesComponent
    */
-  issueStatusOptions = issueStatusOptions;
+  issueStatusOptions = issueStatusOptions.filter(option => option.code !== IssueStatus.ARCHIVE);
 
-  constructor() { }
+  /**
+   * 頁面資料列表
+   *
+   * @type {Issue[]}
+   * @memberof IssuesComponent
+   */
+  pageList: Issue[][] = [];
+
+  /**
+   * 當前頁碼
+   *
+   * @memberof IssuesComponent
+   */
+  currentPage = 1;
+
+  constructor(
+    private api: ApiService
+  ) { }
 
   ngOnInit() {
+    this.queryIssues(IssueStatus.ALL);
   }
 
   /**
-   * 設定當前 議題狀態
+   * 查詢 議題 列表
    *
-   * @param {IssueStatus} status
+   * @param {IssueStatus} issueStatus
    * @memberof IssuesComponent
    */
-  setCurrentIssuesStatus(status: IssueStatus): void {
-    this.currentIssuesStatus = status;
+  queryIssues(issueStatus: IssueStatus): void {
+
+    this.currentIssuesStatus = issueStatus;
+    this.currentPage = 1;
+    this.pageList = [];
+
+    this
+      .api
+      .getIssues(issueStatus)
+      .subscribe((data) => {
+        if (data.pages.length) {
+          this.pageList = data.pages.map(issues => issues.map(issue => new Issue(issue)));
+        }
+      });
+
+  }
+
+  /**
+   * 獲取當前議題列表
+   *
+   * @readonly
+   * @type {Issue[]}
+   * @memberof IssuesComponent
+   */
+  get issues(): Issue[] {
+    return this.pageList[this.currentPage - 1];
   }
 
 }

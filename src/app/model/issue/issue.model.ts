@@ -20,13 +20,14 @@ export class Issue {
    *
    * @memberof Issue
    */
-  status = '';
+  status: number = null;
+
   /**
    * 意見類型
    *
    * @memberof Issue
    */
-  type = '';
+  type: number = null;
 
   /**
    * 標題
@@ -77,8 +78,8 @@ export class Issue {
     }
 
     this.id = data.id || '';
-    this.status = data.status || '';
-    this.type = data.type || '';
+    this.status = data.status;
+    this.type = data.type;
     this.title = data.title || '';
     this.createUser = data.createUser || '';
     this.createTime = data.createTime || '';

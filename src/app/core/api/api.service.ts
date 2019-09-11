@@ -8,9 +8,11 @@ import { environment } from '../../../environments/environment';
 
 // service
 import { NetworkingService } from '../networking/networking.service';
+import { UtilityService } from './../utility/utility.service';
 
 // enum
 import { HttpMethodType } from '../networking/enum/http-method-type.enum';
+import { IssueStatus } from '../../enum/issue-status.enum';
 
 // model
 import { ServerResponse } from '../networking/model/server-response.model';
@@ -36,6 +38,7 @@ export class ApiService {
     private networking: NetworkingService,
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
+    private utilityService: UtilityService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
@@ -173,6 +176,70 @@ export class ApiService {
    */
   getLogInStatus(): Observable<firebase.User> {
     return this.afAuth.authState;
+  }
+
+  /**
+   * 取得 議題列表
+   *
+   * @param {IssueStatus} issueStatus - 議題狀態
+   * @returns {Observable<any>}
+   * @memberof ApiService
+   */
+  getIssues(issueStatus: IssueStatus): Observable<any> {
+
+    return this
+      .afs
+      .collection('issues', ref => {
+
+        let queryRef;
+
+        if (issueStatus !== IssueStatus.ALL) {
+          queryRef = ref.where('status', '==', issueStatus);
+        } else {
+          queryRef = ref.where('status', '<', IssueStatus.ARCHIVE);
+        }
+
+        return queryRef;
+
+      })
+      .valueChanges()
+      .pipe(
+
+        // 1.取第一個後 complete
+        take(1),
+
+        // 2.由 id 排序，小到大
+        map((v) => {
+          return v.sort((a: any, b: any) => {
+            return a.id > b.id ? 1 : -1;
+          });
+        }),
+
+        // 3.建立時間轉換
+        map((v) => {
+          return v.map((item) => {
+            return this.utilityService.convertTimestampToDate(item, 'createTime');
+          });
+        }),
+
+        // 4.分組(十個為一組)
+        map((v) => {
+
+          const data = {
+            total: v.length,
+            pages: []
+          };
+
+          for (let i = 0, len = v.length; i < len; i += 10) {
+            data.pages.push(v.slice(i, i + 10));
+          }
+
+          return data;
+
+        })
+
+      );
+
   }
 
 }

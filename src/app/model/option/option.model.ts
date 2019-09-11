@@ -11,7 +11,7 @@ export class Option {
    *
    * @memberof Option
    */
-  code = '';
+  code: number | string = null;
 
   /**
    * 名稱
@@ -27,7 +27,7 @@ export class Option {
       return;
     }
 
-    this.code = data.code || '';
+    this.code = data.code;
     this.name = data.name || '';
 
   }

@@ -26,6 +26,10 @@ export const issueStatusOptions: Option[] = [
   {
     code: IssueStatus.SOLVED,
     name: '已解決'
+  },
+  {
+    code: IssueStatus.ARCHIVE,
+    name: '歸檔'
   }
 
 ].map(option => new Option(option));

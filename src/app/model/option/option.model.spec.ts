@@ -7,7 +7,7 @@ describe('Option', () => {
     const data = null;
     const option = new Option(data);
 
-    expect(option.code).toEqual('');
+    expect(option.code).toEqual(null);
     expect(option.name).toEqual('');
 
   });
@@ -21,7 +21,7 @@ describe('Option', () => {
 
     const option = new Option(data);
 
-    expect(option.code).toEqual('');
+    expect(option.code).toEqual(null);
     expect(option.name).toEqual('');
 
   });

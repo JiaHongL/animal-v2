@@ -9,7 +9,7 @@ describe('History', () => {
     const history = new History(data);
 
     expect(history.id).toEqual('');
-    expect(history.status).toEqual('');
+    expect(history.status).toEqual(null);
     expect(history.createUser).toEqual('');
     expect(history.createTime).toEqual('');
     expect(history.remark).toEqual('');
@@ -29,7 +29,7 @@ describe('History', () => {
     const history = new History(data);
 
     expect(history.id).toEqual('');
-    expect(history.status).toEqual('');
+    expect(history.status).toEqual(null);
     expect(history.createUser).toEqual('');
     expect(history.createTime).toEqual('');
     expect(history.remark).toEqual('');
@@ -40,7 +40,7 @@ describe('History', () => {
 
     const data = {
       id: '1',
-      status: '2',
+      status: 2,
       createUser: '3',
       createTime: '4',
       remark: '5',
