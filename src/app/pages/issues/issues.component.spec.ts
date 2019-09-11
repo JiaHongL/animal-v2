@@ -2,15 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IssuesComponent } from './issues.component';
 
+import { ButtonGroupModule } from './button-group/button-group.module';
+
 describe('IssuesComponent', () => {
   let component: IssuesComponent;
   let fixture: ComponentFixture<IssuesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IssuesComponent ]
+      declarations: [IssuesComponent],
+      imports: [ButtonGroupModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,0 +1,16 @@
+<div class="button-group">
+  <div
+    class="pure-button-group"
+    role="group"
+  >
+    <ng-container *ngFor="let button of buttons">
+      <button
+        class="pure-button button-secondary button-xsmall"
+        [ngClass]="{'pure-button-active': value===button.code}"
+        (click)="clickEvent.emit(button.code)"
+      >
+        {{ button.name }}
+      </button>
+    </ng-container>
+  </div>
+</div>

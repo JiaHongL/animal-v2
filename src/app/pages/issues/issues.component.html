@@ -1,1 +1,20 @@
-<p>issues works!</p>
+<div class="wrapper">
+  <div class="issues-grid">
+    <div class="title">
+      <legend>
+        <h1 class="no-margin">待處理列表</h1>
+      </legend>
+    </div>
+    <div class="text-left">
+      <app-button-group
+        [buttons]="issueStatusOptions"
+        [value]="currentIssuesStatus"
+        (clickEvent)="setCurrentIssuesStatus($event)"
+      ></app-button-group>
+    </div>
+    <div class="table">
+    </div>
+    <div class="pagination">
+    </div>
+  </div>
+</div>
