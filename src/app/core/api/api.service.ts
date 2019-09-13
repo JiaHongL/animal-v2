@@ -242,4 +242,48 @@ export class ApiService {
 
   }
 
+  /**
+   * 獲取 議題 內容
+   *
+   * @param {string} id
+   * @returns {Observable<{}[]>}
+   * @memberof ApiService
+   */
+  getIssueDetail(id: string): Observable<{}[]> {
+
+    return this
+      .afs
+      .collection('issues', ref => ref.where('id', '==', id))
+      .valueChanges()
+      .pipe(
+
+        // 1.取第一個後 complete
+        take(1),
+
+        // 2.建立時間 轉換
+        map((issues) => issues.map((issue) => this.utilityService.convertTimestampToDate(issue, 'createTime'))),
+
+        // 3.排 案件歷程
+        map((issues: Issue[]) => {
+
+          issues[0].history.sort((a: any, b: any) => b.createTime > a.createTime ? 1 : -1);
+
+          return issues;
+
+        }),
+
+        // 4.案件歷程 的 建立時間 轉換
+        map((issues) => {
+
+          issues[0].history.map((issue) => this.utilityService.convertTimestampToDate(issue, 'createTime'));
+
+          return issues;
+
+        }),
+
+
+      );
+
+  }
+
 }
