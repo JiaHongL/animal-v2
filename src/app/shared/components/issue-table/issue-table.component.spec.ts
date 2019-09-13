@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppRoutingModule } from '../../../app-routing.module';
 
 import { IssueTableComponent } from './issue-table.component';
 
@@ -13,7 +14,8 @@ describe('IssueTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CoreModule,
-        DataTransformModule
+        DataTransformModule,
+        AppRoutingModule
       ],
       declarations: [IssueTableComponent]
     })

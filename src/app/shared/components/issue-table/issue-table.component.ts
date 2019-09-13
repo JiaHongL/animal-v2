@@ -6,6 +6,9 @@ import { Issue } from '../../../model/issue/issue.model';
 // enum
 import { SelectType } from './../../../core/selects/enum/select-type.enum';
 
+// const
+import { appRoutePaths } from '../../../constant/app-route-paths.const';
+
 @Component({
   selector: 'app-issue-table',
   templateUrl: './issue-table.component.html',
@@ -48,6 +51,16 @@ export class IssueTableComponent implements OnInit {
    */
   getItemIndex(index: number): number {
     return index + 1 + (this.page - 1) * 10;
+  }
+
+  /**
+   * 打開議題
+   *
+   * @param {*} issueId - 議題Id
+   * @memberof IssueTableComponent
+   */
+  openIssue(issueId: string): void {
+    window.open('#/' + appRoutePaths.issueDetail.path + '/' + issueId);
   }
 
 }

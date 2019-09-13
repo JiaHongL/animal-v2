@@ -6,12 +6,22 @@ import { Animal } from '../../../model/animal/animal.model';
 // enum
 import { Sex } from '../../../enum/sex.enum';
 
+// const
+import { appRoutePaths } from './../../../constant/app-route-paths.const';
+
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
 export class CardListComponent implements OnInit {
+
+  /**
+   * 全站路由定義檔案
+   *
+   * @memberof CardListComponent
+   */
+  appRoutePaths = appRoutePaths;
 
   /**
    * 從外部進來的寵物資料

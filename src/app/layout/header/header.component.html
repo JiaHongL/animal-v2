@@ -148,6 +148,7 @@
           <div
             class="list-item"
             (click)="isMenuOpen=false"
+            [routerLink]="[ '/' + appRoutePaths.issues.path]"
           >
             <a href="javascript:void(0)">
               <i class="far fa-list-alt fa-lg item-icon"></i>
@@ -158,6 +159,7 @@
             class="list-item"
             *ngIf="isAdmin"
             (click)="isMenuOpen=false"
+            [routerLink]="[ '/' + appRoutePaths.archive.path]"
           >
             <a href="javascript:void(0)">
               <i class="fas fa-clipboard-check fa-lg item-icon p-r-20"></i>

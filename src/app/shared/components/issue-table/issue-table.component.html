@@ -14,13 +14,15 @@
     <tr
       [ngClass]="{'tr-odd': odd}"
       *ngFor="let issue of issues ; let index=index; let odd=odd;"
-
+      (click)="openIssue(issue.id)"
     >
       <th>{{ getItemIndex(index) }}</th>
       <th class="hidden-xs">
         {{ issue.status | dataTransform : selectType.ISSUES_STATUS }}
       </th>
-      <th class="hidden-xs">{{ issue.type | dataTransform: selectType.FEEDBACK_TYPE }}</th>
+      <th class="hidden-xs">
+        {{ issue.type | dataTransform: selectType.FEEDBACK_TYPE }}
+      </th>
       <th>{{ issue.id }}</th>
       <th>{{ issue.title }}</th>
       <th class="hidden-xs">{{ issue.createUser }}</th>
