@@ -158,4 +158,31 @@ export class UtilityService {
 
   }
 
+  /**
+   * Deep Copy
+   *
+   * @param {*} oldObj - 要複製的物件
+   * @returns {any}
+   * @memberof UtilityService
+   */
+  deepCopy(oldObj: any): any {
+
+    let newObj = oldObj;
+
+    if (oldObj && typeof oldObj === 'object') {
+      if (oldObj instanceof Date) {
+        return new Date(oldObj.getTime());
+      }
+      newObj = Object.prototype.toString.call(oldObj) === '[object Array]' ? [] : {};
+
+      for (const key of Object.keys(oldObj)) {
+        newObj[key] = this.deepCopy(oldObj[key]);
+      }
+
+    }
+
+    return newObj;
+
+  }
+
 }

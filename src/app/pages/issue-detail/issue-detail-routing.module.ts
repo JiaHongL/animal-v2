@@ -10,6 +10,7 @@ const routes: Routes = [
   {
     path: ':id',
     component: IssueDetailComponent,
+    runGuardsAndResolvers: 'always',
     resolve: {
       issue: IssueDetailResolver
     }

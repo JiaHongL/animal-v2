@@ -286,4 +286,16 @@ export class ApiService {
 
   }
 
+
+  /**
+   * 更新 議題內容
+   *
+   * @param {Issue} issue - 議題
+   * @returns {Observable<any>}
+   * @memberof ApiService
+   */
+  updateIssue(issue: Issue): Observable<any> {
+    return from(this.afs.collection('issues').doc(issue.id).update(issue));
+  }
+
 }
