@@ -7,14 +7,6 @@
 export class History {
 
   /**
-   * 編號
-   *
-   * @type {number}
-   * @memberof History
-   */
-  id = '';
-
-  /**
    * 狀態
    *
    * @type {number}
@@ -52,7 +44,6 @@ export class History {
       return;
     }
 
-    this.id = data.id || '';
     this.status = data.status;
     this.createUser = data.createUser || '';
     this.createTime = data.createTime || '';

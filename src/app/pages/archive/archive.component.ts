@@ -77,10 +77,12 @@ export class ArchiveComponent implements OnInit {
       .api
       .getIssues(issueStatus)
       .subscribe((data) => {
+
         if (data.pages.length) {
           this.total = data.total;
           this.pageList = data.pages.map(issues => issues.map(issue => new Issue(issue)));
         }
+
       });
 
   }
