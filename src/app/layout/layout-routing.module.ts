@@ -39,6 +39,10 @@ const routes: Routes = [{
     {
       path: appRoutePaths.issueDetail.path,
       loadChildren: () => import('../pages/issue-detail/issue-detail.module').then(m => m.IssueDetailModule)
+    },
+    {
+      path: appRoutePaths.archive.path,
+      loadChildren: () => import('../pages/archive/archive.module').then(m => m.ArchiveModule)
     }
   ]
 }];

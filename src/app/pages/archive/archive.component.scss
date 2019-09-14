@@ -1,0 +1,84 @@
+@import "../../../scss/mixins/_breakpoints";
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  .issues-grid {
+    width: 900px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 376px 50px;
+
+    .title {
+      text-align: center;
+      letter-spacing: 3px;
+
+      legend {
+        display: block;
+        width: 100%;
+        padding: .3em 0;
+        margin-bottom: .3em;
+        color: #333;
+        opacity: .85;
+
+        h1 {
+          font-weight: 400;
+        }
+      }
+    }
+
+    .table {
+    }
+
+    .pagination {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @include media-breakpoint-only(md) {
+    .issues-grid {
+      width: 95%;
+      grid-template-rows: 50px 1fr 50px;
+    }
+  }
+
+  @include media-breakpoint-only(lg) {
+    .issues-grid {
+      width: 95%;
+      grid-template-rows: 50px 1fr 50px;
+
+      .button-group {
+        text-align: left;
+      }
+    }
+  }
+
+  @include media-breakpoint-only(sm) {
+    .issues-grid {
+      width: 95%;
+      grid-template-rows: 50px 1fr 50px;
+
+      .button-group {
+        text-align: center;
+      }
+    }
+  }
+
+  @include media-breakpoint-only(xs) {
+    .issues-grid {
+      width: 95%;
+      grid-template-rows: 50px 1fr 50px;
+
+      .button-group {
+        text-align: center;
+      }
+    }
+  }
+}
