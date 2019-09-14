@@ -36,8 +36,10 @@
       </div>
       <div class="col-md-1-4 col-xs-2-4 icon hidden-xs text-center padding-l-5 padding-r-25 border-t-r line-height-28 text-truncate">
         {{ history.remark }}
-        <a href="javascript:void(0)">
-          <!-- (click)="openRemarkModal(history.remark)" -->
+        <a
+          href="javascript:void(0)"
+          (click)="openRemarkModal(history.remark)"
+        >
           <i
             class="fa fa-book"
             aria-hidden="true"
@@ -50,8 +52,8 @@
         <a
           class="visible-xs-inline"
           href="javascript:void(0)"
+          (click)="openRemarkModal(history.remark)"
         >
-          <!-- (click)="openRemarkModal(history.remark)" -->
           <i class="fa fa-book"></i>
         </a>
       </div>
