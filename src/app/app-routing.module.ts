@@ -6,10 +6,16 @@ import { appRoutePaths } from './constant/app-route-paths.const';
 const routes: Routes = [
   {
     path: appRoutePaths.adLogin.path,
+    data: {
+      title: appRoutePaths.adLogin.title,
+    },
     loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdLoginModule)
   },
   {
     path: appRoutePaths.authError.path,
+    data: {
+      title: appRoutePaths.authError.title,
+    },
     loadChildren: () => import('./auth-error/auth-error.module').then(m => m.AuthErrorModule)
   },
   {
