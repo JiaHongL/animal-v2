@@ -1,7 +1,7 @@
 html,
 body {
   height: 100%;
-  width:100%;
+  width: 100%;
   background: url('./assets/images/brushed_@2X.png');
 }
 
@@ -53,6 +53,14 @@ body {
     background: rgb(0, 105, 92);
     width: 100%;
     z-index: 100;
+
+    .footer-inner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
   }
 
 }
