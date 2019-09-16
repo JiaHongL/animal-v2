@@ -9,7 +9,8 @@
     "ci:test": "ng test --watch=false --browsers=ChromeHeadless --progress=false",
     "ci:build": "ng build --aot=true",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy":"ng deploy"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser": "~8.2.5",
     "@angular/platform-browser-dynamic": "~8.2.5",
     "@angular/router": "~8.2.5",
+    "angular-cli-ghpages": "^0.6.0",
     "firebase": "6.4.0",
     "ngx-infinite-scroll": "8.0.0",
     "ngx-webstorage": "4.0.1",
