@@ -7,6 +7,7 @@ import { DataTransformPipe } from './data-transform.pipe';
   imports: [
     CommonModule
   ],
+  providers: [DataTransformPipe],
   exports: [DataTransformPipe]
 })
 export class DataTransformModule { }
