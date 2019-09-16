@@ -1,0 +1,73 @@
+<div class="container-grid">
+
+  <!-- 標題 開始 -->
+  <div class="modal-header">
+    <div class="title">
+      <span>增加歷程</span>
+    </div>
+    <div class="close">
+      <a
+        href="javascript:void(0)"
+        (click)="modalRef.close()"
+      >
+        <i class="fas fa-times fa-lg font-grey-mint"></i>
+      </a>
+    </div>
+  </div>
+  <!-- 標題 結束 -->
+
+  <!-- 內容 開始 -->
+  <div class="modal-content">
+    <form
+      class="pure-form pure-form-stacked"
+      [formGroup]="form"
+    >
+      <fieldset class="no-padding">
+
+        <!-- 狀態欄位 開始 -->
+        <label for="name">狀態</label>
+        <div class="pure-control-group">
+          <select
+            class="pure-input-1"
+            [formControlName]="formKeys.status"
+          >
+            <option
+              *ngFor="let item of issueStatusOptions"
+              [ngValue]="item.code"
+            >
+              {{item.name}}
+            </option>
+          </select>
+        </div>
+        <!-- 狀態欄位 結束 -->
+
+        <!-- 備註欄位 開始 -->
+        <label for="name">備註</label>
+        <div class="pure-group">
+          <textarea
+            class="pure-textarea h-min-200"
+            placeholder="請填寫備註"
+            [formControlName]="formKeys.remark"
+            [ngClass]="{'has-error': form.controls.remark.touched && form.controls.remark.invalid}"
+          ></textarea>
+        </div>
+        <!-- 備註欄位 結束 -->
+
+      </fieldset>
+    </form>
+  </div>
+  <!-- 內容 結束 -->
+
+  <!-- 頁尾 開始 -->
+  <div class="modal-footer">
+    <button
+      class="pure-button button-small button-search m-r-t"
+      [disabled]="form.invalid"
+      (click)="submitForm()"
+    >
+      送出
+    </button>
+  </div>
+  <!-- 頁尾 結束 -->
+
+</div>

@@ -1,0 +1,19 @@
+<div class="container-grid">
+  <div class="modal-content">
+    <div class="remark-block">
+      <form class="pure-form">
+        <textarea
+          class="pure-textarea"
+          value="{{ remark }}"
+          readonly
+        ></textarea>
+      </form>
+    </div>
+  </div>
+  <a href="javascript:void(0)">
+    <i
+      class="fa fa-times fa-1x close-btn"
+      (click)="modalRef.close()"
+    ></i>
+  </a>
+</div>

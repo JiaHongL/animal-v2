@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <div class="issues-grid">
+
+    <!-- 標題 開始 -->
+    <div class="title">
+      <legend>
+        <h1 class="no-margin">待處理列表</h1>
+      </legend>
+    </div>
+    <!-- 標題 結束 -->
+
+    <!-- 按鈕群組 開始 -->
+    <div class="text-left">
+      <app-button-group
+        [buttons]="issueStatusOptions"
+        [value]="currentIssuesStatus"
+        (clickEvent)="queryIssues($event)"
+      ></app-button-group>
+    </div>
+    <!-- 按鈕群組 結束 -->
+
+    <!-- 表格 開始 -->
+    <div class="table">
+      <app-issue-table
+        [issues]='issues'
+        [page]='currentPage'
+      ></app-issue-table>
+    </div>
+    <!-- 表格 開始 -->
+
+    <!-- 頁碼 開始 -->
+    <div class="pagination">
+      <app-pagination
+        [totalItems]="total"
+        [itemsPerPage]="itemsPerPage"
+        (clickEvent)="setCurrentPage($event)"
+      ></app-pagination>
+    </div>
+    <!-- 頁碼 開始 -->
+
+  </div>
+</div>

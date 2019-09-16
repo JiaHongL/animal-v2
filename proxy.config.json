@@ -1,0 +1,7 @@
+{
+  "/": {
+    "target": "http://animal-proxy-api.herokuapp.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

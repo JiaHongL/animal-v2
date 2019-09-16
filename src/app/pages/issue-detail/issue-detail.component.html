@@ -1,0 +1,71 @@
+<div class="no-touch">
+  <div
+    class="issue-table border-l-b"
+    *ngIf="issue"
+  >
+    <div class="col-md-4-4 col-xs-4-4 padding-l-5 border-t-r line-height-28 bold">一、填單內容</div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">單號</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">{{ issue.id }}</div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">建立時間</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
+      {{ issue.createTime | date: 'yyyy/MM/dd HH:ss' }}
+    </div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">類別</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
+      {{ issue.type | dataTransform:selectType.FEEDBACK_TYPE }}
+    </div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">狀態</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">
+      {{ issue.status | dataTransform : selectType.ISSUES_STATUS }}
+    </div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">填寫人</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28">{{ issue.createUser }}</div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">連絡信箱</div>
+    <div class="col-md-1-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">{{ issue.email }}</div>
+    <div class="col-md-1-4 col-xs-1-4 padding-l-5 border-t-r line-height-28">標題</div>
+    <div class="col-md-3-4 col-xs-3-4 padding-l-5 border-t-r line-height-28 text-truncate">{{ issue.title }}</div>
+    <div class="col-md-4-4 col-xs-4-4 row-md-5 row-xs-4 padding-l-5 border-t-r line-height-28">{{ issue.comment }}</div>
+    <div class="col-md-4-4 col-xs-4-4 padding-l-5 border-t-r line-height-28 bold">二、處理歷程</div>
+    <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">狀態</div>
+    <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">備註</div>
+    <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">填寫人</div>
+    <div class="col-md-1-4 col-xs-4-4 hidden-xs text-center padding-l-5 border-t-r line-height-28">建立時間</div>
+    <ng-container *ngFor="let history of issue.history">
+      <div class="col-md-1-4 col-xs-1-4 text-center padding-l-5 border-t-r line-height-28">
+        {{ history.status | dataTransform : selectType.ISSUES_STATUS }}
+      </div>
+      <div class="col-md-1-4 col-xs-2-4 icon hidden-xs text-center padding-l-5 padding-r-25 border-t-r line-height-28 text-truncate">
+        {{ history.remark }}
+        <a
+          href="javascript:void(0)"
+          (click)="openRemarkModal(history.remark)"
+        >
+          <i
+            class="fa fa-book"
+            aria-hidden="true"
+          ></i>
+        </a>
+      </div>
+      <div class="col-md-1-4 col-xs-1-4 text-center padding-l-5 border-t-r line-height-28">{{ history.createUser }}</div>
+      <div class="col-md-1-4 col-xs-2-4 icon text-center padding-l-5 border-t-r line-height-28">
+        {{ history.createTime | date: 'yyyy/MM/dd HH:ss' }}
+        <a
+          class="visible-xs-inline"
+          href="javascript:void(0)"
+          (click)="openRemarkModal(history.remark)"
+        >
+          <i class="fa fa-book"></i>
+        </a>
+      </div>
+    </ng-container>
+    <button
+      class="add-history-btn"
+      [hidden]="issue?.status===issueStatus.ARCHIVE"
+      (click)="openAddHistoryModal()"
+    >
+      <a href="javascript:void(0)">
+        <i class="fas fa-pen"></i>
+      </a>
+    </button>
+  </div>
+</div>

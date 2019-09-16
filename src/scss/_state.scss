@@ -1,0 +1,135 @@
+.p-b-100 {
+  padding-bottom: 100px !important;
+}
+
+.p-r-5 {
+  padding-right: 5px !important;
+}
+
+.p-r-15 {
+  padding-right: 15px !important;
+}
+
+.p-l-5 {
+  padding-left: 5px !important;
+}
+
+.p-t-20 {
+  padding-top: 20px !important;
+}
+
+.p-r-l-5 {
+  padding: 0 5px 0 5px !important;
+}
+
+.p-r-20{
+  padding-right: 25px !important;
+}
+
+.m-r-t {
+  margin-right: 5px !important;
+}
+
+.m-t-b-5 {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.m-r-l-5 {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.m-l-5 {
+  margin-left: 5px;
+}
+
+.m-b-5{
+  margin-bottom: 15px;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.no-margin{
+  margin: 0px  !important;
+}
+
+.no-border-radius{
+  border-radius:0px 0px 0px 0px !important;
+}
+
+.text-truncate{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@include media-breakpoint-only(xs) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+
+@include media-breakpoint-only(sm) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@include media-breakpoint-only(md) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+.visible-xs-block,
+.visible-xs-inline,
+.visible-xs-inline-block, {
+  display: none !important;
+}
+
+@include media-breakpoint-only(xs) {
+  .visible-xs-inline{
+    display: inline-block !important;
+  }
+}
+
+
+
+.w-200{
+  width: 200px;
+}
+
+.w-250{
+  width: 250px;
+}
+
+.h-min-200{
+  min-height: 200px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.italic{
+  font-style:italic;
+}
+
+.font-size-xs{
+  font-size:10px !important;
+}
+
+.has-error{
+  border:1px solid red !important;
+}

@@ -1,0 +1,143 @@
+<div class="wrapper">
+  <div
+    class="feedback-form"
+    *ngIf="!isPosted; else tmpl"
+  >
+    <form
+      class="pure-form pure-form-stacked"
+      [formGroup]="form"
+      (ngSubmit)="postFeedback()"
+    >
+
+      <fieldset class="no-padding">
+
+        <!-- 標題 開始 -->
+        <legend>
+          <h1 class="no-margin">建議與回饋</h1>
+        </legend>
+        <!-- 標題 結束 -->
+
+        <!-- 意見類型 開始 -->
+        <label
+          class="font-grey-mint"
+          for="type"
+        >
+          意見類型：
+        </label>
+        <select
+          [formControlName]="formKeys.type"
+          class="w-250 w-max"
+          id="type"
+        >
+          <option
+            *ngFor="let item of selects.feedbackTypeList"
+            [ngValue]="item.code"
+          >
+            {{item.name}}
+          </option>
+        </select>
+        <!-- 意見類型 結束 -->
+
+        <fieldset class="pure-group">
+
+          <!-- 標題 開始 -->
+          <input
+            [formControlName]="formKeys.title"
+            [ngClass]="{'has-error': hasError(formKeys.title)}"
+            type="text"
+            style="width:100%"
+            placeholder="標題"
+          >
+          <!-- 標題 結束 -->
+
+          <!-- 內容 開始 -->
+          <textarea
+            [formControlName]="formKeys.comment"
+            [ngClass]="{'has-error': hasError(formKeys.comment)}"
+            style="width:100%;height:200px;"
+            placeholder="內容"
+          ></textarea>
+          <!-- 內容 結束 -->
+
+        </fieldset>
+
+        <div class="user-info-group">
+
+          <!-- 名字 開始 -->
+          <div>
+            <label
+              class="font-grey-mint"
+              for="createUser"
+            >
+              您的名字：
+            </label>
+            <input
+              [formControlName]="formKeys.createUser"
+              [ngClass]="{'has-error': hasError(formKeys.createUser)}"
+              style="width:100%"
+              id="createUser"
+              type="text"
+              placeholder="名字"
+            >
+          </div>
+          <!-- 名字 結束 -->
+
+          <!-- 電子信箱 開始 -->
+          <div>
+            <label
+              class="font-grey-mint"
+              for="email"
+            >
+              Email：
+            </label>
+            <input
+              [formControlName]="formKeys.email"
+              [ngClass]="{'has-error': hasError(formKeys.email)}"
+              style="width:100%"
+              id="email"
+              type="text"
+              placeholder="email"
+            >
+          </div>
+          <!-- 電子信箱 結束 -->
+
+        </div>
+
+        <!-- 填寫提示 開始 -->
+        <div>
+          <span class="pure-form-message text-right font-grey-salsa m-t-b-5 italic font-size-xs">請填寫 標題、內容、姓名</span>
+        </div>
+        <!-- 填寫提示 結束 -->
+
+        <!-- 送出按鈕 開始 -->
+        <div class="text-center">
+          <button
+            type="submit"
+            style="width:100%;"
+            class="pure-button button-warning no-margin"
+            [disabled]="form.invalid"
+          >
+            送出
+          </button>
+        </div>
+        <!-- 送出按鈕 結束 -->
+
+      </fieldset>
+
+    </form>
+  </div>
+
+  <ng-template #tmpl>
+    <div class="message-box">
+      <div class="img">
+        <img
+          src="./assets/images/person-family-001.png"
+          alt
+          srcset
+        >
+      </div>
+      <div class="desc">非常感謝您的填寫</div>
+    </div>
+  </ng-template>
+
+</div>

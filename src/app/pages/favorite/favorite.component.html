@@ -1,0 +1,21 @@
+<div *ngIf="animals.length; else tmpl">
+  <app-card-list
+    [animals]="animals"
+    (clickPicture)="openImageModal($event)"
+  ></app-card-list>
+</div>
+
+<ng-template #tmpl>
+  <div class="wrapper">
+    <div class="message-box">
+      <div class="img">
+        <img
+          src="./assets/images/animal-cat-004.png"
+          alt
+          srcset
+        >
+      </div>
+      <div class="desc">尚未收藏相關資料</div>
+    </div>
+  </div>
+</ng-template>

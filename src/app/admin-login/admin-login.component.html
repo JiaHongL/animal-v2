@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <div class="login-box">
+    <form
+      class="login-form pure-form pure-form-stacked"
+      [formGroup]="form"
+      (ngSubmit)="login()"
+    >
+      <div class="form-title">管理員登入</div>
+      <div class="form-content">
+        <div class="content-wrapper">
+          <div class="input-group">
+            <label
+              class="w-250"
+              for="email"
+            >
+              {{ getLabelName(formKeys.email) }}
+            </label>
+            <input
+              class="w-250"
+              id="email"
+              type="text"
+              placeholder="Email"
+              [formControlName]="formKeys.email"
+            >
+          </div>
+          <div
+            class="error-messages"
+            *ngIf="hasError(formKeys.email)"
+          >
+            <span class="pure-form-message text-right">{{ getErrorMsg(formKeys.email) }}</span>
+          </div>
+          <div class="input-group">
+            <label
+              class="w-250"
+              for="password"
+            >
+              {{ getLabelName(formKeys.password) }}
+            </label>
+            <input
+              class="w-250"
+              id="password"
+              type="password"
+              placeholder="Password"
+              [formControlName]="formKeys.password"
+            >
+          </div>
+          <div
+            class="error-messages"
+            *ngIf="hasError(formKeys.password)"
+          >
+            <span class="pure-form-message text-right"> {{ getErrorMsg(formKeys.password) }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button
+          type="submit"
+          class="pure-button button-small"
+          [disabled]="form.invalid"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

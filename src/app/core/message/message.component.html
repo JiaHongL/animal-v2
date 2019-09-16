@@ -1,0 +1,21 @@
+<div class="container-grid">
+  <div class="modal-title">
+    <h3>{{ title || '提示視窗' }}</h3>
+  </div>
+  <div class="modal-content">{{ content }}</div>
+  <div class="modal-footer">
+    <button
+      class="pure-button button-small m-r-t"
+      *ngIf="type===messageType.CONFIRM"
+      (click)="modalRef.close(false)"
+    >
+      {{ cancelBtnTitle || '取消' }}
+    </button>
+    <button
+      class="pure-button button-small button-secondary"
+      (click)="modalRef.close(true)"
+    >
+      {{ okBtnTitle || '確定' }}
+    </button>
+  </div>
+</div>

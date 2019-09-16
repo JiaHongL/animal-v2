@@ -1,0 +1,117 @@
+@import "../../../../scss/mixins/_breakpoints";
+
+/****************/
+/*     Modal    */
+/****************/
+
+.container-grid {
+  height: 400px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 44px 1fr;
+  justify-items: stretch;
+
+  .modal-header {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 44px;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    align-items: center;
+    justify-items: stretch;
+
+    .title {
+      padding: 5px 0px 5px 16px;
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .close {
+      text-align: center;
+    }
+
+  }
+
+  .modal-content {
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+.list {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 44px;
+
+  .list-item {
+    list-style-type: none;
+    position: relative;
+
+    &:nth-child(odd) {
+      background: #f9f9f9;
+    }
+
+    &:hover {
+      background: #ddd;
+
+      .title,
+      i.fa {
+        color: black;
+      }
+    }
+
+    .title {
+      text-decoration: none;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 2px;
+      font-size: 22px;
+    }
+
+    .icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 35px;
+      height: 44px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .container-grid  {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0px;
+
+    .modal-footer {
+      align-self: center;
+      justify-self: center;
+    }
+
+  }
+
+}

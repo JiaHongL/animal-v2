@@ -117,8 +117,15 @@
               "devServerTarget": "animal-v2:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref":"/animal-v2/"
+          }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "animal-v2"
 }

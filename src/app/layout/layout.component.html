@@ -1,0 +1,25 @@
+<div
+  class="container"
+  appGoTop
+>
+
+  <!-- header 開始 -->
+  <app-header
+    [isLoggedIn]="userService.isLoggedIn"
+    [isAdmin]="userService.isAdmin"
+    [userName]="userService.user?.name"
+    (signOut)="signOut()"
+  ></app-header>
+  <!-- header 結束 -->
+
+  <!-- 內容頁 開始 -->
+  <div class="main p-t-20 p-b-100">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- 內容頁 結束 -->
+
+  <!-- 頁尾 開始 -->
+  <app-footer></app-footer>
+  <!-- 頁尾 結束 -->
+
+</div>

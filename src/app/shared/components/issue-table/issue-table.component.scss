@@ -1,0 +1,38 @@
+.issue-table {
+  width: 100%;
+
+  .thead {
+    background: #4aa84f;
+    color: white;
+
+    th {
+      text-align: center;
+      font-weight: lighter;
+    }
+  }
+
+  .tbody {
+    tr {
+      background: #e9eaeb;
+
+      th {
+        font-weight: lighter;
+      }
+
+      &:hover {
+        background: #dddddd;
+        font-weight: 600;
+
+        .title,
+        i.fa {
+          color: black;
+        }
+      }
+    }
+
+    .tr-odd {
+      background: #f2f2f2;
+    }
+
+  }
+}

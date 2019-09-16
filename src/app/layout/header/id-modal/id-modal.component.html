@@ -1,0 +1,58 @@
+<div class="container-grid">
+
+  <div class="modal-header">
+    <div class="title">
+      <span>依編號收尋</span>
+    </div>
+    <div class="close">
+      <a href="javascript:void(0)">
+        <i
+          class="fas fa-times fa-lg font-grey-mint"
+          (click)="modalRef.close()"
+        ></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="modal-content">
+    <form
+      class="pure-form pure-form-stacked"
+      [formGroup]="form"
+    >
+      <fieldset class="no-padding">
+        <div class="pure-control-group">
+          <label for="id">流水編號</label>
+          <input
+            id="id"
+            type="text"
+            [formControlName]="formKeys.id"
+          >
+        </div>
+        <div class="pure-control-group">
+          <label for="subId">區域編號</label>
+          <input
+            id="subId"
+            type="text"
+            [formControlName]="formKeys.subId"
+          >
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      class="pure-button button-small button-cancel m-r-t hidden-xs"
+      (click)="modalRef.close()"
+    >
+      取消
+    </button>
+    <button
+      class="pure-button button-small button-search m-r-t"
+      (click)="query()"
+    >
+      查詢
+    </button>
+  </div>
+
+</div>

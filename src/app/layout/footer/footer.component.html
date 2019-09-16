@@ -1,0 +1,66 @@
+<div class="footer-inner">
+
+  <!-- 頁尾頂部 開始 -->
+  <div class="footer-top">
+
+    <!-- 左邊區塊 開始 -->
+    <div class="left-block">
+
+      <!-- 麵包屑 開始 -->
+      <div class="breadcrumb-wrapper text-truncate">
+
+        <!-- 第一層 開始 -->
+        <i class="fas fa-atlas fa-xs m-l-5"></i>
+        <i
+          class="fa fa-angle-double-right fa-xs m-l-5"
+          aria-hidden="true"
+        ></i>
+        <span class="fa-xs m-l-5">{{ pageTitle }}</span>
+        <!-- 第一層 結束 -->
+
+        <!-- 第二層 開始 -->
+        <ng-container *ngIf="subTitle">
+          <i
+            class="fa fa-angle-double-right fa-xs m-l-5"
+            aria-hidden="true"
+          ></i>
+          <span class="fa-xs m-l-5">{{ subTitle }}</span>
+        </ng-container>
+        <!-- 第二層 結束 -->
+
+      </div>
+      <!-- 麵包屑 結束 -->
+
+    </div>
+    <!-- 左邊區塊 結束 -->
+
+    <!-- 右邊區塊 開始 -->
+    <div class="right-block hidden-xs hidden-md hidden-sm">
+      <span class="data-from">
+        <i class="far fa-hand-point-right p-r-5"></i>
+        <i>資料來源：行政院農業委員會資料開放平台</i>
+      </span>
+    </div>
+    <!-- 右邊區塊 結束 -->
+
+  </div>
+  <!-- 頁尾頂部 結束 -->
+
+  <!-- 頁尾底部 開始 -->
+  <div class="footer-bottom">
+    <a
+      href="https://github.com/JiaHongL"
+      target="_blank"
+    >
+      <i class="fab fa-github p-r-5"></i>
+    </a>
+    <a
+      href="https://www.facebook.com/tcapo.tas/"
+      target="_blank"
+    >
+      <i class="fab fa-facebook-square"></i>
+    </a>
+  </div>
+  <!-- 頁尾底部 結束 -->
+
+</div>
