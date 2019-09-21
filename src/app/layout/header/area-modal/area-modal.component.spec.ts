@@ -29,7 +29,7 @@ describe('AreaModalComponent', () => {
     component = fixture.componentInstance;
 
     fixture.detectChanges();
-    
+
   });
 
   it('should create', () => {
@@ -40,7 +40,7 @@ describe('AreaModalComponent', () => {
 
     const mockData = {
       [animalQueryFormKeys.areaId]: '1',
-    }
+    };
 
     const modalRef = TestBed.get(ModalRef);
     const spyFunc = spyOn(modalRef, 'close');

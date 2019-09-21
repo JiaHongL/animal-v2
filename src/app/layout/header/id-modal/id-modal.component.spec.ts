@@ -39,11 +39,10 @@ describe('IdModalComponent', () => {
 
   it('query()，應該取得表單欄位內容，且關閉modal，並送出查詢資料  ', () => {
 
-    
     const mockData = {
       [animalQueryFormKeys.id]: '1',
       [animalQueryFormKeys.subId]: '2'
-    }
+    };
 
     const modalRef = TestBed.get(ModalRef);
     const spyFunc = spyOn(modalRef, 'close');
@@ -61,10 +60,9 @@ describe('IdModalComponent', () => {
 
   it('query()，若表單欄位有空值時，需排除空的欄位，且關閉modal，並送出查詢資料  ', () => {
 
-    
     const mockData = {
       [animalQueryFormKeys.id]: '1'
-    }
+    };
 
     const modalRef = TestBed.get(ModalRef);
     const spyFunc = spyOn(modalRef, 'close');

@@ -37,7 +37,7 @@ describe('ShelterModalComponent', () => {
 
     const mockData = {
       [animalQueryFormKeys.shelterId]: '1',
-    }
+    };
 
     const modalRef = TestBed.get(ModalRef);
     const spyFunc = spyOn(modalRef, 'close');
