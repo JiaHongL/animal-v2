@@ -5,7 +5,10 @@ import { AreaModalComponent } from './area-modal.component';
 import { ModalRef } from '../../../shared/components/modal/modal-ref.model';
 import { CoreModule } from '../../../core/core.module';
 
+import { animalQueryFormKeys } from '../../../constant/form-keys/animal-query-form-keys.const';
+
 describe('AreaModalComponent', () => {
+
   let component: AreaModalComponent;
   let fixture: ComponentFixture<AreaModalComponent>;
 
@@ -15,19 +18,39 @@ describe('AreaModalComponent', () => {
       imports: [
         CoreModule
       ],
-      providers: [{ provide: ModalRef, useValue: null }]
+      providers: [{ provide: ModalRef, useValue: { close: () => { } } }]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
+
     fixture = TestBed.createComponent(AreaModalComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
+    
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('query()，應該使用傳入的參數進行傳遞，且關閉modal，並送出查詢資料  ', () => {
+
+    const mockData = {
+      [animalQueryFormKeys.areaId]: '1',
+    }
+
+    const modalRef = TestBed.get(ModalRef);
+    const spyFunc = spyOn(modalRef, 'close');
+
+    component.query(mockData[animalQueryFormKeys.areaId]);
+
+    const args = spyFunc.calls.first().args;
+
+    expect(args[0]).toEqual(mockData);
+
   });
 
 });
