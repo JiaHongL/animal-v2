@@ -123,14 +123,14 @@ describe('HomeComponent', () => {
 
   it('應該監聽路由queryParamMap的變化，進行頁面重新查詢', () => {
 
-    const spyFunc = spyOn(component, 'searchAnimals').and.callFake(() => { });
+    const spyFunc = spyOn(component, 'searchAnimals').and.stub();
 
-    paramsAsMapSubject.next(convertToParamMap({ id: 'b' }));
+    paramsAsMapSubject.next(convertToParamMap({ id: 'bb' }));
 
     const firstArgs = spyFunc.calls.mostRecent().args;
 
     expect(firstArgs[0]).toEqual(1);
-    expect(firstArgs[1]).toEqual({ id: 'b' });
+    expect(firstArgs[1]).toEqual({ id: 'bb' });
 
     paramsAsMapSubject.next(convertToParamMap({ kind: 'c' }));
 
