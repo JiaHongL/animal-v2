@@ -67,16 +67,14 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private api: ApiService,
     private loading: LoadingService
-  ) {
+  ) { }
+
+  ngOnInit() {
 
     this.form = this.createFeedbackFg();
 
     this.createUserCtrlValueChanges();
-    this.createTimeCtrlValueChange();
-
-  }
-
-  ngOnInit() {
+    this.createTimeCtrlValueChanges();
 
     this.subscription = this
       .router
@@ -241,7 +239,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
    *
    * @memberof FeedbackComponent
    */
-  createTimeCtrlValueChange(): void {
+  createTimeCtrlValueChanges(): void {
 
     this
       .createTimeCtrl
@@ -251,7 +249,6 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       });
 
   }
-
 
   /**
    * 是否有驗證未通過
