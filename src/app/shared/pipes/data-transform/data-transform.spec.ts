@@ -39,4 +39,16 @@ describe('DataTransformPipe', () => {
 
   });
 
+  it('當選項列表為空陣列時，轉換時須防呆，回傳原本傳進來的代碼', () => {
+
+    const selectsService: SelectsService = TestBed.get(SelectsService);
+
+    selectsService[SelectType.ISSUES_STATUS] = [];
+
+    const pipe = new DataTransformPipe(selectsService);
+
+    expect(pipe.transform(mockList[0].code, SelectType.ISSUES_STATUS)).toBe(mockList[0].code);
+
+  });
+
 });

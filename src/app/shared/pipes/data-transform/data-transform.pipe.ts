@@ -28,10 +28,13 @@ export class DataTransformPipe implements PipeTransform {
       return '';
     }
 
-    const word = this
-      .selectsService[selectType]
-      .find(item => item.code === code)
-      .name;
+    let word = '';
+
+    try {
+      word = this.selectsService[selectType].find(item => item.code === code).name;
+    } catch (error) {
+      word = code;
+    }
 
     return word;
 
