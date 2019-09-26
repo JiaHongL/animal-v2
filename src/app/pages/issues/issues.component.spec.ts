@@ -563,7 +563,6 @@ describe('IssuesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-
   });
 
   it('should create', () => {
