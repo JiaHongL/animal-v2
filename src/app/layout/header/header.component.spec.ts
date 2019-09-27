@@ -61,7 +61,7 @@ describe('HeaderComponent', () => {
       subId: '2'
     };
 
-    // spy on modal open function and mock reutn
+    // spy on modal open function and mock return
     const modal = TestBed.get(ModalService);
 
     const spyOnOpen = spyOn(modal, 'open').and.callFake(() => {
@@ -86,15 +86,15 @@ describe('HeaderComponent', () => {
     const openArgs = spyOnOpen.calls.first().args;
     const naviagteArgs = spyOnNavigate.calls.first().args;
 
-    const expextComponent = component[`queryComponents`].find(item => item.type === QueryModalType.CONDITION);
-    const expectConfing: ModalConfig = {};
+    const expectedComponent = component[`queryComponents`].find(item => item.type === QueryModalType.CONDITION);
+    const expectConfig: ModalConfig = {};
 
-    expectConfing.minHeight = expextComponent.minHeight;
-    expectConfing.minWidth = expextComponent.minWidth;
-    expectConfing.mobileFullScreen = expextComponent.mobileFullScreen;
+    expectConfig.minHeight = expectedComponent.minHeight;
+    expectConfig.minWidth = expectedComponent.minWidth;
+    expectConfig.mobileFullScreen = expectedComponent.mobileFullScreen;
 
-    expect(openArgs[0]).toEqual(expextComponent.component);
-    expect(openArgs[1]).toEqual(expectConfing);
+    expect(openArgs[0]).toEqual(expectedComponent.component);
+    expect(openArgs[1]).toEqual(expectConfig);
     expect(naviagteArgs[0]).toEqual(['/' + appRoutePaths.home.path]);
     expect(naviagteArgs[1]).toEqual({ queryParams: mockQueryParams });
 
