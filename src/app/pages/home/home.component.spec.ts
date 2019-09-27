@@ -32,8 +32,8 @@ describe('HomeComponent', () => {
   let storageService: StorageService;
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let spyOnGetAnimals;
-  const paramsAsMapSubject = new Subject<ParamMap>();
+  let spyOnGetAnimals: jasmine.Spy = null;
+  let mockQueryParamMap$: Subject<ParamMap> = null;
 
   const mockApiResponse = {
     success: true,
@@ -71,6 +71,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
 
+    mockQueryParamMap$ = new Subject<ParamMap>();
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -82,7 +84,7 @@ describe('HomeComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParamMap: paramsAsMapSubject.asObservable()
+            queryParamMap: mockQueryParamMap$.asObservable()
           }
         }
       ],
@@ -125,14 +127,14 @@ describe('HomeComponent', () => {
 
     const spyFunc = spyOn(component, 'searchAnimals').and.stub();
 
-    paramsAsMapSubject.next(convertToParamMap({ id: 'bb' }));
+    mockQueryParamMap$.next(convertToParamMap({ id: 'bb' }));
 
     const firstArgs = spyFunc.calls.mostRecent().args;
 
     expect(firstArgs[0]).toEqual(1);
     expect(firstArgs[1]).toEqual({ id: 'bb' });
 
-    paramsAsMapSubject.next(convertToParamMap({ kind: 'c' }));
+    mockQueryParamMap$.next(convertToParamMap({ kind: 'c' }));
 
     const secondArgs = spyFunc.calls.mostRecent().args;
 
@@ -238,7 +240,7 @@ describe('HomeComponent', () => {
     component.searchParams = { id: 'a' };
     component.currentPage = 1;
 
-    const spyFunc = spyOn(component, 'searchAnimals');
+    const spyFunc = spyOn(component, 'searchAnimals').and.stub();
 
     component.scrolled();
 
