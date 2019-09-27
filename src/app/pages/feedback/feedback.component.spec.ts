@@ -26,7 +26,7 @@ describe('FeedbackComponent', () => {
 
   let component: FeedbackComponent;
   let fixture: ComponentFixture<FeedbackComponent>;
-  const eventsSubject = new Subject();
+  let events$: Subject<any> = null;
 
   const initHistory = [{
     [historyFormKeys.status]: 0,
@@ -64,9 +64,12 @@ describe('FeedbackComponent', () => {
     }]
   };
 
-  const triggerSameNavigate = () => eventsSubject.next(new NavigationEnd(1, '/feedback', '/feedback'));
+  const triggerSameNavigate = () => events$.next(new NavigationEnd(1, '/feedback', '/feedback'));
 
   beforeEach(async(() => {
+
+    events$ = new Subject();
+
     TestBed.configureTestingModule({
       declarations: [FeedbackComponent],
       imports: [
@@ -80,12 +83,13 @@ describe('FeedbackComponent', () => {
         {
           provide: Router,
           useValue: {
-            events: eventsSubject.asObservable()
+            events: events$.asObservable()
           }
         }
       ]
     })
       .compileComponents();
+
   }));
 
   beforeEach(() => {

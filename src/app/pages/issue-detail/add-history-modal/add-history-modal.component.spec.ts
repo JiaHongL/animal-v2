@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AddHistoryModalComponent } from './add-history-modal.component';
@@ -202,7 +202,7 @@ describe('AddHistoryModalComponent', () => {
 
   });
 
-  it('送出表單時，應該填寫建立時間，且關閉視窗，表單資料傳送出去', () => {
+  it('送出表單時，應該填寫建立時間，且關閉視窗，表單資料傳送出去', fakeAsync(() => {
 
     const expectedFormData = {
       [historyFormKeys.status]: IssueStatus.PROCESSED,
@@ -215,11 +215,13 @@ describe('AddHistoryModalComponent', () => {
 
     component.submitForm();
 
+    tick();
+
     const args = (component.modalRef.close as jasmine.Spy).calls.first().args;
 
     expect(component.modalRef.close).toHaveBeenCalled();
     expect(args[0]).toEqual(expectedFormData);
 
-  });
+  }));
 
 });

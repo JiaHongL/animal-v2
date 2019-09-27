@@ -32,8 +32,7 @@ describe('FavoriteComponent', () => {
   let storageService: StorageService;
   let spyOnGetData: jasmine.Spy;
   let spyOnGetDataObs: jasmine.Spy;
-
-  const animalsSubject = new Subject();
+  let animals$: Subject<any> = null;
 
   const mockData = [
     {
@@ -132,6 +131,9 @@ describe('FavoriteComponent', () => {
   ];
 
   beforeEach(async(() => {
+
+    animals$ = new Subject();
+
     TestBed.configureTestingModule({
       declarations: [FavoriteComponent],
       imports: [
@@ -141,6 +143,7 @@ describe('FavoriteComponent', () => {
       ]
     })
       .compileComponents();
+
   }));
 
   beforeEach(() => {
@@ -148,7 +151,7 @@ describe('FavoriteComponent', () => {
     storageService = TestBed.get(StorageService);
 
     spyOnGetData = spyOn(storageService, 'getData').and.returnValue(mockData);
-    spyOnGetDataObs = spyOn(storageService, 'getDataObs').and.callFake(() => animalsSubject.asObservable());
+    spyOnGetDataObs = spyOn(storageService, 'getDataObs').and.callFake(() => animals$.asObservable());
 
     spyOnGetData.calls.reset();
     spyOnGetDataObs.calls.reset();
@@ -187,7 +190,7 @@ describe('FavoriteComponent', () => {
 
     expect(component.animals).toEqual(localStorageData);
 
-    animalsSubject.next(mockData2);
+    animals$.next(mockData2);
 
     const newLocalStorageData = mockData2.map(animal => new Animal(animal));
 
