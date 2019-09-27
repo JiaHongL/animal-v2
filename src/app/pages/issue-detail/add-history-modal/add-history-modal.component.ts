@@ -24,7 +24,7 @@ export class AddHistoryModalComponent implements OnInit {
    *
    * @memberof AddHistoryModalComponent
    */
-  form: FormGroup;
+  form: FormGroup = null;
 
   /**
    * 表單 key
@@ -45,7 +45,9 @@ export class AddHistoryModalComponent implements OnInit {
     @Inject(MODAL_DATA) public data,
     private fb: FormBuilder,
     public selects: SelectsService
-  ) {
+  ) {}
+
+  ngOnInit() {
 
     this.issueStatusOptions = this
       .selects
@@ -54,7 +56,7 @@ export class AddHistoryModalComponent implements OnInit {
       .filter((issueStatus) => {
 
         if (
-          !data.isAdmin &&
+          !this.data.isAdmin &&
           issueStatus.code === IssueStatus.ARCHIVE
         ) {
           return false;
@@ -66,7 +68,7 @@ export class AddHistoryModalComponent implements OnInit {
     this.form = this.fb.group({
       [this.formKeys.status]: [IssueStatus.TRACKED, ''],
       [this.formKeys.createTime]: ['', ''],
-      [this.formKeys.createUser]: [data.userName, ''],
+      [this.formKeys.createUser]: [this.data.userName, ''],
       [this.formKeys.remark]: ['', Validators.required],
     });
 
@@ -84,9 +86,6 @@ export class AddHistoryModalComponent implements OnInit {
 
     this.modalRef.close(history);
 
-  }
-
-  ngOnInit() {
   }
 
 }
