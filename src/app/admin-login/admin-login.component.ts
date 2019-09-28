@@ -32,7 +32,7 @@ export class AdminLoginComponent implements OnInit {
    * @type {FormGroup}
    * @memberof AdminLoginComponent
    */
-  form: FormGroup;
+  form: FormGroup = null;
 
   /**
    * 登入表單 key 值
@@ -47,7 +47,9 @@ export class AdminLoginComponent implements OnInit {
     private router: Router,
     private loading: LoadingService,
     private message: MessageService
-  ) {
+  ) { }
+
+  ngOnInit() {
 
     this.form = this.fb.group({
       [this.formKeys.email]: ['', [Validators.required, Validators.email]],
@@ -184,9 +186,6 @@ export class AdminLoginComponent implements OnInit {
 
     return labelName;
 
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -50,6 +50,22 @@ describe('AdminLoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('應該 宣告 元件 所需 變數 與 預設值', () => {
+
+    fixture = TestBed.createComponent(AdminLoginComponent);
+    component = fixture.componentInstance;
+
+    expect(component).toEqual(
+      jasmine.objectContaining({
+        form: null,
+        formKeys: adminLoginFormKeys
+      })
+    );
+
+    fixture.detectChanges();
+
+  });
+
   it('初始化，當表單為空時，表單『有效狀態』應該為false', () => {
     expect(component.form.valid).toBeFalsy();
   });
