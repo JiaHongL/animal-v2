@@ -4,9 +4,11 @@
 #
 version: 2
 jobs:
-  build_and_test:
+  build:
     branches:
-      ignore: gh-pages
+      ignore:
+        - gh-pages
+        - master
 
     docker:
       # specify the version you desire here
@@ -42,20 +44,30 @@ jobs:
       - run: npm run ci:test
       - run: npm run ci:build
 
+
 workflows:
   version: 2
-  deploy:
+  build-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - master
-      docker:
-        - image: circleci/node:4.8.2
+      build:
+        filters:
+          branches:
+            only: master
 
-      steps:
+        docker:
+          # specify the version you desire here
+          - image: circleci/node:12.9.0-stretch-browsers
+
+          # Specify service dependencies here if necessary
+          # CircleCI maintains a library of pre-built images
+          # documented at https://circleci.com/docs/2.0/circleci-images/
+          # - image: circleci/mongo:3.4.4
+
+        working_directory: ~/repo
+
+        steps:
           - checkout
+
           # Download and cache dependencies
           - restore_cache:
               keys:
@@ -63,6 +75,15 @@ workflows:
               # fallback to using the latest cache if no exact match is found
 
           - run: npm install
-          - run:
-              name: deploy
-              command: npm run deploy
+
+          - save_cache:
+              paths:
+                - node_modules
+              key: v1-dependencies-{{ checksum "package.json" }}
+
+          # run tests!
+          - run: node -v
+          - run: npm -v
+          - run: npm run lint
+          - run: npm run ci:test
+          - run: npm run ci:build
