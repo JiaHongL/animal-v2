@@ -32,6 +32,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.kind"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.kindList"
               [value]="item.code"
@@ -49,6 +50,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.sex"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.sexList"
               [value]="item.code"
@@ -66,6 +68,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.bodyType"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.bodyTypeList"
               [value]="item.code"
@@ -83,6 +86,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.age"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.ageList"
               [value]="item.code"
@@ -100,6 +104,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.colour"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.colourList"
               [value]="item.code"
@@ -117,6 +122,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.sterilization"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.sterilizationList"
               [value]="item.code"
@@ -134,6 +140,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.bacterin"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of selects.bacterinList"
               [value]="item.code"

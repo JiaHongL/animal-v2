@@ -29,6 +29,7 @@
           class="w-250 w-max"
           id="type"
         >
+          <option hidden disabled selected value></option>
           <option
             *ngFor="let item of selects.feedbackTypeList"
             [ngValue]="item.code"
