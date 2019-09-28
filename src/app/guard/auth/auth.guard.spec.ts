@@ -76,15 +76,14 @@ describe('AuthGuard', () => {
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
     authGuard$.subscribe((canActivate) => {
-
-      const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
-
-      expect(spyOnGetLogInStatus).toHaveBeenCalled();
       expect(canActivate).toBeFalsy();
-      expect(spyOnNavigate).toHaveBeenCalled();
-      expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
-
     });
+
+    const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
+
+    expect(spyOnGetLogInStatus).toHaveBeenCalled();
+    expect(spyOnNavigate).toHaveBeenCalled();
+    expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
 
   });
 
@@ -97,16 +96,15 @@ describe('AuthGuard', () => {
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
     authGuard$.subscribe((canActivate) => {
-
-      const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
-
-      expect(spyOnGetLogInStatus).toHaveBeenCalled();
-      expect(spyOnGetUserInfo).toHaveBeenCalled();
       expect(canActivate).toBeFalsy();
-      expect(spyOnNavigate).toHaveBeenCalled();
-      expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
-
     });
+
+    const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
+
+    expect(spyOnGetLogInStatus).toHaveBeenCalled();
+    expect(spyOnGetUserInfo).toHaveBeenCalled();
+    expect(spyOnNavigate).toHaveBeenCalled();
+    expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
 
   });
 
@@ -119,16 +117,15 @@ describe('AuthGuard', () => {
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
     authGuard$.subscribe((canActivate) => {
-
-      const spyOnStoreDataArgs = spyOnStoreData.calls.mostRecent().args;
-
-      expect(spyOnGetLogInStatus).toHaveBeenCalled();
-      expect(spyOnGetUserInfo).toHaveBeenCalled();
-      expect(spyOnStoreData).toHaveBeenCalled();
-      expect(spyOnStoreDataArgs[0]).toEqual(mockUserInfoResponse[0]);
       expect(canActivate).toBeTruthy();
-
     });
+
+    const spyOnStoreDataArgs = spyOnStoreData.calls.mostRecent().args;
+
+    expect(spyOnGetLogInStatus).toHaveBeenCalled();
+    expect(spyOnGetUserInfo).toHaveBeenCalled();
+    expect(spyOnStoreData).toHaveBeenCalled();
+    expect(spyOnStoreDataArgs[0]).toEqual(mockUserInfoResponse[0]);
 
   });
 
@@ -140,11 +137,10 @@ describe('AuthGuard', () => {
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
     authGuard$.subscribe((canActivate) => {
-
-      expect(spyOnGetLogInStatus).toHaveBeenCalled();
       expect(canActivate).toBeTruthy();
-
     });
+
+    expect(spyOnGetLogInStatus).toHaveBeenCalled();
 
   });
 
