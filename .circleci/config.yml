@@ -46,11 +46,11 @@ workflows:
   version: 2
   deploy:
     jobs:
-      deploy:
-        filters:
-          branches:
-            only: master
-
+      - build:
+          filters:
+            branches:
+              only:
+                - master
       docker:
         - image: circleci/node:4.8.2
 
