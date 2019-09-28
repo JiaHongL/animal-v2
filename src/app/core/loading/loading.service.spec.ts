@@ -9,9 +9,6 @@ import { defaultLoadingType } from './const/default-loading-type.const';
 // enum
 import { LoadingType } from './enum/loading-type.enum';
 
-// rxjs
-import { of } from 'rxjs';
-
 describe('LoadingService', () => {
 
   const loadingObsKey = 'loadingObservable';

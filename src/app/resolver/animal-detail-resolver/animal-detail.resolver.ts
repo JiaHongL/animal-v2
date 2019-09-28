@@ -10,7 +10,7 @@ import { LoadingService } from '../../core/loading/loading.service';
 import { MessageService } from './../../core/message/message.service';
 
 // rxjs
-import { finalize, filter, map } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
 import { LoadingType } from '../../core/loading/enum/loading-type.enum';
 
 /**
@@ -40,10 +40,12 @@ export class AnimalDetailResolver implements Resolve<Animal> {
       .getAnimalDetail(animalId)
       .pipe(
         finalize(() => this.loading.hide()),
-        filter((res) => {
+        tap((res) => {
 
           // 有錯誤時 跳後端的錯誤訊息
-          if (!res.success) { this.message.alert(res.errorMessage); }
+          if (!res.success) {
+            this.message.alert(res.errorMessage);
+          }
 
           return res.success;
 

@@ -201,12 +201,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   /**
    * 頁碼 增加 相關邏輯
    *
-   * @param {number} page
+   * @param {number} count - 要增加的頁碼數量
    * @memberof PaginationComponent
    */
-  incrementCurrentPage(page: number): void {
+  incrementCurrentPage(count: number): void {
 
-    this.currentPage += page;
+    this.currentPage += count;
 
     if (this.currentPage > this.pageGroupList.length) {
       this.currentPage = this.pageGroupList.length;
@@ -224,12 +224,12 @@ export class PaginationComponent implements OnInit, OnChanges {
   /**
    * 頁碼減少 相關邏輯
    *
-   * @param {number} page - 頁碼
+   * @param {number} count - 要減少的頁碼數量
    * @memberof PaginationComponent
    */
-  decrementCurrentPage(page: number): void {
+  decrementCurrentPage(count: number): void {
 
-    this.currentPage -= page;
+    this.currentPage -= count;
 
     if (this.currentPage <= 0) {
       this.currentPage = 1;

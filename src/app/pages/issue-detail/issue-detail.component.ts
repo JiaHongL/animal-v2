@@ -54,7 +54,7 @@ export class IssueDetailComponent implements OnInit, OnDestroy {
   issue: Issue = null;
 
   /**
-   * 夏拉的類型 enum
+   * 下拉的類型 enum
    *
    * @memberof IssueDetailComponent
    */
@@ -82,11 +82,11 @@ export class IssueDetailComponent implements OnInit, OnDestroy {
     private api: ApiService,
     private utility: UtilityService,
     private loading: LoadingService
-  ) {
-    this.issue = this.route.snapshot.data.issue;
-  }
+  ) {}
 
   ngOnInit() {
+
+    this.issue = this.route.snapshot.data.issue;
 
     this.subscription = this
       .router

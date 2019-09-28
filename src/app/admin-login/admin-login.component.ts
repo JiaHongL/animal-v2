@@ -32,7 +32,7 @@ export class AdminLoginComponent implements OnInit {
    * @type {FormGroup}
    * @memberof AdminLoginComponent
    */
-  form: FormGroup;
+  form: FormGroup = null;
 
   /**
    * 登入表單 key 值
@@ -47,24 +47,15 @@ export class AdminLoginComponent implements OnInit {
     private router: Router,
     private loading: LoadingService,
     private message: MessageService
-  ) {
+  ) { }
+
+  ngOnInit() {
 
     this.form = this.fb.group({
       [this.formKeys.email]: ['', [Validators.required, Validators.email]],
       [this.formKeys.password]: ['', Validators.required],
     });
 
-  }
-
-  /**
-   * 是否有驗證未通過
-   *
-   * @param {string} key - 表單key
-   * @returns {boolean}
-   * @memberof AdminLoginComponent
-   */
-  hasError(key: string): boolean {
-    return this.form.get(key).touched && this.form.get(key).invalid;
   }
 
   /**
@@ -129,6 +120,17 @@ export class AdminLoginComponent implements OnInit {
   }
 
   /**
+   * 是否有驗證未通過
+   *
+   * @param {string} key - 表單key
+   * @returns {boolean}
+   * @memberof AdminLoginComponent
+   */
+  hasError(key: string): boolean {
+    return this.form.get(key).touched && this.form.get(key).invalid;
+  }
+
+  /**
    * 獲取錯誤訊息
    *
    * @param {string} key - 表單key值
@@ -157,7 +159,7 @@ export class AdminLoginComponent implements OnInit {
   }
 
   /**
-   *
+   *  獲取欄位 Label
    *
    * @param {string} key - 表單key值
    * @returns {string}
@@ -184,9 +186,6 @@ export class AdminLoginComponent implements OnInit {
 
     return labelName;
 
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -62,7 +62,6 @@ export class MessageComponent implements OnInit {
    */
   cancelBtnTitle?: string;
 
-
   constructor(
     public modalRef: ModalRef<MessageComponent>,
     @Inject(MODAL_DATA) public data: MessageConfig

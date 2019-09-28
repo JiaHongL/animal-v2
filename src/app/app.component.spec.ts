@@ -25,7 +25,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
 
     selectsService = TestBed.get(SelectsService);
-    spyOn(selectsService, 'getAllSelects').and.callFake(() => { });
+    spyOn(selectsService, 'getAllSelects').and.stub();
 
   });
 

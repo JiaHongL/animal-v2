@@ -26,10 +26,10 @@ describe('StorageService', () => {
       [StorageService, SessionStorageService],
       (service: StorageService, sessionStorage: SessionStorageService) => {
 
-        const spyFunc = spyOn(sessionStorage, 'store');
+        const spy = spyOn(sessionStorage, 'store');
 
         service.store('key', 'data', StorageType.SESSION);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
 
       }
     ));
@@ -39,10 +39,10 @@ describe('StorageService', () => {
       (service: StorageService, sessionStorage: SessionStorageService) => {
 
         const data = '{"data":"mock"}';
-        const spyFunc = spyOn(sessionStorage, 'retrieve').and.returnValue(data);
+        const spy = spyOn(sessionStorage, 'retrieve').and.returnValue(data);
 
         service.getData('key', StorageType.SESSION);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       }
     ));
 
@@ -50,10 +50,10 @@ describe('StorageService', () => {
       [StorageService, SessionStorageService],
       (service: StorageService, sessionStorage: SessionStorageService) => {
 
-        const spyFunc = spyOn(sessionStorage, 'clear');
+        const spy = spyOn(sessionStorage, 'clear');
 
         service.clean(StorageType.SESSION);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
 
       }
     ));
@@ -66,10 +66,10 @@ describe('StorageService', () => {
       [StorageService, LocalStorageService],
       (service: StorageService, localStorage: LocalStorageService) => {
 
-        const spyFunc = spyOn(localStorage, 'store');
+        const spy = spyOn(localStorage, 'store');
 
         service.store('key', 'data', StorageType.LOCAL);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
 
       }
     ));
@@ -79,10 +79,10 @@ describe('StorageService', () => {
       (service: StorageService, localStorage: LocalStorageService) => {
 
         const data = '{"data":"mock"}';
-        const spyFunc = spyOn(localStorage, 'retrieve').and.returnValue(data);
+        const spy = spyOn(localStorage, 'retrieve').and.returnValue(data);
 
         service.getData('key', StorageType.LOCAL);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
 
       }
     ));
@@ -91,10 +91,10 @@ describe('StorageService', () => {
       [StorageService, LocalStorageService],
       (service: StorageService, localStorage: LocalStorageService) => {
 
-        const spyFunc = spyOn(localStorage, 'clear');
+        const spy = spyOn(localStorage, 'clear');
 
         service.clean(StorageType.LOCAL);
-        expect(spyFunc).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
 
       }
     ));

@@ -6,6 +6,8 @@ import { ShelterModalComponent } from './shelter-modal.component';
 
 import { ModalRef } from '../../../shared/components/modal/modal-ref.model';
 
+import { animalQueryFormKeys } from '../../../constant/form-keys/animal-query-form-keys.const';
+
 describe('ShelterModalComponent', () => {
   let component: ShelterModalComponent;
   let fixture: ComponentFixture<ShelterModalComponent>;
@@ -16,7 +18,7 @@ describe('ShelterModalComponent', () => {
       imports: [
         CoreModule
       ],
-      providers: [{ provide: ModalRef, useValue: null }]
+      providers: [{ provide: ModalRef, useValue: { close: () => { } } }]
     })
       .compileComponents();
   }));
@@ -29,6 +31,23 @@ describe('ShelterModalComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('query()，應該使用傳入的參數進行傳遞，且關閉modal，並送出查詢資料  ', () => {
+
+    const mockData = {
+      [animalQueryFormKeys.shelterId]: '1',
+    };
+
+    const modalRef = TestBed.get(ModalRef);
+    const spy = spyOn(modalRef, 'close');
+
+    component.query(mockData[animalQueryFormKeys.shelterId]);
+
+    const args = spy.calls.first().args;
+
+    expect(args[0]).toEqual(mockData);
+
   });
 
 });

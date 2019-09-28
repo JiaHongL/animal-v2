@@ -17,13 +17,6 @@ import { ApiService } from '../../core/api/api.service';
 export class ArchiveComponent implements OnInit {
 
   /**
-   * 當前議題狀態
-   *
-   * @memberof ArchiveComponent
-   */
-  currentIssuesStatus = IssueStatus.ALL;
-
-  /**
    * 頁面資料列表
    *
    * @type {Issue[]}
@@ -68,7 +61,6 @@ export class ArchiveComponent implements OnInit {
    */
   queryIssues(issueStatus: IssueStatus): void {
 
-    this.currentIssuesStatus = issueStatus;
     this.currentPage = 1;
     this.pageList = [];
     this.total = 0;

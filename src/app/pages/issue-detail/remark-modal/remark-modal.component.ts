@@ -19,12 +19,11 @@ export class RemarkModalComponent implements OnInit {
   constructor(
     public modalRef: ModalRef<RemarkModalComponent>,
     @Inject(MODAL_DATA) public data
-  ) {
-    this.remark = data.remark;
-  }
+  ) { }
 
 
   ngOnInit() {
+    this.remark = this.data.remark;
   }
 
 }

@@ -36,12 +36,14 @@ describe('NetworkingService', () => {
     [NetworkingService, HttpClient],
     (service: NetworkingService, http: HttpClient) => {
 
-      const spyFunc = spyOn(http, 'get').and.returnValue(of());
+      const spy = spyOn(http, 'get').and.returnValue(of());
+
       service.sendRequest(
         HttpMethodType.GET, '123', {
         a: 'value'
       });
-      expect(spyFunc).toHaveBeenCalled();
+
+      expect(spy).toHaveBeenCalled();
 
     }
   ));
@@ -50,9 +52,10 @@ describe('NetworkingService', () => {
     [NetworkingService, HttpClient],
     (service: NetworkingService, http: HttpClient) => {
 
-      const spyFunc = spyOn(http, 'post').and.returnValue(of());
+      const spy = spyOn(http, 'post').and.returnValue(of());
       service.sendRequest(HttpMethodType.POST, '');
-      expect(spyFunc).toHaveBeenCalled();
+
+      expect(spy).toHaveBeenCalled();
 
     }
   ));
@@ -61,9 +64,10 @@ describe('NetworkingService', () => {
     [NetworkingService, HttpClient],
     (service: NetworkingService, http: HttpClient) => {
 
-      const spyFunc = spyOn(http, 'patch').and.returnValue(of());
+      const spy = spyOn(http, 'patch').and.returnValue(of());
       service.sendRequest(HttpMethodType.PATCH, '');
-      expect(spyFunc).toHaveBeenCalled();
+
+      expect(spy).toHaveBeenCalled();
 
     }
   ));
@@ -72,9 +76,10 @@ describe('NetworkingService', () => {
     [NetworkingService, HttpClient],
     (service: NetworkingService, http: HttpClient) => {
 
-      const spyFunc = spyOn(http, 'delete').and.returnValue(of());
+      const spy = spyOn(http, 'delete').and.returnValue(of());
       service.sendRequest(HttpMethodType.DELETE, '');
-      expect(spyFunc).toHaveBeenCalled();
+
+      expect(spy).toHaveBeenCalled();
 
     }
   ));
@@ -83,9 +88,10 @@ describe('NetworkingService', () => {
     [NetworkingService, HttpClient],
     (service: NetworkingService, http: HttpClient) => {
 
-      const spyFunc = spyOn(http, 'put').and.returnValue(of());
+      const spy = spyOn(http, 'put').and.returnValue(of());
       service.sendRequest(HttpMethodType.PUT, '');
-      expect(spyFunc).toHaveBeenCalled();
+
+      expect(spy).toHaveBeenCalled();
 
     }
   ));

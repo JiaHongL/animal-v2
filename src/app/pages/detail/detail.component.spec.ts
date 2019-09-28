@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DetailComponent } from './detail.component';
+import { ImageModalComponent } from '../../shared/components/image-modal/image-modal.component';
 
 import { CoreModule } from './../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -10,6 +11,9 @@ import { DetailRoutingModule } from './detail-routing.module';
 import { Animal } from '../../model/animal/animal.model';
 
 import { AnimalDetailResolver } from '../../resolver/animal-detail-resolver/animal-detail.resolver';
+
+import { ModalService } from '../../shared/components/modal/modal.service';
+import { UtilityService } from '../../core/utility/utility.service';
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -47,4 +51,37 @@ describe('DetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('ngOnInit()時，為解決 ios touch 問題，應該呼叫 utilityService 的 iosRemoveNoTouch', () => {
+
+    const utilityService = TestBed.get(UtilityService);
+    const spy = spyOn(utilityService, 'iosRemoveNoTouch');
+
+    component.ngOnInit();
+
+    expect(spy).toHaveBeenCalled();
+
+  });
+
+  it('openImageModal()，應該根據傳入的參數，打開相片Modal', () => {
+
+    const mockConfig = {
+      data: {
+        url: 'a'
+      }
+    };
+
+    const modal = TestBed.get(ModalService);
+    const spy = spyOn(modal, 'open');
+
+    component.openImageModal(mockConfig.data.url);
+
+    const args = spy.calls.first().args;
+
+    expect(spy).toHaveBeenCalled();
+    expect(args[0]).toEqual(ImageModalComponent);
+    expect(args[1]).toEqual(mockConfig);
+
+  });
+
 });
