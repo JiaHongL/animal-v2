@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  build_and_test:
     branches:
       ignore: gh-pages
 
@@ -44,24 +44,25 @@ jobs:
 
 workflows:
   version: 2
-  jobs:
-    deploy:
-      filters:
-        branches:
-          only: master
+  deploy:
+    jobs:
+      deploy:
+        filters:
+          branches:
+            only: master
 
       docker:
         - image: circleci/node:4.8.2
 
       steps:
-        - checkout
-        # Download and cache dependencies
-        - restore_cache:
-            keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
+          - checkout
+          # Download and cache dependencies
+          - restore_cache:
+              keys:
+              - v1-dependencies-{{ checksum "package.json" }}
+              # fallback to using the latest cache if no exact match is found
 
-        - run: npm install
-        - run:
-            name: deploy
-            command: npm run deploy
+          - run: npm install
+          - run:
+              name: deploy
+              command: npm run deploy
