@@ -52,7 +52,7 @@ describe('ConditionModalComponent', () => {
     };
 
     const modalRef = TestBed.get(ModalRef);
-    const spyFunc = spyOn(modalRef, 'close');
+    const spy = spyOn(modalRef, 'close');
 
     component.form.get(component.formKeys.kind).setValue(mockData[animalQueryFormKeys.kind]);
     component.form.get(component.formKeys.sex).setValue(mockData[animalQueryFormKeys.sex]);
@@ -64,7 +64,7 @@ describe('ConditionModalComponent', () => {
 
     component.query();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(mockData);
 
@@ -78,13 +78,13 @@ describe('ConditionModalComponent', () => {
     };
 
     const modalRef = TestBed.get(ModalRef);
-    const spyFunc = spyOn(modalRef, 'close');
+    const spy = spyOn(modalRef, 'close');
 
     component.form.get(component.formKeys.kind).setValue(mockData[animalQueryFormKeys.kind]);
 
     component.query();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(mockData);
 

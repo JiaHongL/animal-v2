@@ -12,7 +12,6 @@ import { LoadingType } from './enum/loading-type.enum';
 describe('LoadingComponent', () => {
   let component: LoadingComponent;
   let fixture: ComponentFixture<LoadingComponent>;
-  let loadingComp;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,7 +23,6 @@ describe('LoadingComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoadingComponent);
-    loadingComp = fixture.componentInstance;
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

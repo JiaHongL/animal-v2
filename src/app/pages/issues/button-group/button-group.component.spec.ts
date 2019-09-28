@@ -58,7 +58,7 @@ describe('ButtonGroupComponent', () => {
 
     fixture.detectChanges();
 
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     const btn = fixture.nativeElement.querySelectorAll('.pure-button')[0];
     const btn2 = fixture.nativeElement.querySelectorAll('.pure-button')[1];
@@ -70,16 +70,16 @@ describe('ButtonGroupComponent', () => {
 
     btn.click();
 
-    args = spyFunc.calls.mostRecent().args;
+    args = spy.calls.mostRecent().args;
 
-    expect(spyFunc).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(args[0]).toEqual(mockButtons[0].code);
 
     btn2.click();
 
-    args = spyFunc.calls.mostRecent().args;
+    args = spy.calls.mostRecent().args;
 
-    expect(spyFunc).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(args[0]).toEqual(mockButtons[1].code);
 
   });

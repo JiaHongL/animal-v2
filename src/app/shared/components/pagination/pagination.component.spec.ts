@@ -39,13 +39,13 @@ describe('PaginationComponent', () => {
 
   it('setPageGroupList()，若總筆數大於1，應呼叫設定最大與最小頁碼範圍，且設定當前頁碼為第1頁', () => {
 
-    const spyFunc = spyOn(component, 'setShowMinMaxPage');
+    const spy = spyOn(component, 'setShowMinMaxPage');
 
     component.totalItems = 100;
     component.setPageGroupList();
 
     expect(component.currentPage).toBe(1);
-    expect(spyFunc).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1);
 
   });
 
@@ -94,16 +94,16 @@ describe('PaginationComponent', () => {
     component.currentPage = 2;
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.goToFirstPage();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(1);
     expect(component.currentPageGroup).toBe(0);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(1);
 
   });
@@ -115,16 +115,16 @@ describe('PaginationComponent', () => {
     component.currentPage = 2;
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.goToLastPage();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(10);
     expect(component.currentPageGroup).toBe(2);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(10);
 
   });
@@ -139,16 +139,16 @@ describe('PaginationComponent', () => {
     expect(component.currentPageGroup).toBe(0);
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.incrementCurrentPage(5);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(6);
     expect(component.currentPageGroup).toBe(1);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(6);
 
   });
@@ -165,16 +165,16 @@ describe('PaginationComponent', () => {
     expect(component.currentPageGroup).toBe(1);
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.incrementCurrentPage(1);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(6);
     expect(component.currentPageGroup).toBe(1);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(6);
 
   });
@@ -191,16 +191,16 @@ describe('PaginationComponent', () => {
     expect(component.currentPageGroup).toBe(1);
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.decrementCurrentPage(2);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(4);
     expect(component.currentPageGroup).toBe(0);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(4);
 
   });
@@ -217,19 +217,19 @@ describe('PaginationComponent', () => {
     expect(component.currentPageGroup).toBe(0);
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.decrementCurrentPage(1);
     component.decrementCurrentPage(1);
     component.decrementCurrentPage(1);
     component.decrementCurrentPage(1);
 
-    const args = spyFunc.calls.mostRecent().args;
+    const args = spy.calls.mostRecent().args;
 
     expect(component.currentPage).toBe(1);
     expect(component.currentPageGroup).toBe(0);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(1);
 
   });
@@ -246,16 +246,16 @@ describe('PaginationComponent', () => {
     expect(component.currentPageGroup).toBe(0);
 
     spyOn(component, 'setShowMinMaxPage');
-    const spyFunc = spyOn(component.clickEvent, 'emit');
+    const spy = spyOn(component.clickEvent, 'emit');
 
     component.clickPageNum(6);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.currentPage).toBe(6);
     expect(component.currentPageGroup).toBe(1);
     expect(component.setShowMinMaxPage).toHaveBeenCalled();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(6);
 
   });

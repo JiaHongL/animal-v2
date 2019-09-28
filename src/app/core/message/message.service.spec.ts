@@ -4,7 +4,9 @@ import { MessageService } from './message.service';
 
 import { CoreModule } from '../core.module';
 import { ModalModule } from './../../shared/components/modal/modal.module';
+
 import { ModalService } from '../../shared/components/modal/modal.service';
+
 import { MessageType } from './message-type.enum';
 
 describe('MessageService', () => {
@@ -24,7 +26,7 @@ describe('MessageService', () => {
   it('alert function 應該根據傳入的參數，傳給 Message Component 所需資料，並 開啟 alert message modal',
     inject([MessageService, ModalService], (message: MessageService, modal: ModalService) => {
 
-      const spyFunc = spyOn(modal, 'open');
+      const spy = spyOn(modal, 'open');
 
       const dataKey = 'data';
 
@@ -37,7 +39,7 @@ describe('MessageService', () => {
 
       message.alert(mockData.content, mockData.title, mockData.okBtnTitle);
 
-      const args = spyFunc.calls.first().args;
+      const args = spy.calls.first().args;
 
       expect(args[1][dataKey]).toEqual(mockData);
 
@@ -47,7 +49,7 @@ describe('MessageService', () => {
   it('confirm function 應該根據傳入的參數，傳給 Message Component 所需資料，並 開啟 confirm message modal',
     inject([MessageService, ModalService], (message: MessageService, modal: ModalService) => {
 
-      const spyFunc = spyOn(modal, 'open');
+      const spy = spyOn(modal, 'open');
 
       const dataKey = 'data';
 
@@ -61,7 +63,7 @@ describe('MessageService', () => {
 
       message.confirm(mockData.content, mockData.title, mockData.okBtnTitle , mockData.cancelBtnTitle);
 
-      const args = spyFunc.calls.first().args;
+      const args = spy.calls.first().args;
 
       expect(args[1][dataKey]).toEqual(mockData);
 

@@ -26,7 +26,7 @@ describe('IssuesComponent', () => {
   let component: IssuesComponent;
   let fixture: ComponentFixture<IssuesComponent>;
   let api: ApiService;
-  let spyOnGetIssues: jasmine.Spy;
+  let getIssuesSpy: jasmine.Spy;
 
   const mockResponse = {
     total: 18,
@@ -557,7 +557,7 @@ describe('IssuesComponent', () => {
   beforeEach(() => {
 
     api = TestBed.get(ApiService);
-    spyOnGetIssues = spyOn(api, 'getIssues').and.returnValue(of(mockResponse).pipe(delay(0)));
+    getIssuesSpy = spyOn(api, 'getIssues').and.returnValue(of(mockResponse).pipe(delay(0)));
 
     fixture = TestBed.createComponent(IssuesComponent);
     component = fixture.componentInstance;
@@ -652,15 +652,15 @@ describe('IssuesComponent', () => {
     fixture = TestBed.createComponent(IssuesComponent);
     component = fixture.componentInstance;
 
-    const spyFunc = spyOn(component, 'queryIssues');
+    const spy = spyOn(component, 'queryIssues');
 
-    expect(spyFunc).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
 
     component.ngOnInit();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toBe(IssueStatus.ALL);
 
   });
@@ -672,19 +672,19 @@ describe('IssuesComponent', () => {
     component.pageList = null;
     component.total = null;
 
-    spyOnGetIssues.calls.reset();
+    getIssuesSpy.calls.reset();
 
-    expect(spyOnGetIssues).not.toHaveBeenCalled();
+    expect(getIssuesSpy).not.toHaveBeenCalled();
 
     component.queryIssues(IssueStatus.PROCESSED);
 
-    const args = spyOnGetIssues.calls.mostRecent().args;
+    const args = getIssuesSpy.calls.mostRecent().args;
 
     expect(component.currentIssuesStatus).toEqual(IssueStatus.PROCESSED);
     expect(component.currentPage).toEqual(1);
     expect(component.pageList).toEqual([]);
     expect(component.total).toEqual(0);
-    expect(spyOnGetIssues).toHaveBeenCalled();
+    expect(getIssuesSpy).toHaveBeenCalled();
     expect(args[0]).toEqual(IssueStatus.PROCESSED);
 
     tick();

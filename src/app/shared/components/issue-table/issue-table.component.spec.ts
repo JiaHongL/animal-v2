@@ -48,15 +48,15 @@ describe('IssueTableComponent', () => {
 
     const mockIssueId = 'a';
 
-    const spyFunc = spyOn(window, 'open');
+    const spy = spyOn(window, 'open');
 
     component.openIssue(mockIssueId);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     const url = '#/' + appRoutePaths.issueDetail.path + '/' + mockIssueId;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toEqual(url);
 
   });

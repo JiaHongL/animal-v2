@@ -24,10 +24,10 @@ import { delay } from 'rxjs/internal/operators/delay';
 describe('AnimalDetailResolver', () => {
 
   let animalDetailResolver: AnimalDetailResolver;
-  let spyOnGetAnimalDetail: jasmine.Spy;
-  let spyOnShowLoading: jasmine.Spy;
-  let spyOnHideLoading: jasmine.Spy;
-  let spyOnAlert: jasmine.Spy;
+  let getAnimalDetailSpy: jasmine.Spy;
+  let showLoadingSpy: jasmine.Spy;
+  let hideLoadingSpy: jasmine.Spy;
+  let alertSpy: jasmine.Spy;
   let route: ActivatedRouteSnapshot;
 
   const mockResponse = {
@@ -105,59 +105,59 @@ describe('AnimalDetailResolver', () => {
     const loadindService = TestBed.get(LoadingService);
     const messageService = TestBed.get(MessageService);
 
-    spyOnShowLoading = spyOn(loadindService, 'show');
-    spyOnGetAnimalDetail = spyOn(apiService, 'getAnimalDetail');
-    spyOnHideLoading = spyOn(loadindService, 'hide');
-    spyOnAlert = spyOn(messageService, 'alert');
+    showLoadingSpy = spyOn(loadindService, 'show');
+    getAnimalDetailSpy = spyOn(apiService, 'getAnimalDetail');
+    hideLoadingSpy = spyOn(loadindService, 'hide');
+    alertSpy = spyOn(messageService, 'alert');
 
   });
 
   it('應該 show loading，api 回應後 hide loading，若api失敗，則跳錯誤提示窗', fakeAsync(() => {
 
-    spyOnGetAnimalDetail.and.returnValue(of(mockErrorResponse).pipe(delay(1000000)));
+    getAnimalDetailSpy.and.returnValue(of(mockErrorResponse).pipe(delay(1000000)));
 
     animalDetailResolver.resolve(route).subscribe((animal) => expect(animal).toEqual(new Animal(null)));
 
-    const showLoadingArgs = spyOnShowLoading.calls.mostRecent().args;
-    const getAnimalDetailArgs = spyOnGetAnimalDetail.calls.mostRecent().args;
+    const showLoadingArgs = showLoadingSpy.calls.mostRecent().args;
+    const getAnimalDetailArgs = getAnimalDetailSpy.calls.mostRecent().args;
 
-    expect(spyOnShowLoading).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
     expect(showLoadingArgs[0]).toBe(LoadingType.ROLLER);
 
-    expect(spyOnGetAnimalDetail).toHaveBeenCalled();
+    expect(getAnimalDetailSpy).toHaveBeenCalled();
     expect(getAnimalDetailArgs[0]).toBe(expectedId);
 
     tick(1000000);
 
-    const alertArgs = spyOnAlert.calls.mostRecent().args;
+    const alertArgs = alertSpy.calls.mostRecent().args;
 
-    expect(spyOnHideLoading).toHaveBeenCalled();
-    expect(spyOnAlert).toHaveBeenCalled();
+    expect(hideLoadingSpy).toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalled();
     expect(alertArgs[0]).toBe(mockErrorResponse.errorMessage);
 
   }));
 
   it('應該 show loading，api 回應後 hide loading，若api成功，則傳遞資料', (done: DoneFn) => {
 
-    spyOnGetAnimalDetail.and.callFake(() => {
+    getAnimalDetailSpy.and.callFake(() => {
       done();
       return of(mockResponse).pipe(delay(100000));
     });
 
     animalDetailResolver.resolve(route).subscribe((animal) => {
 
-      expect(spyOnHideLoading).toHaveBeenCalled();
+      expect(hideLoadingSpy).toHaveBeenCalled();
       expect(animal).toEqual(new Animal(mockResponse[0]));
 
     });
 
-    const showLoadingArgs = spyOnShowLoading.calls.mostRecent().args;
-    const getAnimalDetailArgs = spyOnGetAnimalDetail.calls.mostRecent().args;
+    const showLoadingArgs = showLoadingSpy.calls.mostRecent().args;
+    const getAnimalDetailArgs = getAnimalDetailSpy.calls.mostRecent().args;
 
-    expect(spyOnShowLoading).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
     expect(showLoadingArgs[0]).toBe(LoadingType.ROLLER);
 
-    expect(spyOnGetAnimalDetail).toHaveBeenCalled();
+    expect(getAnimalDetailSpy).toHaveBeenCalled();
     expect(getAnimalDetailArgs[0]).toBe(expectedId);
 
   });

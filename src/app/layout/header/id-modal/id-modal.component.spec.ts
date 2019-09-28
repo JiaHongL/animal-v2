@@ -45,14 +45,14 @@ describe('IdModalComponent', () => {
     };
 
     const modalRef = TestBed.get(ModalRef);
-    const spyFunc = spyOn(modalRef, 'close');
+    const spy = spyOn(modalRef, 'close');
 
     component.form.get(component.formKeys.id).setValue(mockData[animalQueryFormKeys.id]);
     component.form.get(component.formKeys.subId).setValue(mockData[animalQueryFormKeys.subId]);
 
     component.query();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(mockData);
 
@@ -65,13 +65,13 @@ describe('IdModalComponent', () => {
     };
 
     const modalRef = TestBed.get(ModalRef);
-    const spyFunc = spyOn(modalRef, 'close');
+    const spy = spyOn(modalRef, 'close');
 
     component.form.get(component.formKeys.id).setValue(mockData[animalQueryFormKeys.id]);
 
     component.query();
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(mockData);
 

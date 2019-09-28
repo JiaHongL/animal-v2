@@ -43,11 +43,11 @@ describe('AreaModalComponent', () => {
     };
 
     const modalRef = TestBed.get(ModalRef);
-    const spyFunc = spyOn(modalRef, 'close');
+    const spy = spyOn(modalRef, 'close');
 
     component.query(mockData[animalQueryFormKeys.areaId]);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(mockData);
 

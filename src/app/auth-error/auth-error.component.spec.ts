@@ -33,7 +33,7 @@ describe('AuthErrorComponent', () => {
   it('ngOnInit後，應該開始倒數三秒，然後轉頁到登入頁', fakeAsync(() => {
 
     const router = TestBed.get(Router);
-    const spyFunc = spyOn(router, 'navigate');
+    const spy = spyOn(router, 'navigate');
 
     component.ngOnInit();
 
@@ -50,7 +50,7 @@ describe('AuthErrorComponent', () => {
     // 快轉 1s
     tick(1000);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(component.sec).toBe(0);
     expect(args[0]).toEqual([appRoutePaths.adLogin.path]);

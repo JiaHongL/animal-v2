@@ -30,8 +30,8 @@ describe('FavoriteComponent', () => {
   let component: FavoriteComponent;
   let fixture: ComponentFixture<FavoriteComponent>;
   let storageService: StorageService;
-  let spyOnGetData: jasmine.Spy;
-  let spyOnGetDataObs: jasmine.Spy;
+  let getDataSpy: jasmine.Spy;
+  let getDataObsSpy: jasmine.Spy;
   let animals$: Subject<any> = null;
 
   const mockData = [
@@ -150,11 +150,11 @@ describe('FavoriteComponent', () => {
 
     storageService = TestBed.get(StorageService);
 
-    spyOnGetData = spyOn(storageService, 'getData').and.returnValue(mockData);
-    spyOnGetDataObs = spyOn(storageService, 'getDataObs').and.callFake(() => animals$.asObservable());
+    getDataSpy = spyOn(storageService, 'getData').and.returnValue(mockData);
+    getDataObsSpy = spyOn(storageService, 'getDataObs').and.callFake(() => animals$.asObservable());
 
-    spyOnGetData.calls.reset();
-    spyOnGetDataObs.calls.reset();
+    getDataSpy.calls.reset();
+    getDataObsSpy.calls.reset();
 
     fixture = TestBed.createComponent(FavoriteComponent);
     component = fixture.componentInstance;
@@ -171,7 +171,7 @@ describe('FavoriteComponent', () => {
 
     const localStorageData = mockData.map(animal => new Animal(animal));
 
-    const getDataArgs = spyOnGetData.calls.first().args;
+    const getDataArgs = getDataSpy.calls.first().args;
 
     expect(getDataArgs[0]).toEqual(storageKeys.favoriteList);
     expect(getDataArgs[1]).toEqual(StorageType.LOCAL);
@@ -183,7 +183,7 @@ describe('FavoriteComponent', () => {
 
     const localStorageData = mockData.map(animal => new Animal(animal));
 
-    const getDataObsArgs = spyOnGetDataObs.calls.first().args;
+    const getDataObsArgs = getDataObsSpy.calls.first().args;
 
     expect(getDataObsArgs[0]).toEqual(storageKeys.favoriteList);
     expect(getDataObsArgs[1]).toEqual(StorageType.LOCAL);
@@ -200,25 +200,25 @@ describe('FavoriteComponent', () => {
 
   it('應該儲存 getDataObs subscribe 的 subscription，在 Destroy 時，做 unsubscribe ', () => {
 
-    const spyFunc = spyOn(component.subscription, 'unsubscribe');
+    const spy = spyOn(component.subscription, 'unsubscribe');
 
     expect(component.subscription instanceof Subscription).toBeTruthy();
 
     component.ngOnDestroy();
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
 
   });
 
   it('應該儲存 getDataObs subscribe 的 subscription，在 Destroy 時，做 unsubscribe ', () => {
 
-    const spyFunc = spyOn(component.subscription, 'unsubscribe');
+    const spy = spyOn(component.subscription, 'unsubscribe');
 
     expect(component.subscription instanceof Subscription).toBeTruthy();
 
     component.ngOnDestroy();
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
 
   });
 
@@ -231,13 +231,13 @@ describe('FavoriteComponent', () => {
     };
 
     const modal = TestBed.get(ModalService);
-    const spyFunc = spyOn(modal, 'open');
+    const spy = spyOn(modal, 'open');
 
     component.openImageModal(mockConfig.data.url);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toEqual(ImageModalComponent);
     expect(args[1]).toEqual(mockConfig);
 

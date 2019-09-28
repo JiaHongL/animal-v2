@@ -154,12 +154,12 @@ describe('AdminLoginComponent', () => {
     }];
 
     // 需要 spyOn 的 obj function 與 callFake return
-    const spyOnShowLoading = spyOn(loading, 'show');
-    const spyOnHideLoading = spyOn(loading, 'hide');
-    const spyOnLogin = spyOn(userService, 'login').and.callFake(() => of(mockLoginInfo).pipe(delay(100)));
-    const spyOnGetUserInfo = spyOn(userService, 'getUserInfo').and.callFake(() => of(mockUserInfo).pipe(delay(200)));
-    const spyOnStoreData = spyOn(userService, 'storeData');
-    const spyOnRouterNavigate = spyOn(router, 'navigate');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const hideLoadingSpy = spyOn(loading, 'hide');
+    const loginSpy = spyOn(userService, 'login').and.callFake(() => of(mockLoginInfo).pipe(delay(100)));
+    const getUserInfoSpy = spyOn(userService, 'getUserInfo').and.callFake(() => of(mockUserInfo).pipe(delay(200)));
+    const storeDataSpy = spyOn(userService, 'storeData');
+    const routerNavigateSpy = spyOn(router, 'navigate');
 
     // 表單控制項目
     const emailCtrl = component.form.get(formKeys.email);
@@ -171,10 +171,10 @@ describe('AdminLoginComponent', () => {
     component.login();
 
     // 1. 預期 顯示 Loading畫面 並 呼叫 userService.login 進行登入
-    const loginArgs = spyOnLogin.calls.first().args;
+    const loginArgs = loginSpy.calls.first().args;
 
-    expect(spyOnShowLoading).toHaveBeenCalled();
-    expect(spyOnLogin).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
+    expect(loginSpy).toHaveBeenCalled();
     expect(loginArgs[0]).toBe(emailCtrl.value);
     expect(loginArgs[1]).toBe(passwordCtrl.value);
 
@@ -182,7 +182,7 @@ describe('AdminLoginComponent', () => {
     tick(100);
 
     // 2.若登入成功，繼續呼叫 userService.getUserInfo 取得使用者資料
-    const getUserInfoArgs = spyOnGetUserInfo.calls.first().args;
+    const getUserInfoArgs = getUserInfoSpy.calls.first().args;
 
     expect(getUserInfoArgs[0]).toBe(mockLoginInfo.user.uid);
 
@@ -190,10 +190,10 @@ describe('AdminLoginComponent', () => {
     tick(200);
 
     // 3.取得使用者資料後，應 使用 userService.storeData進行儲存 並 跳轉到 意見處理 頁面
-    const storeDataArgs = spyOnStoreData.calls.first().args;
-    const routerNavigateArgs = spyOnRouterNavigate.calls.first().args;
+    const storeDataArgs = storeDataSpy.calls.first().args;
+    const routerNavigateArgs = routerNavigateSpy.calls.first().args;
 
-    expect(spyOnHideLoading).toHaveBeenCalled();
+    expect(hideLoadingSpy).toHaveBeenCalled();
     expect(storeDataArgs[0]).toEqual(mockUserInfo[0]);
     expect(routerNavigateArgs[0]).toEqual([appRoutePaths.issues.path]);
 
@@ -214,10 +214,10 @@ describe('AdminLoginComponent', () => {
     };
 
     // 需要 spyOn 的 obj function 與 callFake return
-    const spyOnShowLoading = spyOn(loading, 'show');
-    const spyOnHideLoading = spyOn(loading, 'hide');
-    const spyOnLogin = spyOn(userService, 'login').and.callFake(() => throwError(mockLoginInfo).pipe(delay(0)));
-    const spyOnMessageAlert = spyOn(message, 'alert');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const hideLoadingSpy = spyOn(loading, 'hide');
+    const loginSpy = spyOn(userService, 'login').and.callFake(() => throwError(mockLoginInfo).pipe(delay(0)));
+    const alertSpy = spyOn(message, 'alert');
 
     // 表單控制項目
     const emailCtrl = component.form.get(formKeys.email);
@@ -229,10 +229,10 @@ describe('AdminLoginComponent', () => {
     component.login();
 
     // 1. 預期 顯示 Loading畫面 並 呼叫 userService.login 進行登入
-    const loginArgs = spyOnLogin.calls.first().args;
+    const loginArgs = loginSpy.calls.first().args;
 
-    expect(spyOnShowLoading).toHaveBeenCalled();
-    expect(spyOnLogin).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
+    expect(loginSpy).toHaveBeenCalled();
     expect(loginArgs[0]).toBe(emailCtrl.value);
     expect(loginArgs[1]).toBe(passwordCtrl.value);
 
@@ -240,11 +240,11 @@ describe('AdminLoginComponent', () => {
     tick();
 
     // 2. 預期 登入失敗，則根據 error code，彈出對應顯示的 Alert
-    const messageAlertArgs = spyOnMessageAlert.calls.first().args;
+    const alertArgs = alertSpy.calls.first().args;
 
-    expect(spyOnHideLoading).toHaveBeenCalled();
-    expect(spyOnMessageAlert).toHaveBeenCalled();
-    expect(messageAlertArgs[0]).toBe(alertMessage.userNotFound);
+    expect(hideLoadingSpy).toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalled();
+    expect(alertArgs[0]).toBe(alertMessage.userNotFound);
 
   }));
 
@@ -261,8 +261,8 @@ describe('AdminLoginComponent', () => {
     };
 
     // 需要 spyOn 的 obj function 與 callFake return
-    const spyOnLogin = spyOn(userService, 'login').and.callFake(() => throwError(mockLoginInfo).pipe(delay(0)));
-    const spyOnMessageAlert = spyOn(message, 'alert');
+    spyOn(userService, 'login').and.callFake(() => throwError(mockLoginInfo).pipe(delay(0)));
+    const alertSpy = spyOn(message, 'alert');
 
     // 表單控制項目
     const emailCtrl = component.form.get(formKeys.email);
@@ -277,10 +277,10 @@ describe('AdminLoginComponent', () => {
     tick();
 
     // 1. 預期 登入失敗 ，當 無法轉換 訊息錯誤代碼時，則直接回傳後端的error message ，彈出提示的 Alert
-    const messageAlertArgs = spyOnMessageAlert.calls.first().args;
+    const alertArgs = alertSpy.calls.first().args;
 
-    expect(spyOnMessageAlert).toHaveBeenCalled();
-    expect(messageAlertArgs[0]).toBe(mockLoginInfo.message);
+    expect(alertSpy).toHaveBeenCalled();
+    expect(alertArgs[0]).toBe(mockLoginInfo.message);
 
   }));
 

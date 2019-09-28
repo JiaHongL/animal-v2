@@ -32,7 +32,7 @@ describe('HomeComponent', () => {
   let storageService: StorageService;
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let spyOnGetAnimals: jasmine.Spy = null;
+  let getAnimalsSpy: jasmine.Spy = null;
   let mockQueryParamMap$: Subject<ParamMap> = null;
 
   const mockApiResponse = {
@@ -102,8 +102,8 @@ describe('HomeComponent', () => {
     storageService = TestBed.get(StorageService);
     storageService.getData(null, null);
 
-    spyOnGetAnimals = spyOn(apiService, 'getAnimals');
-    spyOnGetAnimals
+    getAnimalsSpy = spyOn(apiService, 'getAnimals');
+    getAnimalsSpy
       .and
       .callFake(() => {
 
@@ -125,18 +125,18 @@ describe('HomeComponent', () => {
 
   it('應該監聽路由queryParamMap的變化，進行頁面重新查詢', () => {
 
-    const spyFunc = spyOn(component, 'searchAnimals').and.stub();
+    const spy = spyOn(component, 'searchAnimals').and.stub();
 
     mockQueryParamMap$.next(convertToParamMap({ id: 'bb' }));
 
-    const firstArgs = spyFunc.calls.mostRecent().args;
+    const firstArgs = spy.calls.mostRecent().args;
 
     expect(firstArgs[0]).toEqual(1);
     expect(firstArgs[1]).toEqual({ id: 'bb' });
 
     mockQueryParamMap$.next(convertToParamMap({ kind: 'c' }));
 
-    const secondArgs = spyFunc.calls.mostRecent().args;
+    const secondArgs = spy.calls.mostRecent().args;
 
     expect(secondArgs[0]).toEqual(1);
     expect(secondArgs[1]).toEqual({ kind: 'c' });
@@ -151,26 +151,26 @@ describe('HomeComponent', () => {
 
     const loading = TestBed.get(LoadingService);
 
-    const spyOnShow = spyOn(loading, 'show');
-    const spyOnHide = spyOn(loading, 'hide');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const hideLoadingSoy = spyOn(loading, 'hide');
 
     component.isQuerying = true;
     component.searchAnimals(1, mockQueryParams);
 
     // 『呼異步api之前』 => 函式內同步的程式碼
     expect(component.isQuerying).toBeTruthy();
-    expect(spyOnShow).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
     expect(component.animals).toEqual([]);
 
     // async time 快轉
     tick();
 
-    const args = spyOnGetAnimals.calls.mostRecent().args;
+    const args = getAnimalsSpy.calls.mostRecent().args;
 
     // 『異步api完成後』 => 函式內異步的程式碼
     expect(args[0]).toBe(1);
     expect(args[1]).toEqual(mockQueryParams);
-    expect(spyOnHide).toHaveBeenCalled();
+    expect(hideLoadingSoy).toHaveBeenCalled();
     expect(component.isQuerying).toBeFalsy();
     expect(component.animals).toEqual(mockApiResponse.result.map(animal => new Animal(animal)));
 
@@ -202,7 +202,7 @@ describe('HomeComponent', () => {
 
   it('searchAnimals()，若API有錯誤訊息回覆，需跳視窗提示', fakeAsync(() => {
 
-    spyOnGetAnimals
+    getAnimalsSpy
       .and
       .callFake(() => {
 
@@ -222,15 +222,15 @@ describe('HomeComponent', () => {
     component.animals = [];
 
     const message = TestBed.get(MessageService);
-    const spyOnAlert = spyOn(message, 'alert');
+    const alertSpy = spyOn(message, 'alert');
 
     component.searchAnimals(1, mockQueryParams);
 
     tick();
 
-    const args = spyOnAlert.calls.first().args;
+    const args = alertSpy.calls.first().args;
 
-    expect(spyOnAlert).toHaveBeenCalled();
+    expect(alertSpy).toHaveBeenCalled();
     expect(args[0]).toEqual('has error');
 
   }));
@@ -240,23 +240,23 @@ describe('HomeComponent', () => {
     component.searchParams = { id: 'a' };
     component.currentPage = 1;
 
-    const spyFunc = spyOn(component, 'searchAnimals').and.stub();
+    const spy = spyOn(component, 'searchAnimals').and.stub();
 
     component.scrolled();
 
-    const firstArgs = spyFunc.calls.mostRecent().args;
+    const firstArgs = spy.calls.mostRecent().args;
 
     expect(component.currentPage).toEqual(2);
-    expect(spyFunc).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(firstArgs[0]).toEqual(2);
     expect(firstArgs[1]).toEqual(component.searchParams);
 
     component.scrolled();
 
-    const secondArgs = spyFunc.calls.mostRecent().args;
+    const secondArgs = spy.calls.mostRecent().args;
 
     expect(component.currentPage).toEqual(3);
-    expect(spyFunc).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(secondArgs[0]).toEqual(3);
     expect(secondArgs[1]).toEqual(component.searchParams);
 
@@ -271,13 +271,13 @@ describe('HomeComponent', () => {
     };
 
     const modalService = TestBed.get(ModalService);
-    const spyFunc = spyOn(modalService, 'open');
+    const spy = spyOn(modalService, 'open');
 
     component.openImageModal(expectConfig.data.url);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toEqual(ImageModalComponent);
     expect(args[1]).toEqual(expectConfig);
 

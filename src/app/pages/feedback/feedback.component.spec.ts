@@ -242,7 +242,7 @@ describe('FeedbackComponent', () => {
 
     fixture = TestBed.createComponent(FeedbackComponent);
 
-    const spyOnNgOnInit = spyOn(fixture.componentInstance, 'ngOnInit').and.callThrough();
+    const ngOnInitSpy = spyOn(fixture.componentInstance, 'ngOnInit').and.callThrough();
 
     component = fixture.componentInstance;
 
@@ -250,7 +250,7 @@ describe('FeedbackComponent', () => {
     const spyOnCreateUserCtrlValueChanges = spyOn(component, 'createUserCtrlValueChanges').and.callThrough();
     const spyOnCreateTimeCtrlValueChanges = spyOn(component, 'createTimeCtrlValueChanges').and.callThrough();
 
-    expect(spyOnNgOnInit).not.toHaveBeenCalled();
+    expect(ngOnInitSpy).not.toHaveBeenCalled();
     expect(component.form).toBeUndefined();
     expect(component.subscription).toBeNull();
     expect(spyOnCreateFeedbackFg).not.toHaveBeenCalled();
@@ -259,7 +259,7 @@ describe('FeedbackComponent', () => {
 
     component.ngOnInit();
 
-    expect(spyOnNgOnInit).toHaveBeenCalled();
+    expect(ngOnInitSpy).toHaveBeenCalled();
     expect(component.form).not.toBeUndefined();
     expect(component.form.value).toEqual(component.createFeedbackFg().value);
     expect(component.subscription).not.toBeNull();
@@ -277,12 +277,12 @@ describe('FeedbackComponent', () => {
 
     component.form = component.createFeedbackFg();
 
-    const spyFunc = spyOn(component, 'createUserCtrlValueChanges').and.callThrough();
+    const spy = spyOn(component, 'createUserCtrlValueChanges').and.callThrough();
     const createUserCtr = component.form.get(feedbackFormKeys.createUser);
 
     createUserCtr.setValue('a');
 
-    expect(spyFunc).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
     expect(createUserCtr.value).toBe('a');
     expect(component.firstHistoryCreateUserCtrl.value).toBe('');
 
@@ -290,7 +290,7 @@ describe('FeedbackComponent', () => {
 
     createUserCtr.setValue('b');
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(createUserCtr.value).toBe('b');
     expect(component.firstHistoryCreateUserCtrl.value).toBe('b');
 
@@ -306,12 +306,12 @@ describe('FeedbackComponent', () => {
 
     component.form = component.createFeedbackFg();
 
-    const spyFunc = spyOn(component, 'createTimeCtrlValueChanges').and.callThrough();
+    const spy = spyOn(component, 'createTimeCtrlValueChanges').and.callThrough();
     const createTimeCtr = component.form.get(feedbackFormKeys.createTime);
 
     createTimeCtr.setValue('a');
 
-    expect(spyFunc).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
     expect(createTimeCtr.value).toBe('a');
     expect(component.firstHistoryCreateTimeCtrl.value).toBe('');
 
@@ -319,7 +319,7 @@ describe('FeedbackComponent', () => {
 
     createTimeCtr.setValue('b');
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(createTimeCtr.value).toBe('b');
     expect(component.firstHistoryCreateTimeCtrl.value).toBe('b');
 
@@ -329,16 +329,16 @@ describe('FeedbackComponent', () => {
 
   it('若router被觸發導航相同路由，需『重置表單』與『送單狀態』', () => {
 
-    const spyFunc = spyOn(component, 'restForm');
+    const spy = spyOn(component, 'restForm');
     component.isPosted = true;
 
     expect(component.isPosted).toBeTruthy();
-    expect(spyFunc).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
 
     triggerSameNavigate();
 
     expect(component.isPosted).toBeFalsy();
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
 
   });
 
@@ -365,8 +365,8 @@ describe('FeedbackComponent', () => {
   it('postFeedback()，應該設定表單的『建立時間』，並 『show loading』 與 『送出API』，送出成功後，『hide loading』與 設定 『送出狀態』 為 已送出', fakeAsync(() => {
 
     const loading = TestBed.get(LoadingService);
-    const spyOnShowLoading = spyOn(loading, 'show');
-    const spyOnHideLoading = spyOn(loading, 'hide');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const hideLoadingSpy = spyOn(loading, 'hide');
     const createTime = new Date();
     const fakePostData = JSON.parse(JSON.stringify(fakeFeedback));
 
@@ -374,25 +374,25 @@ describe('FeedbackComponent', () => {
     fakePostData.history[0].createTime = createTime;
 
     const api = TestBed.get(ApiService);
-    const spyOnPostFeedback = spyOn(api, 'postFeedback').and.returnValue(of('').pipe(delay(0)));
+    const postFeedbackSpy = spyOn(api, 'postFeedback').and.returnValue(of('').pipe(delay(0)));
 
     component.form.setValue(fakeFeedback);
 
     component.postFeedback();
 
-    const showLoadingArgs = spyOnShowLoading.calls.first().args;
-    const spyOnPostFeedbackArgs = spyOnPostFeedback.calls.first().args;
+    const showLoadingArgs = showLoadingSpy.calls.first().args;
+    const postFeedbackArgs = postFeedbackSpy.calls.first().args;
 
     expect(component.form.get(feedbackFormKeys.createTime).value).toEqual(createTime);
-    expect(spyOnShowLoading).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
     expect(showLoadingArgs[0]).toBe(LoadingType.SPINNER);
-    expect(spyOnPostFeedback).toHaveBeenCalled();
-    expect(spyOnPostFeedbackArgs[0]).toEqual(fakePostData);
+    expect(postFeedbackSpy).toHaveBeenCalled();
+    expect(postFeedbackArgs[0]).toEqual(fakePostData);
     expect(component.isPosted).toBeFalsy();
 
     tick();
 
-    expect(spyOnHideLoading).toHaveBeenCalled();
+    expect(hideLoadingSpy).toHaveBeenCalled();
     expect(component.isPosted).toBeTruthy();
 
   }));

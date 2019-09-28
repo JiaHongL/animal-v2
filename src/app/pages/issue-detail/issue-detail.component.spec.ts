@@ -220,13 +220,13 @@ describe('IssueDetailComponent', () => {
 
   it('ngOnDestroy()，應該 unsubscribe component.subscription', () => {
 
-    const spyFunc = spyOn(component.subscription, 'unsubscribe');
+    const spy = spyOn(component.subscription, 'unsubscribe');
 
-    expect(spyFunc).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
 
     component.ngOnDestroy();
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
 
   });
 
@@ -241,13 +241,13 @@ describe('IssueDetailComponent', () => {
     };
 
     const modal = TestBed.get(ModalService);
-    const spyFunc = spyOn(modal, 'open');
+    const spy = spyOn(modal, 'open');
 
     component.openRemarkModal(expectedConfig.data.remark);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toEqual(RemarkModalComponent);
     expect(args[1]).toEqual(expectedConfig);
 
@@ -288,12 +288,12 @@ describe('IssueDetailComponent', () => {
     const userService = TestBed.get(UserService);
 
     // Spies
-    const spyOnOpenModal = spyOn(modal, 'open');
-    const spyOnShowLoading = spyOn(loading, 'show');
-    const spyOnDeepCopy = spyOn(utility, 'deepCopy').and.callThrough();
-    const spyOnUpdateIssue = spyOn(api, 'updateIssue');
-    const spyOnHideLoading = spyOn(loading, 'hide');
-    const spyOnNavigate = router.navigate as jasmine.Spy;
+    const openModalSpy = spyOn(modal, 'open');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const deepCopySpy = spyOn(utility, 'deepCopy').and.callThrough();
+    const updateIssueSpy = spyOn(api, 'updateIssue');
+    const hideLoadingSpy = spyOn(loading, 'hide');
+    const navigateSpy = router.navigate as jasmine.Spy;
 
     // Mock Function
 
@@ -312,7 +312,7 @@ describe('IssueDetailComponent', () => {
     });
 
     // 2. mock『新增歷程視窗』關閉時，回傳填寫內容
-    spyOnOpenModal.and.callFake(() => {
+    openModalSpy.and.callFake(() => {
 
       const mockModalRef = {
         afterClosed: () => {
@@ -329,36 +329,36 @@ describe('IssueDetailComponent', () => {
     });
 
     // 3. mock update api response
-    spyOnUpdateIssue.and.callFake(() => of('').pipe(delay(1000)));
+    updateIssueSpy.and.callFake(() => of('').pipe(delay(1000)));
 
     // Testing
 
     component.openAddHistoryModal();
 
-    const openModalArgs = spyOnOpenModal.calls.first().args;
+    const openModalArgs = openModalSpy.calls.first().args;
 
-    expect(spyOnOpenModal).toHaveBeenCalled();
+    expect(openModalSpy).toHaveBeenCalled();
     expect(openModalArgs[0]).toEqual(expected.component);
     expect(openModalArgs[1]).toEqual(expected.config);
 
     // 快轉 2s (關閉Modal)
     tick(2000);
 
-    const updateIssueArgs = spyOnUpdateIssue.calls.first().args;
+    const updateIssueArgs = updateIssueSpy.calls.first().args;
 
-    expect(spyOnShowLoading).toHaveBeenCalled();
-    expect(spyOnDeepCopy).toHaveBeenCalled();
-    expect(spyOnUpdateIssue).toHaveBeenCalled();
+    expect(showLoadingSpy).toHaveBeenCalled();
+    expect(deepCopySpy).toHaveBeenCalled();
+    expect(updateIssueSpy).toHaveBeenCalled();
     expect(updateIssueArgs[0]).toEqual(expected.issue);
 
     // 快轉 1s (updateIssue response time)
     tick(1000);
 
-    const spyOnNavigateArgs = spyOnNavigate.calls.first().args;
+    const navigateArgs = navigateSpy.calls.first().args;
 
-    expect(spyOnHideLoading).toHaveBeenCalled();
-    expect(spyOnNavigate).toHaveBeenCalled();
-    expect(spyOnNavigateArgs[0]).toEqual([appRoutePaths.issueDetail.path, expected.issue.id]);
+    expect(hideLoadingSpy).toHaveBeenCalled();
+    expect(navigateSpy).toHaveBeenCalled();
+    expect(navigateArgs[0]).toEqual([appRoutePaths.issueDetail.path, expected.issue.id]);
 
   }));
 
@@ -387,9 +387,9 @@ describe('IssueDetailComponent', () => {
     const userService = TestBed.get(UserService);
 
     // Spies
-    const spyOnOpenModal = spyOn(modal, 'open');
-    const spyOnShowLoading = spyOn(loading, 'show');
-    const spyOnUpdateIssue = spyOn(api, 'updateIssue');
+    const openModalSpy = spyOn(modal, 'open');
+    const showLoadingSpy = spyOn(loading, 'show');
+    const updateIssueSpy = spyOn(api, 'updateIssue');
 
     // Mock Function
 
@@ -408,7 +408,7 @@ describe('IssueDetailComponent', () => {
     });
 
     // 2. mock 『新增歷程視窗』關閉時，回傳 null
-    spyOnOpenModal.and.callFake(() => {
+    openModalSpy.and.callFake(() => {
 
       const mockModalRef = {
         afterClosed: () => of(null).pipe(delay(2000))
@@ -422,17 +422,17 @@ describe('IssueDetailComponent', () => {
 
     component.openAddHistoryModal();
 
-    const openModalArgs = spyOnOpenModal.calls.first().args;
+    const openModalArgs = openModalSpy.calls.first().args;
 
-    expect(spyOnOpenModal).toHaveBeenCalled();
+    expect(openModalSpy).toHaveBeenCalled();
     expect(openModalArgs[0]).toEqual(expected.component);
     expect(openModalArgs[1]).toEqual(expected.config);
 
     // 快轉 2s (關閉Modal)
     tick(2000);
 
-    expect(spyOnShowLoading).not.toHaveBeenCalled();
-    expect(spyOnUpdateIssue).not.toHaveBeenCalled();
+    expect(showLoadingSpy).not.toHaveBeenCalled();
+    expect(updateIssueSpy).not.toHaveBeenCalled();
 
   }));
 

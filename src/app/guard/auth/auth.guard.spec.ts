@@ -15,11 +15,11 @@ import { of, Observable } from 'rxjs';
 describe('AuthGuard', () => {
 
   let authGuard: AuthGuard;
-  let spyOnGetLogInStatus: jasmine.Spy;
-  let spyOnGetUserInfo: jasmine.Spy;
-  let spyOnUser: jasmine.Spy;
-  let spyOnStoreData: jasmine.Spy;
-  const spyOnNavigate: jasmine.Spy = jasmine.createSpy('navigate');
+  let getLogInStatusSpy: jasmine.Spy;
+  let getUserInfoSpy: jasmine.Spy;
+  let userSpy: jasmine.Spy;
+  let storeDataSpy: jasmine.Spy;
+  const navigateSpy: jasmine.Spy = jasmine.createSpy('navigate');
 
   const authErrorPage = [appRoutePaths.authError.path];
 
@@ -46,7 +46,7 @@ describe('AuthGuard', () => {
         {
           provide: Router,
           useValue: {
-            navigate: spyOnNavigate
+            navigate: navigateSpy
           }
         }
       ]
@@ -59,19 +59,18 @@ describe('AuthGuard', () => {
     authGuard = TestBed.get(AuthGuard);
     const apiService = TestBed.get(ApiService);
     const userService = TestBed.get(UserService);
-    const router = TestBed.get(Router);
 
     // spies
-    spyOnGetLogInStatus = spyOn(apiService, 'getLogInStatus');
-    spyOnGetUserInfo = spyOn(userService, 'getUserInfo');
-    spyOnUser = spyOnProperty(userService, 'user', 'get');
-    spyOnStoreData = spyOn(userService, 'storeData').and.stub();
+    getLogInStatusSpy = spyOn(apiService, 'getLogInStatus');
+    getUserInfoSpy = spyOn(userService, 'getUserInfo');
+    userSpy = spyOnProperty(userService, 'user', 'get');
+    storeDataSpy = spyOn(userService, 'storeData').and.stub();
 
   });
 
   it('若 非已登入狀態，則不允許進入路由，且導到無權限頁面', () => {
 
-    spyOnGetLogInStatus.and.returnValue(of(null));
+    getLogInStatusSpy.and.returnValue(of(null));
 
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
@@ -79,19 +78,19 @@ describe('AuthGuard', () => {
       expect(canActivate).toBeFalsy();
     });
 
-    const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
+    const navigateArgs = navigateSpy.calls.mostRecent().args;
 
-    expect(spyOnGetLogInStatus).toHaveBeenCalled();
-    expect(spyOnNavigate).toHaveBeenCalled();
-    expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
+    expect(getLogInStatusSpy).toHaveBeenCalled();
+    expect(navigateSpy).toHaveBeenCalled();
+    expect(navigateArgs[0]).toEqual(authErrorPage);
 
   });
 
   it('當是 已登入狀態，但 localstorage 的 user資料 為空時，將重新 call api 取得，若查無user資料，則不允許進入路由，且導到無權限頁面', () => {
 
-    spyOnGetLogInStatus.and.returnValue(of(mockLoginInfo));
-    spyOnUser.and.returnValue(null);
-    spyOnGetUserInfo.and.returnValue(of([]));
+    getLogInStatusSpy.and.returnValue(of(mockLoginInfo));
+    userSpy.and.returnValue(null);
+    getUserInfoSpy.and.returnValue(of([]));
 
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
@@ -99,20 +98,20 @@ describe('AuthGuard', () => {
       expect(canActivate).toBeFalsy();
     });
 
-    const spyOnNavigateArgs = spyOnNavigate.calls.mostRecent().args;
+    const navigateArgs = navigateSpy.calls.mostRecent().args;
 
-    expect(spyOnGetLogInStatus).toHaveBeenCalled();
-    expect(spyOnGetUserInfo).toHaveBeenCalled();
-    expect(spyOnNavigate).toHaveBeenCalled();
-    expect(spyOnNavigateArgs[0]).toEqual(authErrorPage);
+    expect(getLogInStatusSpy).toHaveBeenCalled();
+    expect(getUserInfoSpy).toHaveBeenCalled();
+    expect(navigateSpy).toHaveBeenCalled();
+    expect(navigateArgs[0]).toEqual(authErrorPage);
 
   });
 
   it('當是 已登入狀態，但 localstorage 的 user資料 為空時，將重新 call api 取得，api查有user資料時，將儲存user資料，且允許進入路由', () => {
 
-    spyOnGetLogInStatus.and.returnValue(of(mockLoginInfo));
-    spyOnUser.and.returnValue(null);
-    spyOnGetUserInfo.and.returnValue(of(mockUserInfoResponse));
+    getLogInStatusSpy.and.returnValue(of(mockLoginInfo));
+    userSpy.and.returnValue(null);
+    getUserInfoSpy.and.returnValue(of(mockUserInfoResponse));
 
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
@@ -120,19 +119,19 @@ describe('AuthGuard', () => {
       expect(canActivate).toBeTruthy();
     });
 
-    const spyOnStoreDataArgs = spyOnStoreData.calls.mostRecent().args;
+    const storeDataArgs = storeDataSpy.calls.mostRecent().args;
 
-    expect(spyOnGetLogInStatus).toHaveBeenCalled();
-    expect(spyOnGetUserInfo).toHaveBeenCalled();
-    expect(spyOnStoreData).toHaveBeenCalled();
-    expect(spyOnStoreDataArgs[0]).toEqual(mockUserInfoResponse[0]);
+    expect(getLogInStatusSpy).toHaveBeenCalled();
+    expect(getUserInfoSpy).toHaveBeenCalled();
+    expect(storeDataSpy).toHaveBeenCalled();
+    expect(storeDataArgs[0]).toEqual(mockUserInfoResponse[0]);
 
   });
 
   it('當 已是登入狀態 且 localstorage 有 user資料，則允許進入路由', () => {
 
-    spyOnGetLogInStatus.and.returnValue(of(mockLoginInfo));
-    spyOnUser.and.returnValue(mockUserInfoResponse);
+    getLogInStatusSpy.and.returnValue(of(mockLoginInfo));
+    userSpy.and.returnValue(mockUserInfoResponse);
 
     const authGuard$ = authGuard.canActivate() as Observable<boolean>;
 
@@ -140,7 +139,7 @@ describe('AuthGuard', () => {
       expect(canActivate).toBeTruthy();
     });
 
-    expect(spyOnGetLogInStatus).toHaveBeenCalled();
+    expect(getLogInStatusSpy).toHaveBeenCalled();
 
   });
 

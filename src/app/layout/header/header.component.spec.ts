@@ -64,7 +64,7 @@ describe('HeaderComponent', () => {
     // spy on modal open function and mock return
     const modal = TestBed.get(ModalService);
 
-    const spyOnOpen = spyOn(modal, 'open').and.callFake(() => {
+    const openSpy = spyOn(modal, 'open').and.callFake(() => {
 
       const mockModalRef = {
         afterClosed: () => {
@@ -79,12 +79,12 @@ describe('HeaderComponent', () => {
     // spy on router navigate function
     const router = TestBed.get(Router);
 
-    const spyOnNavigate = spyOn(router, 'navigate');
+    const navigateSpy = spyOn(router, 'navigate');
 
     component.openQueryModal(QueryModalType.CONDITION);
 
-    const openArgs = spyOnOpen.calls.first().args;
-    const naviagteArgs = spyOnNavigate.calls.first().args;
+    const openArgs = openSpy.calls.first().args;
+    const naviagteArgs = navigateSpy.calls.first().args;
 
     const expectedComponent = component[`queryComponents`].find(item => item.type === QueryModalType.CONDITION);
     const expectConfig: ModalConfig = {};
@@ -99,6 +99,5 @@ describe('HeaderComponent', () => {
     expect(naviagteArgs[1]).toEqual({ queryParams: mockQueryParams });
 
   });
-
 
 });

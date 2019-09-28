@@ -55,7 +55,7 @@ describe('SelectsService', () => {
 
     expect(service).toBeTruthy();
 
-    const spyFunc = spyOn<any>(service, 'getSelects').and.callFake(type => of(getMockList(type)));
+    const spy = spyOn<any>(service, 'getSelects').and.callFake(type => of(getMockList(type)));
 
     service.getAllSelects();
 
@@ -72,7 +72,7 @@ describe('SelectsService', () => {
     expect(service.shelterList).toBe(getMockList(SelectType.SHELTER));
     expect(service.sterilizationList).toBe(getMockList(SelectType.STERILIZATION));
 
-    expect(spyFunc).toHaveBeenCalledTimes(12);
+    expect(spy).toHaveBeenCalledTimes(12);
 
   });
 

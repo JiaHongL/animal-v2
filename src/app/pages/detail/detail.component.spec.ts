@@ -55,11 +55,11 @@ describe('DetailComponent', () => {
   it('ngOnInit()時，為解決 ios touch 問題，應該呼叫 utilityService 的 iosRemoveNoTouch', () => {
 
     const utilityService = TestBed.get(UtilityService);
-    const spyFunc = spyOn(utilityService, 'iosRemoveNoTouch');
+    const spy = spyOn(utilityService, 'iosRemoveNoTouch');
 
     component.ngOnInit();
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
 
   });
 
@@ -72,13 +72,13 @@ describe('DetailComponent', () => {
     };
 
     const modal = TestBed.get(ModalService);
-    const spyFunc = spyOn(modal, 'open');
+    const spy = spyOn(modal, 'open');
 
     component.openImageModal(mockConfig.data.url);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
-    expect(spyFunc).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(args[0]).toEqual(ImageModalComponent);
     expect(args[1]).toEqual(mockConfig);
 

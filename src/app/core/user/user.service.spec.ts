@@ -59,11 +59,11 @@ describe('UserService', () => {
       email: 'd'
     });
 
-    const spyFunc = spyOn(storage, 'store');
+    const spy = spyOn(storage, 'store');
 
     service.storeData(mockData);
 
-    const args = spyFunc.calls.first().args;
+    const args = spy.calls.first().args;
 
     expect(args[0]).toEqual(storageKeys.user);
     expect(args[1]).toEqual(mockData);
