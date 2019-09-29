@@ -39,8 +39,10 @@
           >
             <a href="javascript:void(0)">
               <img
-                src="{{ item.album_file || 'assets/images/non01.png' }}"
-                alt
+                [offset]="offset"
+                defaultImage="assets/images/loading.png"
+                [lazyLoad]="item.album_file || 'assets/images/non01.png'"
+                [useSrcset]="true"
               >
             </a>
           </div>

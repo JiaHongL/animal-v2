@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 // module
 import { AppRoutingModule } from './app-routing.module';
-import { FirebaseModule } from './core/firebase/firebase.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 

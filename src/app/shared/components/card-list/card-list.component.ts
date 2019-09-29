@@ -9,6 +9,9 @@ import { Sex } from '../../../enum/sex.enum';
 // const
 import { appRoutePaths } from './../../../constant/app-route-paths.const';
 
+// service
+import { UtilityService } from '../../../core/utility/utility.service';
+
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
@@ -45,9 +48,17 @@ export class CardListComponent implements OnInit {
    */
   sex = Sex;
 
-  constructor() { }
+  /**
+   *  距離
+   *
+   * @memberof CardListComponent
+   */
+  offset = this.utilityService.isMobile ? 400 : 1000;
 
-  ngOnInit() {
-  }
+  constructor(
+    public utilityService: UtilityService
+  ) { }
+
+  ngOnInit() {}
 
 }
