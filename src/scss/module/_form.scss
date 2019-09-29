@@ -311,9 +311,8 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     font-size: 0.875em;
 }
 
-
-
 @media only screen and (max-width : 480px) {
+
     .pure-form button[type="submit"] {
         margin: 0.7em 0 0;
     }
@@ -376,6 +375,13 @@ since IE8 won't execute CSS that contains a CSS3 selector.
         /* Increased bottom padding to make it group with its related input element. */
         padding: 0.2em 0 0.8em;
     }
+
+    .pure-form select {
+        height: 2.5em;
+        border: 1px solid #ccc;
+        background-color: white;
+    }
+
 }
 
 .pure-textarea{

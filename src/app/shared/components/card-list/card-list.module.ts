@@ -4,12 +4,20 @@ import { RouterModule } from '@angular/router';
 
 import { CardListComponent } from './card-list.component';
 
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+
+import { UtilityService } from '../../../core/utility/utility.service';
+
 @NgModule({
   declarations: [CardListComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    LazyLoadImageModule
   ],
-  exports: [CardListComponent]
+  exports: [CardListComponent],
+  providers: [
+    UtilityService
+  ]
 })
 export class CardListModule { }

@@ -14,7 +14,6 @@ import { MessageModule } from './message/message.module';
 import { ApiService } from './api/api.service';
 import { UtilityService } from './utility/utility.service';
 import { UserService } from './user/user.service';
-import { ModalModule } from '../shared/components/modal/modal.module';
 
 @NgModule({
   imports: [

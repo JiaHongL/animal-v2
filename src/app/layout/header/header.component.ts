@@ -13,6 +13,7 @@ import { ModalService } from './../../shared/components/modal/modal.service';
 // const
 import { ModalConfig } from '../../shared/components/modal/modal-config';
 import { appRoutePaths } from './../../constant/app-route-paths.const';
+import { animalQueryFormKeys } from '../../constant/form-keys/animal-query-form-keys.const';
 
 // enum
 import { QueryModalType } from './enum/query-modal-type.enum';
@@ -114,7 +115,7 @@ export class HeaderComponent implements OnInit {
   /**
    * class 綁定
    *
-   * @memberof FooterComponent
+   * @memberof HeaderComponent
    */
   @HostBinding('class') class = 'header';
 
@@ -150,6 +151,28 @@ export class HeaderComponent implements OnInit {
    */
   get marginRightPx(): 0 | -284 {
     return this.isMenuOpen ? 0 : -284;
+  }
+
+  /**
+   * 狗的查詢參數
+   *
+   * @readonly
+   * @type {object}
+   * @memberof HeaderComponent
+   */
+  get dogQueryParams(): object {
+    return { [animalQueryFormKeys.kind]: '狗' };
+  }
+
+  /**
+   * 貓的查詢參數
+   *
+   * @readonly
+   * @type {object}
+   * @memberof HeaderComponent
+   */
+  get catQueryParams(): object {
+    return { [animalQueryFormKeys.kind]: '貓' };
   }
 
   /**

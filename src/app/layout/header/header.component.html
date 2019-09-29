@@ -47,8 +47,10 @@
         </div>
         <!-- 選單表頭 結束 -->
 
-        <!-- 前台選項 開始 -->
+        <!-- 前台選單 開始 -->
         <div *ngIf="!isLoggedIn">
+
+          <!-- 首頁 開始 -->
           <div
             class="list-item"
             [routerLink]="[ '/' + appRoutePaths.home.path]"
@@ -59,9 +61,12 @@
               <span class="item-title">首頁</span>
             </a>
           </div>
+          <!-- 首頁 結束 -->
+
+          <!-- 我的最愛 開始 -->
           <div
             class="list-item"
-            [routerLink]="[ '/' + appRoutePaths.favorite.path]"
+            [routerLink]="[ '/' + appRoutePaths.favorite.path ]"
             (click)="isMenuOpen=false"
           >
             <a href="javascript:void(0)">
@@ -69,6 +74,43 @@
               <span class="item-title">我的最愛</span>
             </a>
           </div>
+          <!-- 我的最愛 結束 -->
+
+          <!-- 小狗收尋 開始 -->
+          <div
+            class="list-item"
+            [routerLink]="[ '/' + appRoutePaths.home.path ]"
+            [queryParams]="dogQueryParams"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i
+                class="fas fa-dog fa-lg item-icon"
+                style="padding-left:14px;padding-right:23px;"
+              ></i>
+              <span class="item-title">小狗收尋</span>
+            </a>
+          </div>
+          <!-- 小狗收尋 結束 -->
+
+          <!-- 貓咪收尋 開始 -->
+          <div
+            class="list-item"
+            [routerLink]="[ '/' + appRoutePaths.home.path]"
+            [queryParams]="catQueryParams"
+            (click)="isMenuOpen=false"
+          >
+            <a href="javascript:void(0)">
+              <i
+                class="fas fa-cat fa-lg item-icon"
+                style="padding-left:14px;padding-right:23px;"
+              ></i>
+              <span class="item-title">貓咪收尋</span>
+            </a>
+          </div>
+          <!-- 貓咪收尋 結束 -->
+
+          <!-- 條件收尋 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false;openQueryModal(queryModalType.CONDITION)"
@@ -81,6 +123,9 @@
               <span class="item-title">條件收尋</span>
             </a>
           </div>
+          <!-- 條件收尋 結束 -->
+
+          <!-- 編號收尋 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false;openQueryModal(queryModalType.ID)"
@@ -93,6 +138,9 @@
               <span class="item-title">編號收尋</span>
             </a>
           </div>
+          <!-- 編號收尋 結束 -->
+
+          <!-- 地區收尋 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false;openQueryModal(queryModalType.AREA)"
@@ -102,6 +150,9 @@
               <span class="item-title">地區收尋</span>
             </a>
           </div>
+          <!-- 地區收尋 結束 -->
+
+          <!-- 收容中心收尋 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false;openQueryModal(queryModalType.SHELTER)"
@@ -111,6 +162,9 @@
               <span class="item-title">收容中心收尋</span>
             </a>
           </div>
+          <!-- 收容中心收尋 結束 -->
+
+          <!-- 回饋與建議 開始 -->
           <div
             class="list-item"
             [routerLink]="[ '/' + appRoutePaths.feedback.path]"
@@ -121,6 +175,9 @@
               <span class="item-title">回饋與建議</span>
             </a>
           </div>
+          <!-- 回饋與建議 結束 -->
+
+          <!-- 管理員登入 開始 -->
           <div
             class="list-item"
             [routerLink]="['/' + appRoutePaths.adLogin.path]"
@@ -131,11 +188,15 @@
               <span class="item-title">管理員登入</span>
             </a>
           </div>
-        </div>
-        <!-- 前台選項 結束 -->
+          <!-- 管理員登入 結束 -->
 
-        <!-- 後台選項 開始 -->
+        </div>
+        <!-- 前台選單 結束 -->
+
+        <!-- 後台選單 開始 -->
         <div *ngIf="isLoggedIn">
+
+          <!-- 使用者名稱 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false"
@@ -145,6 +206,9 @@
               <span class="item-title">{{ userName }}</span>
             </a>
           </div>
+          <!-- 使用者名稱 開始 -->
+
+          <!-- 待處理 結束 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false"
@@ -155,6 +219,9 @@
               <span class="item-title">待處理</span>
             </a>
           </div>
+          <!-- 待處理 結束 -->
+
+          <!-- 已歸檔 開始 -->
           <div
             class="list-item"
             *ngIf="isAdmin"
@@ -166,6 +233,9 @@
               <span class="item-title">已歸檔</span>
             </a>
           </div>
+          <!-- 已歸檔 結束 -->
+
+          <!-- 登出帳號 開始 -->
           <div
             class="list-item"
             (click)="isMenuOpen=false;signOut.emit()"
@@ -175,6 +245,8 @@
               <span class="item-title">登出帳號</span>
             </a>
           </div>
+          <!-- 登出帳號 結束 -->
+
         </div>
         <!-- 後台選項 結束 -->
 

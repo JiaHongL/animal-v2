@@ -31,6 +31,7 @@
             class="pure-input-1"
             [formControlName]="formKeys.status"
           >
+            <option hidden disabled selected value></option>
             <option
               *ngFor="let item of issueStatusOptions"
               [ngValue]="item.code"
