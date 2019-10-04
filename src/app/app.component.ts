@@ -5,7 +5,12 @@ import { Router, NavigationEnd, ActivatedRoute, PRIMARY_OUTLET } from '@angular/
 // service
 import { SelectsService } from './core/selects/selects.service';
 import { UtilityService } from './core/utility/utility.service';
+
+// rxjs
 import { filter, map, mergeMap } from 'rxjs/operators';
+
+// const
+import { preloadPicture } from './constant/preload-picture.const';
 
 @Component({
   selector: 'app-root',
@@ -48,15 +53,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
 
     // 預載圖片 (緩存)
-    const pictures = [
-      './assets/images/animal-koala-001.png',
-      './assets/images/person-family-001.png',
-      './assets/images/animal-cat-004.png',
-      './assets/images/non02.png',
-      './assets/images/brushed_@2X.png',
-    ];
-
-    this.utility.preloadPicture(pictures);
+    this.utility.preloadPicture(preloadPicture);
 
   }
 
