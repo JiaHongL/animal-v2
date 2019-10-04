@@ -1,27 +1,69 @@
-# AnimalV2
+# Animal V2
+   此專案為 **動物認養 v2**  ，主要為 **架構調整** 與 **單元測試** 撰寫 .
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
+## CI / CD
+- 使用 circle ci 檢測 tslint、unit test 、build 是否通過 .
+- 使用 angular-cli-ghpages  部署到 Github .
 
-## Development server
+## Document
+- 使用 compodoc 產生專案文件 .
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 資料夾結構
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<table>
+	<tr>
+		<td colspan="3"> app 底下 </td>
+	</tr>
+	<tr>
+		<td rowspan="3">通用定義</td>
+		<td>constant</td>
+		<td>各式常數</td>
+	</tr>
+	<tr>
+		<td>enum</td>
+		<td>各式參數</td>
+	</tr>
+	<tr>
+		<td>model</td>
+		<td>各式資料結構</td>
+	</tr>
+	<tr>
+		<td rowspan="2">獨立頁面</td>
+		<td>admin-login</td>
+		<td>登入頁</td>
+	</tr>
+	<tr>
+		<td>auth-error</td>
+		<td>無權限頁</td>
+	</tr>
+	<tr>
+		<td>版型頁</td>
+		<td>layout</td>
+		<td>包含 header footer </td>
+	</tr>
+	<tr>
+		<td>內容頁</td>
+		<td>pages</td>
+		<td>使用版型一的各式內容頁</td>
+	</tr>
+	<tr>
+		<td>核心功能</td>
+		<td>core</td>
+		<td>系統通用 或是 做成底層的service </td>
+	</tr>
+	<tr>
+		<td>共享功能</td>
+		<td>shared</td>
+		<td>通用 components 、directives、pipes</td>
+	</tr>
+	<tr>
+		<td>路由管控</td>
+		<td>guard</td>
+		<td>路由權限控管</td>
+	</tr>
+	<tr>
+		<td>載入資料</td>
+		<td>resolver</td>
+		<td>進入頁面前，可先拿的資料</td>
+	</tr>
+</table>
