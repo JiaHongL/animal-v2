@@ -10,6 +10,9 @@ import { CoreModule } from '../core.module';
 
 // service
 import { SelectsService } from './selects.service';
+import { StorageService } from '../storage/storage.service';
+
+// rxjs
 import { of } from 'rxjs';
 
 describe('SelectsService', () => {
@@ -71,6 +74,32 @@ describe('SelectsService', () => {
     expect(service.feedbackTypeList).toBe(getMockList(SelectType.FEEDBACK_TYPE));
     expect(service.shelterList).toBe(getMockList(SelectType.SHELTER));
     expect(service.sterilizationList).toBe(getMockList(SelectType.STERILIZATION));
+
+    expect(spy).toHaveBeenCalledTimes(12);
+
+  });
+
+  it('clearAllSelections function 應該 清除所有資料', () => {
+
+    const storage: StorageService = TestBed.get(StorageService);
+    const service: SelectsService = TestBed.get(SelectsService);
+
+    const spy = spyOn<any>(storage, 'clean').and.stub();
+
+    service.clearAllSelections();
+
+    expect(service.statusList).toEqual([]);
+    expect(service.issuesStatusList).toEqual([]);
+    expect(service.bacterinList).toEqual([]);
+    expect(service.bodyTypeList).toEqual([]);
+    expect(service.ageList).toEqual([]);
+    expect(service.kindList).toEqual([]);
+    expect(service.sexList).toEqual([]);
+    expect(service.kindList).toEqual([]);
+    expect(service.colourList).toEqual([]);
+    expect(service.feedbackTypeList).toEqual([]);
+    expect(service.shelterList).toEqual([]);
+    expect(service.sterilizationList).toEqual([]);
 
     expect(spy).toHaveBeenCalledTimes(12);
 
