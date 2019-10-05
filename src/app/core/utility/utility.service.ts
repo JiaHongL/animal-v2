@@ -59,7 +59,7 @@ export class UtilityService {
   /**
    * 停止 Body 滾動 ( mobile modal open & hide 使用)
    *
-   * @param {boolean} isLock
+   * @param {boolean} isLock - 是否鎖定
    * @memberof UtilityService
    */
   stopBodyScroll(isLock: boolean): void {
@@ -83,7 +83,7 @@ export class UtilityService {
   /**
    * 預載圖片
    *
-   * @param {string[]} images
+   * @param {string[]} images - 照片陣列
    * @memberof UtilityService
    */
   preloadPicture(images: string[]): void {
@@ -96,8 +96,8 @@ export class UtilityService {
   /**
    * Timestamp 轉換為 Date
    *
-   * @param {*} item
-   * @param {*} name
+   * @param {*} item - 資料
+   * @param {*} name - key
    * @returns
    * @memberof UtilityService
    */
