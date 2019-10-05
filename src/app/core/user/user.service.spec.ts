@@ -71,4 +71,17 @@ describe('UserService', () => {
 
   }));
 
+  it('should be clean Data', inject([UserService, StorageService], (service: UserService, storage: StorageService) => {
+
+    const spy = spyOn(storage, 'clean');
+
+    service.cleanUserInfo();
+
+    const args = spy.calls.first().args;
+
+    expect(args[0]).toEqual(StorageType.LOCAL);
+    expect(args[1]).toEqual(storageKeys.user);
+
+  }));
+
 });
