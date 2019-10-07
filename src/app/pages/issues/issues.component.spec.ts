@@ -19,7 +19,9 @@ import { issueStatusOptions } from '../../constant/options/issue-status-options.
 
 // rxjs
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, tap, finalize } from 'rxjs/operators';
+
+// 練習四種處理異步的方式
 
 describe('IssuesComponent', () => {
 
@@ -542,6 +544,19 @@ describe('IssuesComponent', () => {
     ]
   };
 
+  const expectedList = mockResponse.pages.map(issues => issues.map(issue => new Issue(issue)));
+
+  const resetQueryStatus = () => {
+
+    component.currentIssuesStatus = null;
+    component.currentPage = null;
+    component.pageList = null;
+    component.total = null;
+
+    getIssuesSpy.calls.reset();
+
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [IssuesComponent],
@@ -633,8 +648,6 @@ describe('IssuesComponent', () => {
 
   it('issues()，應該回傳當前頁碼的列表資料 ', () => {
 
-    const expectedList = mockResponse.pages.map(issues => issues.map(issue => new Issue(issue)));
-
     component.pageList = expectedList;
 
     expect(component.currentPage).toBe(1);
@@ -665,14 +678,37 @@ describe('IssuesComponent', () => {
 
   });
 
-  it('queryIssues()，應重新設定 當前議題狀態、當前頁碼、頁面資料列表、總數，並根據傳入的參數做查詢', fakeAsync(() => {
+  it('[ 使用 jasmine.clock ] queryIssues()，應重新設定 當前議題狀態、當前頁碼、頁面資料列表、總數，並根據傳入的參數做查詢', () => {
 
-    component.currentIssuesStatus = null;
-    component.currentPage = null;
-    component.pageList = null;
-    component.total = null;
+    resetQueryStatus();
 
-    getIssuesSpy.calls.reset();
+    jasmine.clock().install();
+
+    expect(getIssuesSpy).not.toHaveBeenCalled();
+
+    component.queryIssues(IssueStatus.PROCESSED);
+
+    const args = getIssuesSpy.calls.mostRecent().args;
+
+    expect(component.currentIssuesStatus).toEqual(IssueStatus.PROCESSED);
+    expect(component.currentPage).toEqual(1);
+    expect(component.pageList).toEqual([]);
+    expect(component.total).toEqual(0);
+    expect(getIssuesSpy).toHaveBeenCalled();
+    expect(args[0]).toEqual(IssueStatus.PROCESSED);
+
+    jasmine.clock().tick(0);
+
+    expect(component.total).toEqual(mockResponse.total);
+    expect(component.pageList).toEqual(expectedList);
+
+    jasmine.clock().uninstall();
+
+  });
+
+  it('[ 使用 fakeAsync ]，queryIssues()，應重新設定 當前議題狀態、當前頁碼、頁面資料列表、總數，並根據傳入的參數做查詢', fakeAsync(() => {
+
+    resetQueryStatus();
 
     expect(getIssuesSpy).not.toHaveBeenCalled();
 
@@ -689,11 +725,68 @@ describe('IssuesComponent', () => {
 
     tick();
 
-    const expectedList = mockResponse.pages.map(issues => issues.map(issue => new Issue(issue)));
-
     expect(component.total).toEqual(mockResponse.total);
     expect(component.pageList).toEqual(expectedList);
 
   }));
+
+  it('[ 使用 whenStable ] queryIssues()，應重新設定 當前議題狀態、當前頁碼、頁面資料列表、總數，並根據傳入的參數做查詢', async(() => {
+
+    resetQueryStatus();
+
+    expect(getIssuesSpy).not.toHaveBeenCalled();
+
+    component.queryIssues(IssueStatus.PROCESSED);
+
+    const args = getIssuesSpy.calls.mostRecent().args;
+
+    expect(component.currentIssuesStatus).toEqual(IssueStatus.PROCESSED);
+    expect(component.currentPage).toEqual(1);
+    expect(component.pageList).toEqual([]);
+    expect(component.total).toEqual(0);
+    expect(getIssuesSpy).toHaveBeenCalled();
+    expect(args[0]).toEqual(IssueStatus.PROCESSED);
+
+    fixture.whenStable().then(() => {
+
+      expect(component.total).toEqual(mockResponse.total);
+      expect(component.pageList).toEqual(expectedList);
+
+    });
+
+  }));
+
+  it('[ 使用 jasmine done() ] queryIssues()，應重新設定 當前議題狀態、當前頁碼、頁面資料列表、總數，並根據傳入的參數做查詢', done => {
+
+    resetQueryStatus();
+
+    getIssuesSpy.and.returnValue(
+      of(mockResponse)
+        .pipe(
+          delay(0),
+          tap(() => done()),
+          finalize(() => {
+
+            expect(component.total).toEqual(mockResponse.total);
+            expect(component.pageList).toEqual(expectedList);
+
+          })
+        )
+    );
+
+    expect(getIssuesSpy).not.toHaveBeenCalled();
+
+    component.queryIssues(IssueStatus.PROCESSED);
+
+    const args = getIssuesSpy.calls.mostRecent().args;
+
+    expect(component.currentIssuesStatus).toEqual(IssueStatus.PROCESSED);
+    expect(component.currentPage).toEqual(1);
+    expect(component.pageList).toEqual([]);
+    expect(component.total).toEqual(0);
+    expect(getIssuesSpy).toHaveBeenCalled();
+    expect(args[0]).toEqual(IssueStatus.PROCESSED);
+
+  });
 
 });
