@@ -1,25 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 // model
-import { Option } from '../../model/option/option.model';
+import { Option } from "../../model/option/option.model";
 
 // enum
-import { SelectType } from './enum/select-type.enum';
-import { StorageType } from '../storage/storage-type.enum';
+import { SelectType } from "./enum/select-type.enum";
+import { StorageType } from "../storage/storage-type.enum";
 
 // service
-import { ApiService } from './../api/api.service';
-import { StorageService } from '../storage/storage.service';
-import { MessageService } from './../message/message.service';
+import { ApiService } from "./../api/api.service";
+import { StorageService } from "../storage/storage.service";
+import { MessageService } from "./../message/message.service";
 
 // rxjs
-import { Observable, of, combineLatest } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-
+import { Observable, of, combineLatest } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { storageKeys } from "../storage/storage-key.const";
 
 @Injectable()
 export class SelectsService {
-
   /**
    * 動物狀態代碼列表
    *
@@ -120,9 +119,7 @@ export class SelectsService {
     private api: ApiService,
     private storage: StorageService,
     private message: MessageService
-  ) {
-
-  }
+  ) {}
 
   /**
    * 取得所有選項列表
@@ -130,6 +127,24 @@ export class SelectsService {
    * @memberof SelectsService
    */
   getAllSelects(): void {
+
+    const updateTime =
+      this.storage.getData(storageKeys.updateTime, StorageType.LOCAL) ||
+      new Date().getTime() - 1;
+
+    if (new Date().getTime() - updateTime > 0) {
+
+      this.clearAllSelections();
+
+      const newUpdateTime = new Date().getTime() + 60 * 30 * 1000;
+
+      this.storage.store(
+        storageKeys.updateTime,
+        newUpdateTime,
+        StorageType.LOCAL
+      );
+
+    }
 
     const combined = combineLatest([
       this.getList(SelectType.STATUS),
@@ -143,11 +158,10 @@ export class SelectsService {
       this.getList(SelectType.COLOUR),
       this.getList(SelectType.SHELTER),
       this.getList(SelectType.FEEDBACK_TYPE),
-      this.getList(SelectType.ISSUES_STATUS)
+      this.getList(SelectType.ISSUES_STATUS),
     ]);
 
     combined.subscribe((list) => {
-
       this.statusList = list[0];
       this.sexList = list[1];
       this.bodyTypeList = list[2];
@@ -160,9 +174,7 @@ export class SelectsService {
       this.shelterList = list[9];
       this.feedbackTypeList = list[10];
       this.issuesStatusList = list[11];
-
     });
-
   }
 
   /**
@@ -171,7 +183,6 @@ export class SelectsService {
    * @memberof SelectsService
    */
   clearAllSelections(): void {
-
     this.storage.clean(StorageType.LOCAL, SelectType.STATUS);
     this.storage.clean(StorageType.LOCAL, SelectType.SEX);
     this.storage.clean(StorageType.LOCAL, SelectType.BODY_TYPE);
@@ -184,7 +195,6 @@ export class SelectsService {
     this.storage.clean(StorageType.LOCAL, SelectType.SHELTER);
     this.storage.clean(StorageType.LOCAL, SelectType.FEEDBACK_TYPE);
     this.storage.clean(StorageType.LOCAL, SelectType.ISSUES_STATUS);
-
   }
 
   /**
@@ -197,33 +207,24 @@ export class SelectsService {
    * @memberof SelectsService
    */
   private getSelects(type: string, canStore = true): Observable<Option[]> {
+    return this.api.getSelects(type).pipe(
+      map((res) => {
+        let options = [];
 
-    return this
-      .api
-      .getSelects(type)
-      .pipe(
-        map((res) => {
+        if (res.success) {
+          options = res.result;
+        } else {
+          this.message.alert(res.errorMessage);
+        }
 
-          let options = [];
-
-          if (res.success) {
-            options = res.result;
-          } else {
-            this.message.alert(res.errorMessage);
-          }
-
-          return options.map(option => new Option(option));
-
-        }),
-        tap((options) => {
-
-          if (canStore) {
-            this.storeSelects(options, type);
-          }
-
-        })
-      );
-
+        return options.map((option) => new Option(option));
+      }),
+      tap((options) => {
+        if (canStore) {
+          this.storeSelects(options, type);
+        }
+      })
+    );
   }
 
   /**
@@ -235,9 +236,7 @@ export class SelectsService {
    * @memberof SelectsService
    */
   private storeSelects(options: Option[], key: string): void {
-
     this.storage.store(key, options, StorageType.LOCAL);
-
   }
 
   /**
@@ -249,15 +248,12 @@ export class SelectsService {
    * @memberof SelectsService
    */
   private getList(key: string): Observable<Option[]> {
-
     const datas: any[] = this.storage.getData(key, StorageType.LOCAL) || [];
 
     if (datas.length) {
-      return of(datas.map(data => new Option(data)));
+      return of(datas.map((data) => new Option(data)));
     } else {
       return this.getSelects(key);
     }
-
   }
-
 }

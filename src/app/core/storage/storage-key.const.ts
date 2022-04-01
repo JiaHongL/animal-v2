@@ -11,6 +11,11 @@ export const storageKeys = {
   /**
    * 使用者資料
    */
-  user: 'user'
+  user: 'user',
+
+  /**
+   * 更新時間
+   */
+  updateTime:'updateTime'
 
 };
